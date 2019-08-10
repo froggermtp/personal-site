@@ -1,5 +1,5 @@
 module.exports = {
-    templateFormats: ["html", "njk"],
+    templateFormats: ["html", "njk", "css"],
     dir: {
         input: "views"
     }
