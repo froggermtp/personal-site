@@ -1,0 +1,21 @@
+#main-container {
+    display: flex;
+    flex-flow: column wrap;
+}
+
+header {
+    display: flex;
+    height: 250px;
+    width: 100%;
+    outline: 1px solid black;
+}
+
+#header-text {
+    margin: auto;
+    line-height: 1.25;
+    font-size: 2em;
+}
+
+#last-name {
+    float: right;
+}

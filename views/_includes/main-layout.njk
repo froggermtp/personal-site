@@ -3,12 +3,17 @@
 <html lang="en">
 
 <head>
+    {% block head %}
     <meta charset="utf-8">
 
     <title>{{ title }}</title>
     <meta name="description" content="{{ description }}">
     <meta name="author" content="Matthew Parris">
 
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/main.css" />
+
+    {% endblock %}
 </head>
 
 <body>
