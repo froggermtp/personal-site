@@ -1,0 +1,12 @@
+{% macro experienceSection(company, title, date) %}
+<section id="{{ company }}-section">
+    <div class="experience-header">
+        <h2 class="experience-title">{{ title }}</h2>
+        <h3 class="experience-company">{{ company }}</h3>
+        <h4 class="experience-date">{{ date }}</h4>
+    </div>
+    <div class="experience-img-container">
+        <img class="experience-img" src="img/{{ company | replace(" ", "") | lower }}.jpg" alt="{{ company }}"/>
+    </div>
+</section>
+{% endmacro %}
