@@ -1,6 +1,14 @@
-module.exports = {
-    templateFormats: ["html", "njk", "css", "jpg", "svg"],
-    dir: {
-        input: "views"
-    }
+module.exports = function (eleventyConfig) {
+    eleventyConfig.addPassthroughCopy("views/img");
+    eleventyConfig.addPassthroughCopy("views/css");
+
+    return {
+        templateFormats: [
+            "md",
+            "njk"
+        ],
+        dir: {
+            input: "views"
+        }
+    };
 };
