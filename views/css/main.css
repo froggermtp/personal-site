@@ -4,4 +4,27 @@
     --space-lg: 1rem;
     --space-xl: 2rem;
     --space-xxl: 4rem;
+
+    --color-dark: hsl(0, 0%, 13%);
+    --color-grey: hsl(0, 0%, 29%);
+    --color-light-grey: hsl(0, 0%, 45%);
+}
+
+* {
+    color: var(--color-dark);
+    font-weight: 400;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    line-height: 1.25;
+    margin: 0 var(--space-xl) var(--space-med) var(--space-xl);
+}
+
+p {
+    line-height: 1.5;
+    margin: 0 var(--space-xl) var(--space-med) var(--space-xl);
+}
+
+section {
+    margin-bottom: var(--space-lg);
 }
