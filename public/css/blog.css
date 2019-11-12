@@ -1,0 +1,35 @@
+article {
+    margin-top: var(--space-xl);
+    margin-left: var(--space-xl);
+    margin-right: var(--space-xl);
+}
+
+article h1 {
+    margin-left: 0;
+    margin-bottom: var(--space-sm);
+}
+
+.metadata {
+    margin-bottom: var(--space-xl);
+}
+
+article footer {
+    text-align: right;
+    margin-right: var(--space-xl);
+}
+
+article a:link {
+    text-decoration: none;
+}
+  
+article a:visited {
+    text-decoration: none;
+}
+
+article a:hover {
+    text-decoration: underline;
+}
+
+article a:active {
+    text-decoration: underline;
+}

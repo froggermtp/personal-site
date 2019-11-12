@@ -1,6 +1,6 @@
 module.exports = function (eleventyConfig) {
-    eleventyConfig.addPassthroughCopy("views/img");
-    eleventyConfig.addPassthroughCopy("views/css");
+    eleventyConfig.addPassthroughCopy({ "public/img": "img" });
+    eleventyConfig.addPassthroughCopy({ "public/css": "css" });
 
     return {
         templateFormats: [
