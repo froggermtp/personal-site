@@ -1,0 +1,16 @@
+{
+  "name": "matthew-parris-site",
+  "version": "1.0.0",
+  "description": "Matthew Parris's personal website",
+  "scripts": {
+    "build": "npx eleventy",
+    "watch": "npx eleventy --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Matthew Parris",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "@11ty/eleventy": "^0.9.0"
+  }
+}
