@@ -1,5 +1,5 @@
 {% macro experienceSection(company, title, date) %}
-<section id="{{ company }}-section">
+<section id="{{ company | replace(" ", "") | lower }}-section">
     <div class="experience-header">
         <h2 class="experience-title">{{ title }}</h2>
         <h3 class="experience-company">{{ company }}</h3>
