@@ -7,18 +7,24 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ title }}</title>
+    <title>{{ title }} | Matthew Parris</title>
     <meta name="description" content="{{ description }}">
     <meta name="author" content="Matthew Parris">
 
-    <link rel="stylesheet" href="css/normalize.css" />
-    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="/css/normalize.css" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <link href="https://fonts.googleapis.com/css?family=Bowlby+One+SC|Oxygen&display=swap" rel="stylesheet"> 
 
     {% endblock %}
 </head>
 
 <body>
-    {{ content | safe }}
+    <div id="main-container">
+        {% include "parts/_nav.njk" %}
+        {% block content %}
+
+        {% endblock %}
+    </div>
     {% include "parts/_footer.njk" %}
 </body>
 

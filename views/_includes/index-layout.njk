@@ -2,5 +2,13 @@
 
 {% block head %}
 {{ super() }}
-<link rel="stylesheet" href="css/index.css" />
+<link rel="stylesheet" href="/css/index.css" />
+{% endblock %}
+
+{% block content %}
+<header>
+    <div id="header-content">
+        <img src="/img/header-avatar.jpg" id="header-avatar">
+    </div>
+</header>
 {% endblock %}

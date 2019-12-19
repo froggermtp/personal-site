@@ -1,31 +1,31 @@
 ---
-layout: index-layout.njk
-title: Home | Matthew Parris
+title: Home
 description: Home page
 ---
 
+{% extends "index-layout.njk" %}
 {% import "macros/index-macros.njk" as indexMacros %}
 
-<div id="main-container">
-    {% include "parts/_header.njk" %}
+{% block content %}
 
-    <section id="introduction-section">
-        <h2>I'm Matthew Parris, a computer science student at The University of Tulsa</h2>
-        <p>
-            I want to make the world a better place—by utilizing science,
-            technology, engineering, and math as well as an audicious amount
-            of em dashes. In middle school, I got into making some really 
-            terrible video games. Now, I code corporate applications 🎉. It's
-            some serious stuff. Some of the buzzwords that I am currently into:
-            Javascript, Node JS, Puppeteer, browser automation, and 
-            single-page applications.
-        </p>
-    </section>
-    <div id="experiences-container">
-        <h2>Here's some things I've done</h2>
-        {{ indexMacros.experienceSection("Paycom", "Software Development Intern", "Summer 2019") }}
-        {{ indexMacros.experienceSection("Encore Pro Staffing", "Security Guard", "Summer 2018") }}
-    </div>
+{{ super() }}
+
+<section id="introduction-section">
+    <h2>I'm Matthew Parris, a computer science student at The University of Tulsa</h2>
+    <p>
+        I want to make the world a better place—by utilizing science,
+        technology, engineering, and math as well as an audicious amount
+        of em dashes. In middle school, I got into making some really 
+        terrible video games. Now, I code corporate applications 🎉. It's
+        some serious stuff. Some of the buzzwords that I am currently into:
+        Javascript, Node JS, Puppeteer, browser automation, and 
+        single-page applications.
+    </p>
+</section>
+<div id="experiences-container">
+    <h2 class="bowlby">Here's some things I've done</h2>
+    {{ indexMacros.experienceSection("Paycom", "Software Development Intern", "Summer 2019") }}
+    {{ indexMacros.experienceSection("Encore Pro Staffing", "Security Guard", "Summer 2018") }}
 </div>
 <script>
     document.getElementById('mobile-menu-button')
@@ -40,3 +40,4 @@ description: Home page
         
     });
 </script>
+{% endblock %}
