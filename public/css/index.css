@@ -9,8 +9,9 @@
 
 header {
     height: 200px;
-    text-align: center; /* remove this */
+    text-align: center;
     margin-bottom: var(--space-lg);
+    margin-top: var(--space-xl);
 }
 
 section {
@@ -20,6 +21,10 @@ section {
 h2 {
     font-size: 1.1rem;
     margin-bottom: var(--space-lg);
+}
+
+#introduction-section h2 {
+    font-weight: 600;
 }
 
 #experiences-container {
@@ -77,7 +82,7 @@ h2 {
     border-left: 6px solid rgb(0, 98, 66);
 }
 
-#encore-section > .experience-header {
+#encoreprostaffing-section > .experience-header {
     border-left: 6px solid rgb(41, 65, 122);
 }
 
