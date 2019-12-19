@@ -34,6 +34,12 @@ section {
     font-family: 'Bowlby One SC', cursive;
 }
 
+.sourceSansPro {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+
+
 #main-container {
     display: flex;
     flex-flow: column wrap;
