@@ -1,0 +1,9 @@
+{
+    "tags": [
+        "post"
+    ],
+    "layout": "post-layout.njk",
+    "blogAuthor": "Matthew Parris",
+    "date": "Last Modified",
+    "permalink": "blog/{{ page.date | date: '%Y/%m/%d' }}/{{ title | slug }}/index.html"
+}

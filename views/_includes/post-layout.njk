@@ -1,0 +1,29 @@
+{% extends "main-layout.njk" %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="/css/post.css" />
+<script src="/js/post.js" />
+{% endblock %}
+
+{% block content %}
+    <article>
+        <header>
+            <div id="mainImage">
+                <img src="{{ mainImage | safe }}"></img>
+            </div>
+            <h1 id="title">{{ title | safe }}</h1>
+            <div id="headerDiv">
+                <div id="postInfo">
+                    <span>{{ blogAuthor | safe }}</span>
+                    <time> {{ page.date.toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric' }) | safe }} </span>
+                </div>
+                <div id="shareButtons">
+                </div>
+            </div>
+        </header>
+        <div class="articleContent">
+            {{ content | safe }}
+        </div>
+    </article>
+{% endblock %}
