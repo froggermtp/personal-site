@@ -27,17 +27,4 @@ description: Home page
     {{ indexMacros.experienceSection("Paycom", "Software Development Intern", "Summer 2019") }}
     {{ indexMacros.experienceSection("Encore Pro Staffing", "Security Guard", "Summer 2018") }}
 </div>
-<script>
-    document.getElementById('mobile-menu-button')
-        .addEventListener('click', function(e) {
-        document.querySelector('nav').classList.toggle('fullscreen');
-
-        const buttons = document.querySelectorAll('.header-button + .header-button');
-
-        for(let button of buttons) {
-            button.classList.toggle('block');
-        }
-        
-    });
-</script>
 {% endblock %}
