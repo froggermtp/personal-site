@@ -54,15 +54,8 @@ header h1 {
     max-height: 400px;
     overflow: hidden;
     margin-bottom: var(--space-xl);
-    margin-left: var(--space-xl);
-    margin-right: var(--space-xl);
 }
 
 #mainImage img {
     width: 100%;
-    /* transition: all 1s ease; */
 }
-
-/* #mainImage img:hover {
-    transform: scale(1.3);
-} */
