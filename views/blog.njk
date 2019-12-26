@@ -1,0 +1,40 @@
+---
+title: Blog
+pagination:
+    data: collections.post
+    size: 2
+    alias: posts
+---
+
+{% extends "main-layout.njk" %}
+{% import "macros/blog-macros.njk" as blogMacros %}
+
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="/css/blog.css" />
+{% endblock %}
+
+{% block content %}
+
+{% for post in posts %}
+  {{ blogMacros.article(post) }}
+{% endfor %}
+
+<nav>
+  <span class="previous">
+    {% if pagination.previousPageHref %}
+      <a href="{{ pagination.previousPageHref }}" class="previous">Previous</a>
+    {% else %}
+      Previous
+    {% endif %}
+  </span>
+  <span class="next">
+    {% if pagination.nextPageHref %}
+      <a href="{{ pagination.nextPageHref }}" class="next">Next</a>
+    {% else %}
+      Next
+    {% endif %}
+  </span>
+</nav>
+
+{% endblock %}

@@ -9,15 +9,6 @@ article h1 {
     margin-bottom: var(--space-sm);
 }
 
-.metadata {
-    margin-bottom: var(--space-xl);
-}
-
-article footer {
-    text-align: right;
-    margin-right: var(--space-xl);
-}
-
 article a:link {
     text-decoration: none;
 }
@@ -32,4 +23,23 @@ article a:hover {
 
 article a:active {
     text-decoration: underline;
+}
+
+nav {
+    text-align: right;
+    margin-right: var(--space-xl);
+    margin-bottom: var(--space-xl);
+}
+
+.postImage {
+    min-height: 400px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+article > a {
+    display: block;
 }
