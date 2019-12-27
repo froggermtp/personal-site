@@ -20,7 +20,7 @@ pagination:
   {{ blogMacros.article(post) }}
 {% endfor %}
 
-<nav>
+<nav id="pagination">
   <span class="previous">
     {% if pagination.previousPageHref %}
       <a href="{{ pagination.previousPageHref }}" class="previous">Previous</a>

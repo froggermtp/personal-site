@@ -25,7 +25,7 @@ article a:active {
     text-decoration: underline;
 }
 
-nav {
+#pagination {
     text-align: right;
     margin-right: var(--space-xl);
     margin-bottom: var(--space-xl);
