@@ -116,10 +116,28 @@ section {
     height: 2.5px;
     background-color: #333;
     margin: 3.5px 0 0 0;
+    transition: 0.4s;
 }
 
 .bar3 {
     margin-bottom: 6px;
+}
+
+/* Rotate first bar */
+.change .bar1 {
+    -webkit-transform: rotate(-45deg) translate(-5px, 4px) ;
+    transform: rotate(-45deg) translate(-5px, 4px) ;
+}
+  
+/* Fade out the second bar */
+.change .bar2 {
+    opacity: 0;
+}
+
+/* Rotate last bar */
+.change .bar3 {
+    -webkit-transform: rotate(45deg) translate(-4px, -4px) ;
+    transform: rotate(45deg) translate(-4px, -4px) ;
 }
 
 #nav-header {
