@@ -1,6 +1,8 @@
 ---
 title: Home
 description: Home page
+paycomAltText: Matthew and his coworkers posing with a camel at Paycom
+encoreAltText: A storm is approaching at the horse race track
 ---
 
 {% extends "index-layout.njk" %}
@@ -24,7 +26,7 @@ description: Home page
 </section>
 <div id="experiences-container">
     <h2 class="sourceSansPro">Here's some things I've done</h2>
-    {{ indexMacros.experienceSection("Paycom", "Software Development Intern", "Summer 2019") }}
-    {{ indexMacros.experienceSection("Encore Pro Staffing", "Security Guard", "Summer 2018") }}
+    {{ indexMacros.experienceSection("Paycom", "Software Development Intern", "Summer 2019", paycomAltText) }}
+    {{ indexMacros.experienceSection("Encore Pro Staffing", "Security Guard", "Summer 2018", encoreAltText) }}
 </div>
 {% endblock %}
