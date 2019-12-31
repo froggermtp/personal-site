@@ -226,6 +226,10 @@ section {
         max-width: 730px; */
     }
 
+    #home-button {
+        display: none;
+    }
+
     .header-button {
         border: none;
         color: var(--color-grey);
