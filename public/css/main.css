@@ -189,7 +189,7 @@ section {
     margin-bottom: var(--space-lg);
 }
 
-#social > span + span {
+#social > a + a {
     margin-left: var(--space-lg);
 }
 
@@ -268,12 +268,10 @@ section {
         -webkit-transform: scaleX(1);
         transform: scaleX(1);
       }
-      
-      
 }
 
 @media only screen and (min-width: 920px) {
-    #social > span + span {
+    #social > a + a {
         margin-left: var(--space-xl);
     }
 }

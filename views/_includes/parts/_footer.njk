@@ -1,17 +1,26 @@
 <footer id="pageFooter">
     <div id="social">
-             <span>
-                 <img src="/img/email.svg" />
-             </span>
-             <span>
-                 <img src="/img/github.svg" />
-             </span>
-             <span>
-                 <img src="/img/twitter.svg" />
-             </span>
-             <span>
-                 <img src="/img/linkedin.svg" />
-            </span>
+            <a href="javascript:decryptEmail('bWF0dGhld3BhcnJpc0BvdXRsb29rLmNvbQ==')">
+                <img src="/img/email.svg" />
+            </a>
+            <a href="https://github.com/froggermtp">
+                <img src="/img/github.svg" />
+            </a>
+            <a href="https://twitter.com/froggermtp">
+                <img src="/img/twitter.svg" />
+            </a>
+            <a href="https://www.linkedin.com/in/matthew-parris/">
+                <img src="/img/linkedin.svg" />
+            </a>
         </div>
     <div id="copyright">Copyright &copy 2019 Matthew Parris</div>
 </footer>
+<script>
+
+  function decryptEmail(encoded) {
+    var address = atob(encoded);
+    window.location.href = "mailto:" + address;
+
+  }
+
+</script>
