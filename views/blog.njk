@@ -3,6 +3,7 @@ title: Blog
 pagination:
     data: collections.post
     size: 2
+    reverse: true
     alias: posts
 ---
 
@@ -16,9 +17,11 @@ pagination:
 
 {% block content %}
 
+<div id="posts">
 {% for post in posts %}
   {{ blogMacros.article(post) }}
 {% endfor %}
+</div>
 
 <nav id="pagination">
   <span class="previous">

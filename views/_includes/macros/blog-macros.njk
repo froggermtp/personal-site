@@ -1,15 +1,24 @@
 {% macro article(post) %}
 
 <article>
-        <a href="{{ post.url | url }}"> 
+        {# <a href="{{ post.url | url }}"> 
             <img src="{{ post.data.mainImage }}"></img>
-        </a>
-        <h1 class="blogTitle">
-            <a href="{{ post.url | url }}">{{ post.data.title }}</a>
-        </h1>
-        <div class="metadata">
-            <time>{{ post.date.toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric' }) | safe}}</time>
-        </div>
+        </a> #}
+        <header>
+            <h1 class="blogTitle">
+                <a href="{{ post.url | url }}">{{ post.data.title }}</a>
+            </h1>
+            <div class="metadata">
+                <span>Posted on</span>
+                <time>{{ post.date | dateReadable }}</time>
+            </div>
+        </header>
+        <p>
+            {{ post.templateContent | striptags(true) | truncate(280) }}
+        </p>
+        <footer class="article-footer">
+            <a class="readMore" href="{{ post.url | url }}">Read more</a>
+        </footer>
 </article>
 
 {% endmacro %}
