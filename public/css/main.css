@@ -70,6 +70,7 @@ section {
     margin-left: var(--space-xl);
     width: 100%;
     letter-spacing: 1px;
+    text-decoration: none;
 }
 
 #header-buttons {
@@ -78,6 +79,10 @@ section {
     justify-content: inherit;
     overflow: hidden;
     width: 100%;
+}
+
+#header-buttons a {
+    text-decoration: none;
 }
 
 .fullscreen #header-buttons {
@@ -91,8 +96,8 @@ section {
 
 .header-button {
     background-color: white;
-    font-size: 16px;
-    cursor: pointer;
+    font-size: 20px;
+    font-weight: 600;
     margin: var(--space-med) 0 var(--space-med) var(--space-lg);
     padding: 5px 8px 5px 8px;
     position: relative;
@@ -233,6 +238,8 @@ section {
     .header-button {
         border: none;
         color: var(--color-grey);
+        font-size: 16px;
+        font-weight: 400;
     }
 
     .header-button:hover {
