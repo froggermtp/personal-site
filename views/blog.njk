@@ -24,20 +24,12 @@ pagination:
 </div>
 
 <nav id="pagination">
-  <span class="previous">
     {% if pagination.previousPageHref %}
-      <a href="{{ pagination.previousPageHref }}" class="previous">Previous</a>
-    {% else %}
-      Previous
+      <a href="{{ pagination.previousPageHref }}" class="new">Newer posts</a>
     {% endif %}
-  </span>
-  <span class="next">
     {% if pagination.nextPageHref %}
-      <a href="{{ pagination.nextPageHref }}" class="next">Next</a>
-    {% else %}
-      Next
+      <a href="{{ pagination.nextPageHref }}" class="old">Older posts</a>
     {% endif %}
-  </span>
 </nav>
 
 {% endblock %}
