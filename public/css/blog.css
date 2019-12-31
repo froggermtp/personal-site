@@ -1,3 +1,7 @@
+#posts {
+    margin-top: var(--space-lg);
+}
+
 article {
     margin-top: var(--space-lg);
     margin-left: var(--space-xl);
