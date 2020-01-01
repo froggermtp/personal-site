@@ -9,7 +9,9 @@
   },
   "author": "Matthew Parris",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "clean-css": "^4.2.1"
+  },
   "devDependencies": {
     "@11ty/eleventy": "^0.9.0"
   }
