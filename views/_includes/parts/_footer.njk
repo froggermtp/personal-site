@@ -15,12 +15,10 @@
         </div>
     <div id="copyright">Copyright &copy 2019 Matthew Parris</div>
 </footer>
+{% set js %}
+    {% include "js/footer.js" %}
+{% endset %}
+
 <script>
-
-  function decryptEmail(encoded) {
-    var address = atob(encoded);
-    window.location.href = "mailto:" + address;
-
-  }
-
+    {{ js | jsmin | safe }}
 </script>

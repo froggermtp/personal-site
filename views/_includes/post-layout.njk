@@ -18,7 +18,13 @@
         {{ css | cssmin | safe }}
     </style>
 
-    <script src="/js/post.js" />
+    {% set js %}
+        {% include "js/post.js" %}
+    {% endset %}
+
+    <script>
+        {{ js | jsmin | safe }}
+    </script>
 {% endblock %}
 
 {% block content %}
