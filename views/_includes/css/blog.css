@@ -53,6 +53,7 @@ p {
     margin-right: var(--space-xl);
     margin-bottom: var(--space-xl);
     margin-left: var(--space-xl);
+    margin-top: var(--space-lg);
 }
 
 .new {
