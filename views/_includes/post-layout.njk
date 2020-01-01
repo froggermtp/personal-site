@@ -26,4 +26,18 @@
             {{ content | safe }}
         </div>
     </article>
+    <nav id="otherPosts">
+    {% if collections.postInfo[page.url].nextTitle %}
+        <div id="next">
+            <span>Next post</span>
+            <a href="{{ collections.postInfo[page.url].nextUrl }}">{{ collections.postInfo[page.url].nextTitle }}</a>
+        </div>
+    {% endif %}
+    {% if collections.postInfo[page.url].previousTitle %}
+        <div id="previous">
+            <span>Previous post</span>
+            <a href="{{ collections.postInfo[page.url].previousUrl }}">{{ collections.postInfo[page.url].previousTitle }}</a>
+        </div>
+    {% endif %}
+    </nav>
 {% endblock %}
