@@ -11,10 +11,16 @@
     <meta name="description" content="{{ description }}">
     <meta name="author" content="Matthew Parris">
 
-    <link rel="stylesheet" href="/css/normalize.css" />
-    <link rel="stylesheet" href="/css/main.css" />
-    <link href="https://fonts.googleapis.com/css?family=Oxygen|Source+Sans+Pro&display=swap" rel="stylesheet"> 
+    {% set css %}
+        {% include "css/normalize.css" %}
+        {% include "css/main.css" %}
+    {% endset %}
 
+    <style>
+        {{ css | cssmin | safe }}
+    </style>
+
+    <link href="https://fonts.googleapis.com/css?family=Oxygen|Source+Sans+Pro&display=swap" rel="stylesheet"> 
     {% endblock %}
 </head>
 

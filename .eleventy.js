@@ -1,7 +1,12 @@
+const CleanCSS = require("clean-css");
+
 module.exports = function (eleventyConfig) {
     eleventyConfig.addPassthroughCopy({ "public/img": "img" });
-    eleventyConfig.addPassthroughCopy({ "public/css": "css" });
     eleventyConfig.addPassthroughCopy({ "public/js": "js" });
+
+    eleventyConfig.addFilter("cssmin", function (code) {
+        return new CleanCSS({}).minify(code).styles;
+    });
 
     eleventyConfig.addFilter('dateReadable', function (date) {
         return date.toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric' });

@@ -1,8 +1,15 @@
 {% extends "main-layout.njk" %}
 
 {% block head %}
-{{ super() }}
-<link rel="stylesheet" href="/css/index.css" />
+    {{ super() }}
+
+    {% set css %}
+        {% include "css/index.css" %}
+    {% endset %}
+
+    <style>
+        {{ css | cssmin | safe }}
+    </style>
 {% endblock %}
 
 {% block content %}

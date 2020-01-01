@@ -11,8 +11,16 @@ pagination:
 {% import "macros/blog-macros.njk" as blogMacros %}
 
 {% block head %}
-{{ super() }}
-<link rel="stylesheet" href="/css/blog.css" />
+  {{ super() }}
+
+  {% set css %}
+      {% include "css/blog.css" %}
+  {% endset %}
+
+  <style>
+      {{ css | cssmin | safe }}
+  </style>
+
 {% endblock %}
 
 {% block content %}
