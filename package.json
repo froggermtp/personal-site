@@ -9,6 +9,10 @@
   },
   "author": "Matthew Parris",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/froggermtp/personal-site.git"
+  },
   "dependencies": {
     "clean-css": "^4.2.1",
     "terser": "^4.4.3"
