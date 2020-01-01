@@ -3,7 +3,6 @@ const Terser = require("terser");
 
 module.exports = function (eleventyConfig) {
     eleventyConfig.addPassthroughCopy({ "public/img": "img" });
-    eleventyConfig.addPassthroughCopy({ "public/js": "js" });
 
     eleventyConfig.addFilter("cssmin", function (code) {
         return new CleanCSS({}).minify(code).styles;
