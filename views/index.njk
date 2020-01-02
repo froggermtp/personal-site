@@ -5,12 +5,28 @@ paycomAltText: Matthew and his coworkers posing with a camel at Paycom
 encoreAltText: A storm is approaching at the horse race track
 ---
 
-{% extends "index-layout.njk" %}
+{% extends "main-layout.njk" %}
 {% import "macros/index-macros.njk" as indexMacros %}
+
+{% block head %}
+    {{ super() }}
+
+    {% set css %}
+        {% include "css/index.css" %}
+    {% endset %}
+
+    <style>
+        {{ css | cssmin | safe }}
+    </style>
+{% endblock %}
 
 {% block content %}
 
-{{ super() }}
+<header>
+    <div id="header-content">
+        <img src="/img/header-avatar.jpg" id="header-avatar" alt="A not so professional headshot of Matthew">
+    </div>
+</header>
 
 <section id="introduction-section">
     <h2>I'm Matthew Parris, a computer science student at The University of Tulsa</h2>
