@@ -4,6 +4,5 @@
     ],
     "layout": "post-layout.njk",
     "blogAuthor": "Matthew Parris",
-    "date": "Last Modified",
     "permalink": "/{{ title | slug }}/index.html"
 }
