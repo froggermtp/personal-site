@@ -1,11 +1,34 @@
+#blog-page-header {
+    background-color: black;
+    width: 100%;
+    height: 100px;
+}
+
+#blog-page-header h1 {
+    color: white;
+    margin-top: var(--space-xl);
+}
+
+#blog-page-header::after {
+    position:relative;
+    content: " ";
+    display:block;
+    bottom:px;
+    width:110%;
+    background-color: black;
+    z-index: -1;
+    height: 50px;
+    transform: rotate(3deg);
+}
+
 #posts {
-    margin-top: var(--space-lg);
+    margin-top: var(--space-xxl);
 }
 
 article {
-    margin-top: var(--space-lg);
     margin-left: var(--space-xl);
     margin-right: var(--space-xl);
+    margin-bottom: var(--space-lg);
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
@@ -53,7 +76,7 @@ p {
     margin-right: var(--space-xl);
     margin-bottom: var(--space-xl);
     margin-left: var(--space-xl);
-    margin-top: var(--space-lg);
+    margin-top: auto;
 }
 
 .new {
@@ -68,9 +91,9 @@ p {
     font-size: .8rem;
 }
 
-#main-container {
+/* #main-container {
     justify-content: space-between;
-}
+} */
 
 /* .postImage {
     min-height: 400px;

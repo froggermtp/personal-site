@@ -47,6 +47,7 @@ section {
     max-width: 730px;
     margin-top: 50px;
     min-height: calc(100vh - 122px);
+    overflow: hidden;
 }
 
 #mainNav {
