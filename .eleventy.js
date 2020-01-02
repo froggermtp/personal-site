@@ -1,5 +1,6 @@
 const CleanCSS = require("clean-css");
 const Terser = require("terser");
+const moment = require('moment');
 
 module.exports = function (eleventyConfig) {
     eleventyConfig.addPassthroughCopy({ "public/img": "img" });
@@ -18,8 +19,8 @@ module.exports = function (eleventyConfig) {
         return minified.code;
     });
 
-    eleventyConfig.addFilter('dateReadable', function (date) {
-        return date.toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric' });
+    eleventyConfig.addFilter('date', function (date, format) {
+        return moment.utc(date).format(format);
     });
 
     eleventyConfig.addCollection('postInfo', function (collection) {
