@@ -10,7 +10,7 @@
             </h1>
             <div class="metadata">
                 <span>Posted on</span>
-                <time>{{ post.date | dateReadable }}</time>
+                <time>{{ post.date | date("LL") | safe }}</time>
             </div>
         </header>
         <p>
