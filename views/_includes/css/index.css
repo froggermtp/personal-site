@@ -86,6 +86,10 @@ h2 {
     border-left: 6px solid rgb(41, 65, 122);
 }
 
+#universityoftulsa-section > .experience-header {
+    border-left: 6px solid #004282;
+}
+
 @media only screen and (min-width: 920px) {
     #experiences-container section {
         display: flex;

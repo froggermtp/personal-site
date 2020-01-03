@@ -42,6 +42,8 @@ encoreAltText: A storm is approaching at the horse race track
 </section>
 <div id="experiences-container">
     <h2 class="sourceSansPro">Here's some things I've done</h2>
+    {% set utulsaAltText %}The University of Tulsa's library{% endset %}
+    {{ indexMacros.experienceSection("University of Tulsa", "Student", "2016 - 2020", utulsaAltText) }}
     {{ indexMacros.experienceSection("Paycom", "Software Development Intern", "Summer 2019", paycomAltText) }}
     {{ indexMacros.experienceSection("Encore Pro Staffing", "Security Guard", "Summer 2018", encoreAltText) }}
 </div>
