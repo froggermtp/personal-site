@@ -181,7 +181,6 @@ section {
     justify-content: space-around;
     height: 75px;
     text-align: center;
-    /* background-color: #d3d3d3; */
 }
 
 #social {
@@ -228,8 +227,6 @@ section {
         display: flex;
         flex-direction: row;
         justify-content: flex-end;
-        /* width: 70%;
-        max-width: 730px; */
     }
 
     #home-button {
@@ -246,7 +243,6 @@ section {
     .header-button:hover {
         background-color: white;
         color: var(--color-black);
-        /* padding-bottom: 13px; */
     }
 
     .header-button:before {

@@ -1,9 +1,6 @@
 {% macro article(post) %}
 
 <article>
-        {# <a href="{{ post.url | url }}"> 
-            <img src="{{ post.data.mainImage }}"></img>
-        </a> #}
         <header>
             <h1 class="blogTitle">
                 <a href="{{ post.url | url }}">{{ post.data.title }}</a>
