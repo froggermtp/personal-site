@@ -1,3 +1,7 @@
+body {
+    line-height: 1.6;
+}
+
 #header-avatar {
     max-width: 175px;
     max-height: 175PX;
@@ -16,6 +20,12 @@ header {
 
 section {
     width: 100%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    margin-bottom: var(--space-xl);
+}
+
+section:last-of-type {
+    border-bottom: none;
 }
 
 h2 {
@@ -23,85 +33,31 @@ h2 {
     margin-bottom: var(--space-lg);
 }
 
+#introduction-section {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+#introduction-section span {
+    margin-right: var(--space-xl);
+    margin-left: var(--space-xl);
+    margin-bottom: var(--space-lg);
+}
+
 #introduction-section h2 {
     font-weight: 600;
 }
 
-#experiences-container {
-    width: 100%;
+#ten-sec-bio {
+    text-align: center;
 }
 
-#experiences-container > h2 {
-    margin-bottom: var(--space-xl);
+#ten-sec-bio ul {
+    list-style: none;
+    margin-right: var(--space-xl);
 }
 
-#experiences-container > section {
-    margin-bottom: var(--space-xl);
-}
-
-.experience-img-container {
-    margin: 0 var(--space-xl) var(--space-med) var(--space-xl);
-}
-
-.experience-img {
-    width: 100%;
-    height: auto;
-    min-height: 210px;
-    object-fit: cover;
-}
-
-.experience-header {
-    margin: 0 0 var(--space-lg) var(--space-xl);
-    display: flex;
-    flex-flow: column wrap;
-    padding-left: 5px;
-}
-
-.experience-date {
-    margin: 0;
-    color: var(--color-light-grey);
-    font-weight: 400;
-    font-size: .85rem;
-}
-
-.experience-title {
-    margin: 0;
-    color: var(--color-black);
-    font-weight: 700;
-    font-size: 1rem;
-}
-
-.experience-company {
-    margin: 0;
-    color: var(--color-grey);
-    font-weight: 400;
-    font-size: .9rem;
-}
-
-#paycom-section > .experience-header {
-    border-left: 6px solid rgb(0, 98, 66);
-}
-
-#encoreprostaffing-section > .experience-header {
-    border-left: 6px solid rgb(41, 65, 122);
-}
-
-#universityoftulsa-section > .experience-header {
-    border-left: 6px solid #004282;
-}
-
-@media only screen and (min-width: 920px) {
-    #experiences-container section {
-        display: flex;
-        flex-direction: row-reverse;
-        justify-content: flex-end;
-    }
-
-    .experience-img-container {
-        max-width: 400px;
-    }
-
-    #experiences-container .experience-header {
-        border-left: none;
-    }
+#ten-sec-bio li {
+    margin-bottom: var(--space-lg);
 }

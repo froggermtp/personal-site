@@ -22,29 +22,44 @@ encoreAltText: A storm is approaching at the horse race track
 
 {% block content %}
 
-<header>
-    <div id="header-content">
-        <img src="/img/header-avatar.jpg" id="header-avatar" alt="A not so professional headshot of Matthew">
-    </div>
-</header>
+    <header>
+        <div id="header-content">
+            <img src="/img/header-avatar.jpg" id="header-avatar" alt="A not so professional headshot of Matthew">
+        </div>
+    </header>
 
-<section id="introduction-section">
-    <h2>I'm Matthew Parris, a computer science student at The University of Tulsa</h2>
-    <p>
-        I want to make the world a better place—by utilizing science,
-        technology, engineering, and math as well as an audicious amount
-        of em dashes. In middle school, I got into making some really 
-        terrible video games. Now, I code corporate applications 🎉. It's
-        some serious stuff. Some of the buzzwords that I am currently into:
-        Javascript, Node JS, Puppeteer, browser automation, and 
-        single-page applications.
-    </p>
-</section>
-<div id="experiences-container">
+    <section id="introduction-section">
+        <h2>I'm Matthew Parris, a computer science student at The University of Tulsa</h2>
+        <span>Welcome to my website!</span>
+        <span>
+            I want to make the world a better place—by utilizing science,
+            technology, engineering, and math as well as an audicious amount
+            of em dashes.
+        </span>
+        <span>
+            In middle school, I got into making some really 
+            terrible video games. Now, I code corporate applications 🎉. It's some serious stuff.
+        </span>
+        <span>On here, you can find some stuff I've written. Feel free to snoop around.</span>
+    </section>
+
+    <section id="ten-sec-bio">
+        <h2>10 Second Bio</h2>
+        <ul>
+            <li>I have a <a href="/blog">blog</a> that isn't popular</li>
+            <li>I'm fluent in Christianese</li>
+            <li>Broken Arrow, Oklahoma native</li>
+            <li>I grew up playing competitive soccer</li>
+            <li>Won a few track and cross-country state championships in high school</li>
+            <li>Favorite music artist: Kendrick Lamar</li>
+            <li>Go Oklahoma City Thunder!</li>
+        </ul>
+    </section>
+{# <div id="experiences-container">
     <h2 class="sourceSansPro">Here's some things I've done</h2>
     {% set utulsaAltText %}The University of Tulsa's library{% endset %}
     {{ indexMacros.experienceSection("University of Tulsa", "Student", "2016 - 2020", utulsaAltText) }}
     {{ indexMacros.experienceSection("Paycom", "Software Development Intern", "Summer 2019", paycomAltText) }}
     {{ indexMacros.experienceSection("Encore Pro Staffing", "Security Guard", "Summer 2018", encoreAltText) }}
-</div>
+</div> #}
 {% endblock %}
