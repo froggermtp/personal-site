@@ -1,12 +1,9 @@
 ---
 title: Home
 description: Home page
-paycomAltText: Matthew and his coworkers posing with a camel at Paycom
-encoreAltText: A storm is approaching at the horse race track
 ---
 
 {% extends "main-layout.njk" %}
-{% import "macros/index-macros.njk" as indexMacros %}
 
 {% block head %}
     {{ super() }}
@@ -21,7 +18,6 @@ encoreAltText: A storm is approaching at the horse race track
 {% endblock %}
 
 {% block content %}
-
     <header>
         <div id="header-content">
             <img src="/img/header-avatar.jpg" id="header-avatar" alt="A not so professional headshot of Matthew">
@@ -55,11 +51,4 @@ encoreAltText: A storm is approaching at the horse race track
             <li>Go Oklahoma City Thunder!</li>
         </ul>
     </section>
-{# <div id="experiences-container">
-    <h2 class="sourceSansPro">Here's some things I've done</h2>
-    {% set utulsaAltText %}The University of Tulsa's library{% endset %}
-    {{ indexMacros.experienceSection("University of Tulsa", "Student", "2016 - 2020", utulsaAltText) }}
-    {{ indexMacros.experienceSection("Paycom", "Software Development Intern", "Summer 2019", paycomAltText) }}
-    {{ indexMacros.experienceSection("Encore Pro Staffing", "Security Guard", "Summer 2018", encoreAltText) }}
-</div> #}
 {% endblock %}
