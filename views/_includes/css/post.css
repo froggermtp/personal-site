@@ -2,8 +2,21 @@ article {
     margin-bottom: var(--space-xl);
 }
 
+.articleContent {
+    padding-left: var(--space-xl);
+    padding-right: var(--space-xl);
+}
+
 .articleContent p {
+    margin-left: 0;
+    margin-right: 0;
     font-size: 1.1rem;
+    margin-bottom: var(--space-xl)
+}
+
+.articleContent h1 {
+    margin-left: 0;
+    margin-right: 0;
     margin-bottom: var(--space-xl);
 }
 
