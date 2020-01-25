@@ -99,12 +99,12 @@ header h1 {
 }
 
 #next {
-    float: left;
+    float: right;
+    text-align: right;
 }
 
 #previous {
-    float: right;
-    text-align: right;
+    float: left;
 }
 
 #next span, #previous span {
