@@ -4,6 +4,7 @@ const moment = require('moment');
 
 module.exports = function (eleventyConfig) {
     eleventyConfig.addPassthroughCopy({ "public/img": "img" });
+    eleventyConfig.addPassthroughCopy({ "public/pdf": "pdf" });
 
     eleventyConfig.addFilter("cssmin", function (code) {
         return new CleanCSS({}).minify(code).styles;
