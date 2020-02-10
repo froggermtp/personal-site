@@ -17,14 +17,6 @@
     <style>
         {{ css | cssmin | safe }}
     </style>
-
-    {% set js %}
-        {% include "js/post.js" %}
-    {% endset %}
-
-    <script>
-        {{ js | jsmin | safe }}
-    </script>
 {% endblock %}
 
 {% block content %}
@@ -38,8 +30,6 @@
                 <div id="postInfo">
                     <span>{{ blogAuthor | safe }}</span>
                     <time> {{ page.date | date("LL") | safe }} </span>
-                </div>
-                <div id="shareButtons">
                 </div>
             </div>
         </header>
