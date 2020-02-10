@@ -4,7 +4,6 @@ date: 2019-05-18
 mainImage: /img/clothes-on-a-hanger.jpeg
 mainImageAltText: Some clothes on hanger
 ---
-<i>I wrote this piece several months ago, but never published it. After a few minor edits, here it is in all its glory. Enjoy.</i>
 
 Not to brag or anything but I recently accepted an offer to intern at Paycom for the summer of 2019. So that nobody has to ask me: the internship has something to do with software development. I am anticipating working on a team to solve interesting problems. Yeah, I don’t really know exactly what I’ll be doing yet; however, I wanted to ramble a little bit about my process of trying to get an internship.
 

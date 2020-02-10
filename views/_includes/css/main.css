@@ -4,7 +4,6 @@
     --space-lg: 1rem;
     --space-xl: 2rem;
     --space-xxl: 4rem;
-
     --color-dark: hsl(0, 0%, 13%);
     --color-grey: hsl(0, 0%, 29%);
     --color-light-grey: hsl(0, 0%, 45%);
@@ -56,7 +55,7 @@ section {
     left: 0;
     width: 100%;
     height: 50px;
-    box-shadow: 0 0.125rem 0.25rem 0 rgba(0,0,0,.11);
+    box-shadow: 0 0.125rem 0.25rem 0 rgba(0, 0, 0, .11);
     z-index: 2;
     background: #fff;
 }
@@ -116,7 +115,7 @@ section {
     cursor: pointer;
     margin-right: var(--space-lg);
 }
-  
+
 .bar1, .bar2, .bar3 {
     width: 18px;
     height: 2.5px;
@@ -130,20 +129,23 @@ section {
 }
 
 /* Rotate first bar */
+
 .change .bar1 {
-    -webkit-transform: rotate(-45deg) translate(-5px, 4px) ;
-    transform: rotate(-45deg) translate(-5px, 4px) ;
+    -webkit-transform: rotate(-45deg) translate(-5px, 4px);
+    transform: rotate(-45deg) translate(-5px, 4px);
 }
-  
+
 /* Fade out the second bar */
+
 .change .bar2 {
     opacity: 0;
 }
 
 /* Rotate last bar */
+
 .change .bar3 {
-    -webkit-transform: rotate(45deg) translate(-4px, -4px) ;
-    transform: rotate(45deg) translate(-4px, -4px) ;
+    -webkit-transform: rotate(45deg) translate(-4px, -4px);
+    transform: rotate(45deg) translate(-4px, -4px);
 }
 
 #nav-header {
@@ -189,7 +191,7 @@ section {
     margin-bottom: var(--space-lg);
 }
 
-#social > a + a {
+#social>a+a {
     margin-left: var(--space-lg);
 }
 
@@ -208,43 +210,35 @@ section {
         width: 70%;
         margin: 50px auto 0;
     }
-
     #mainNav {
         justify-content: center;
     }
-
     #navContainer {
         width: 70%;
         max-width: 730px;
         margin: auto;
     }
-
     #nav-header {
         display: none;
     }
-
     #header-buttons {
         display: flex;
         flex-direction: row;
         justify-content: flex-end;
     }
-
     #home-button {
         display: none;
     }
-
     .header-button {
         border: none;
         color: var(--color-grey);
         font-size: 16px;
         font-weight: 400;
     }
-
     .header-button:hover {
         background-color: white;
         color: var(--color-black);
     }
-
     .header-button:before {
         content: "";
         position: absolute;
@@ -258,17 +252,16 @@ section {
         transform: scaleX(0);
         -webkit-transition: all 0.3s ease-in-out 0s;
         transition: all 0.3s ease-in-out 0s;
-      }
-
-      .header-button:hover:before {
+    }
+    .header-button:hover:before {
         visibility: visible;
         -webkit-transform: scaleX(1);
         transform: scaleX(1);
-      }
+    }
 }
 
 @media only screen and (min-width: 920px) {
-    #social > a + a {
+    #social>a+a {
         margin-left: var(--space-xl);
     }
 }
