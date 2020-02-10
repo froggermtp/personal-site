@@ -31,12 +31,12 @@ section:last-of-type {
 h2 {
     font-size: 1.1rem;
     margin-bottom: var(--space-lg);
+    font-weight: 600;
 }
 
 #introduction-section {
     display: flex;
     flex-direction: column;
-    text-align: center;
 }
 
 #introduction-section span {
@@ -45,16 +45,11 @@ h2 {
     margin-bottom: var(--space-lg);
 }
 
-#introduction-section h2 {
-    font-weight: 600;
-}
-
-#ten-sec-bio {
-    text-align: center;
+#introduction-section span:last-of-type {
+    margin-bottom: var(--space-xl);
 }
 
 #ten-sec-bio ul {
-    list-style: none;
     margin-right: var(--space-xl);
 }
 
