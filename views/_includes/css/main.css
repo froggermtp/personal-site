@@ -44,19 +44,135 @@ section {
     flex-flow: column wrap;
     width: 100%;
     max-width: 730px;
+    margin-top: 50px;
     min-height: calc(100vh - 122px);
     overflow: hidden;
 }
 
 #mainNav {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 40px;
+    height: 50px;
+    box-shadow: 0 0.125rem 0.25rem 0 rgba(0, 0, 0, .11);
+    z-index: 2;
+    background: #fff;
 }
 
-#mainNav div {
-    text-align: center;
-    vertical-align: middle;
-    line-height: 40px;
+#navContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#logo {
+    margin-left: var(--space-xl);
+    width: 100%;
+    letter-spacing: 1px;
+    text-decoration: none;
+}
+
+#header-buttons {
+    display: none;
+    flex-direction: column;
+    justify-content: inherit;
+    overflow: hidden;
+    width: 100%;
+}
+
+#header-buttons a {
+    text-decoration: none;
+}
+
+.fullscreen #header-buttons {
+    display: flex;
+    margin-left: var(--space-xl);
+}
+
+.fullscreen #logo {
+    display: none;
+}
+
+.header-button {
+    background-color: white;
+    font-size: 20px;
+    font-weight: 600;
+    margin: var(--space-med) 0 var(--space-med) var(--space-lg);
+    padding: 5px 8px 5px 8px;
+    position: relative;
+}
+
+.fullscreen .header-button {
+    padding-left: 0;
+    text-align: left;
+}
+
+.hamburger-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    cursor: pointer;
+    margin-right: var(--space-lg);
+}
+
+.bar1, .bar2, .bar3 {
+    width: 18px;
+    height: 2.5px;
+    background-color: #333;
+    margin: 3.5px 0 0 0;
+    transition: 0.4s;
+}
+
+.bar3 {
+    margin-bottom: 6px;
+}
+
+/* Rotate first bar */
+
+.change .bar1 {
+    -webkit-transform: rotate(-45deg) translate(-5px, 4px);
+    transform: rotate(-45deg) translate(-5px, 4px);
+}
+
+/* Fade out the second bar */
+
+.change .bar2 {
+    opacity: 0;
+}
+
+/* Rotate last bar */
+
+.change .bar3 {
+    -webkit-transform: rotate(45deg) translate(-4px, -4px);
+    transform: rotate(45deg) translate(-4px, -4px);
+}
+
+#nav-header {
+    display: flex;
+    justify-content: flex-end;
+    height: 50px;
+    width: 100%;
+}
+
+#mainNav.fullscreen {
+    height: 100%;
+}
+
+.fullscreen #navContainer {
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+}
+
+#mainNav.fullscreen button {
+    font-size: 1.4rem;
+    border: none;
+    margin-left: 0;
+}
+
+#mainNav.fullscreen button:hover {
+    background-color: inherit;
+    color: initial;
 }
 
 /** Footer **/
@@ -92,7 +208,7 @@ section {
 @media only screen and (min-width: 768px) {
     #main-container {
         width: 70%;
-        margin: auto;
+        margin: 50px auto 0;
     }
     #mainNav {
         justify-content: center;
