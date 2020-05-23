@@ -1,0 +1,19 @@
+#most-recent-post header {
+    height: 100%;
+    text-align: left;
+    margin-bottom: var(--space-lg);
+    margin-top: 0;
+}
+
+#most-recent-post header h3 {
+    margin-top: 0;
+    font-size: 1.1rem;
+}
+
+#most-recent-post footer a {
+    margin-left: var(--space-xl)
+}
+
+#most-recent-post footer a:link, #most-recent-post footer a:visited {
+    color: #2A5DB0;
+}
