@@ -192,7 +192,7 @@ section {
 }
 
 #social>a+a {
-    margin-left: var(--space-lg);
+    margin-left: var(--space-xl);
 }
 
 #social img {
@@ -262,6 +262,6 @@ section {
 
 @media only screen and (min-width: 920px) {
     #social>a+a {
-        margin-left: var(--space-xl);
+        margin-left: var(--space-xxl);
     }
 }
