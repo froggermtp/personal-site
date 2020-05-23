@@ -10,11 +10,11 @@
 }
 
 #blog-page-header::after {
-    position:relative;
+    position: relative;
     content: " ";
-    display:block;
-    bottom:px;
-    width:110%;
+    display: block;
+    bottom: px;
+    width: 110%;
     background-color: black;
     z-index: -1;
     height: 50px;
@@ -28,11 +28,16 @@
 article {
     margin-left: var(--space-xl);
     margin-right: var(--space-xl);
-    margin-bottom: var(--space-lg);
+    margin-bottom: var(--space-xl);
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
+article:last-of-type {
+    border-bottom: none;
+}
+
 article h1 {
+    font-size: 1.4rem;
     margin-left: 0;
     margin-bottom: var(--space-med);
 }
@@ -40,7 +45,7 @@ article h1 {
 article a:link {
     text-decoration: none;
 }
-  
+
 article a:visited {
     text-decoration: none;
 }
@@ -62,13 +67,13 @@ p {
     margin-bottom: var(--space-lg);
 }
 
-.readMore:link, .readMore:visited { 
+.readMore:link, .readMore:visited {
     color: #2A5DB0;
     text-decoration: underline;
 }
 
 .article-footer {
-    margin-bottom: var(--space-lg);
+    margin-bottom: var(--space-xl);
 }
 
 #pagination {
