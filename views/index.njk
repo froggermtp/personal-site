@@ -19,25 +19,30 @@ description: Homepage for Matthew Parris's personal website
 {% endblock %}
 
 {% block content %}
-    <header>
-        <div id="header-content">
-            <img src="/img/header-avatar.jpg" id="header-avatar" alt="A not so professional headshot of Matthew">
-        </div>
-    </header>
-
     <section id="introduction-section">
-        <h2>Hi, I'm Matthew</h2>
-        <span>
-            I've just recently graduated from the University of Tulsa with a degree in computer science.
-            Right now, I am stuck at my house due to coronavirus.
-        </span>
+        <header class="left">
+            <div id="header-content">
+                <img src="/img/header-avatar.jpg" id="header-avatar" alt="A not so professional headshot of Matthew">
+            </div>
+        </header>
+        <div class="right">
+            <h2>Hi, I'm Matthew</h2>
 
-        <span>On here, I am writing about topics tangent to the important stuff.</span>
-        
+            <p>
+                I've just recently graduated from the University of Tulsa with a degree in computer science.
+                Right now, I am stuck at my house due to coronavirus.
+            </p>
+
+            <p>On here, I am writing about topics tangent to the important stuff.</p>
+        </div>   
     </section>
 
     <section>
-        <h2>Blog</h2>
-        {% include "parts/_most-recent-post.njk" %}
+        <div class="left">
+            <h2>Blog</h2>
+        </div>
+        <div class="right">
+            {% include "parts/_most-recent-post.njk" %}
+        </div>
     </section>
 {% endblock %}

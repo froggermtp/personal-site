@@ -19,6 +19,8 @@ header {
 }
 
 section {
+    display: flex;
+    flex-flow: column nowrap;
     width: 100%;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     margin-bottom: var(--space-xl);
@@ -35,25 +37,27 @@ h2 {
     font-weight: 600;
 }
 
-#introduction-section {
-    display: flex;
-    flex-direction: column;
-}
-
-#introduction-section span {
-    margin-right: var(--space-xl);
-    margin-left: var(--space-xl);
-    margin-bottom: var(--space-lg);
-}
-
-#introduction-section span:last-of-type {
+.right {
     margin-bottom: var(--space-xl);
 }
 
-#ten-sec-bio ul {
-    margin-right: var(--space-xl);
-}
-
-#ten-sec-bio li {
-    margin-bottom: var(--space-lg);
+@media only screen and (min-width: 920px) {
+    #main-container>section {
+        flex-direction: row;
+    }
+    .left, .right {
+        width: 50%;
+    }
+    .left {
+        margin-right: 0;
+    }
+    #introduction-section .right {
+        margin-top: var(--space-xl);
+    }
+    p, h2, h3, .right #most-recent-post footer a {
+        margin-left: 0;
+    }
+    .left>* {
+        text-align: center;
+    }
 }
