@@ -3,6 +3,14 @@ const Terser = require("terser");
 const moment = require('moment');
 
 module.exports = function (eleventyConfig) {
+    let markdownIt = require("markdown-it");
+    let options = {
+        html: true
+    };
+    let markdownLib = markdownIt(options).use(require("markdown-it-footnote"));
+    eleventyConfig.setLibrary("md", markdownLib);
+
+
     eleventyConfig.addPassthroughCopy({ "public/img": "img" });
     eleventyConfig.addPassthroughCopy({ "public/pdf": "pdf" });
 
