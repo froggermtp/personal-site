@@ -10,7 +10,7 @@ article {
 .articleContent p {
     margin-left: 0;
     margin-right: 0;
-    font-size: 1.1rem;
+    font-size: 1em;
     margin-bottom: var(--space-xl)
 }
 
@@ -109,10 +109,4 @@ header h1 {
 
 #next span, #previous span {
     margin-bottom: var(--space-sm);
-}
-
-@media only screen and (min-width: 768px) {
-    header h1 {
-        font-size: 2em;
-    }
 }
