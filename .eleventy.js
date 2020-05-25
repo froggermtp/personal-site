@@ -33,6 +33,11 @@ module.exports = function (eleventyConfig) {
         return moment.utc(date).format(format);
     });
 
+    eleventyConfig.addFilter('removeFootnote', function (str) {
+        const regex = /\[.+\]/g
+        return str.replace(regex, "");
+    });
+
     eleventyConfig.addCollection('postInfo', function (collection) {
         const posts = collection.getFilteredByTag('post');
         let postInfo = {};
