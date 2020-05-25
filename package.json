@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "clean-css": "^4.2.1",
+    "eleventy-plugin-typeset": "^1.0.0",
     "markdown-it-footnote": "^3.0.2",
     "moment": "^2.24.0",
     "terser": "^4.4.3"
