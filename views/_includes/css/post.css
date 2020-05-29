@@ -44,6 +44,7 @@ article {
 
 .articleContent h2 {
     margin-left: 0;
+    margin-bottom: var(--space-lg);
     font-weight: 700;
     font-size: 1.375em;
 }
