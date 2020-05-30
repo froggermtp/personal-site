@@ -10,14 +10,14 @@ article {
 .articleContent p {
     margin-left: 0;
     margin-right: 0;
-    font-size: 1.1rem;
-    margin-bottom: var(--space-xl)
+    font-size: 1em;
+    margin-bottom: var(--space-lg);
 }
 
 .articleContent h1 {
     margin-left: 0;
     margin-right: 0;
-    margin-bottom: var(--space-xl);
+    margin-bottom: var(--space-lg);
 }
 
 .articleContent img {
@@ -25,6 +25,32 @@ article {
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+
+.articleContent blockquote {
+    margin-left: 0;
+    margin-right: 0;
+    position: relative;
+}
+
+.articleContent blockquote:before {
+    content: '';
+    border-left: 4px solid #000;
+    height: 100%;
+    width: 4px;
+    position: absolute;
+    left: -15px;
+}
+
+.articleContent h2 {
+    margin-left: 0;
+    margin-bottom: var(--space-lg);
+    font-weight: 700;
+    font-size: 1.375em;
+}
+
+.articleContent p>a {
+    color: #2A5DB0;
 }
 
 header {
@@ -109,10 +135,4 @@ header h1 {
 
 #next span, #previous span {
     margin-bottom: var(--space-sm);
-}
-
-@media only screen and (min-width: 768px) {
-    header h1 {
-        font-size: 2em;
-    }
 }

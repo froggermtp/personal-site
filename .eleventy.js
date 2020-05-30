@@ -3,6 +3,16 @@ const Terser = require("terser");
 const moment = require('moment');
 
 module.exports = function (eleventyConfig) {
+    let markdownIt = require("markdown-it");
+    let options = {
+        html: true
+    };
+    let markdownLib = markdownIt(options).use(require("markdown-it-footnote"));
+    eleventyConfig.setLibrary("md", markdownLib);
+
+    eleventyConfig.addPlugin(require("@11ty/eleventy-plugin-rss"));
+    eleventyConfig.addPlugin(require("eleventy-plugin-typeset")({ only: '.articleContent p' }));
+
     eleventyConfig.addPassthroughCopy({ "public/img": "img" });
     eleventyConfig.addPassthroughCopy({ "public/pdf": "pdf" });
 
@@ -22,6 +32,11 @@ module.exports = function (eleventyConfig) {
 
     eleventyConfig.addFilter('date', function (date, format) {
         return moment.utc(date).format(format);
+    });
+
+    eleventyConfig.addFilter('removeFootnote', function (str) {
+        const regex = /\[.+\]/g
+        return str.replace(regex, "");
     });
 
     eleventyConfig.addCollection('postInfo', function (collection) {

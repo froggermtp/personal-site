@@ -10,6 +10,7 @@ description: Homepage for Matthew Parris's personal website
 
     {% set css %}
         {% include "css/index.css" %}
+        {% include "css/most-recent-post.css" %}
     {% endset %}
 
     <style>
@@ -18,37 +19,30 @@ description: Homepage for Matthew Parris's personal website
 {% endblock %}
 
 {% block content %}
-    <header>
-        <div id="header-content">
-            <img src="/img/header-avatar.jpg" id="header-avatar" alt="A not so professional headshot of Matthew">
-        </div>
-    </header>
-
     <section id="introduction-section">
-        <h2>I'm Matthew Parris, a computer science student at The University of Tulsa</h2>
-        <span>Welcome to my website!</span>
-        <span>
-            I want to make the world a better place—by utilizing science,
-            technology, engineering, and math as well as an audicious amount
-            of em dashes.
-        </span>
-        <span>
-            In middle school, I got into making some really 
-            terrible video games. Now, I code corporate applications 🎉. It's some serious stuff.
-        </span>
-        <span>On here, you can find some words I've written. Feel free to snoop around.</span>
+        <header class="left">
+            <div id="header-content">
+                <img src="/img/header-avatar.jpg" id="header-avatar" alt="A not so professional headshot of Matthew">
+            </div>
+        </header>
+        <div class="right">
+            <h2>Hi, I'm Matthew</h2>
+
+            <p>
+                I've just recently graduated from the University of Tulsa with a degree in computer science.
+                Right now, I am stuck at my house due to coronavirus.
+            </p>
+
+            <p>On here, I am writing about topics tangent to the important stuff.</p>
+        </div>   
     </section>
 
-    <section id="ten-sec-bio">
-        <h2>Random Facts</h2>
-        <ul>
-            <li>I have a <a href="/blog">blog</a> that isn't popular</li>
-            <li>I'm fluent in Christianese</li>
-            <li>Broken Arrow, Oklahoma native</li>
-            <li>I grew up playing competitive soccer</li>
-            <li>Won a few track and cross-country state championships in high school</li>
-            <li>Favorite music artist: Kendrick Lamar</li>
-            <li>Go Oklahoma City Thunder!</li>
-        </ul>
+    <section>
+        <div class="left">
+            <h2>Blog</h2>
+        </div>
+        <div class="right">
+            {% include "parts/_most-recent-post.njk" %}
+        </div>
     </section>
 {% endblock %}
