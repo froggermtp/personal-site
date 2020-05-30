@@ -1,6 +1,7 @@
 ---
 title: Hello World
 date: 2020-05-29
+description: Learn why I am blogging and how I built the blog
 mainImage: /img/pale-blue-dot.jpg"
 mainImageAltText: The Earth in a sunbeam
 ---
@@ -31,15 +32,15 @@ If you don't care about the technical details behind the blog, you can stop read
 
 The blog is built using a static site generator called [Eleventy](https://www.11ty.dev/). I like the framework because it is written in JavaScript. JavaScript is a language that I already know. This familiarity makes tweaking the configuration file and writing plugins a breeze. 
 
-The frontend work is currently being done with the template engine Nunjucks and some vanilla CSS. Nunjucks is relatively close to standard HTML, so learning it wasn't too bad. Now, I didn't have to use Nunjucks. Eleventy is compatible with many other template engines, but a lot of the documentation is targeted at Nunjucks. When learning Eleventy, it's worth keeping that in mind.
+The frontend work is currently being done with the template engine [Nunjucks](https://www.mozilla.github.io/nunjucks/) and some vanilla CSS. Nunjucks is relatively close to standard HTML, so learning it wasn't too bad. Now, I didn't have to use Nunjucks. Eleventy is compatible with many other template engines, but a lot of the documentation is targeted at Nunjucks. When learning Eleventy, it's worth keeping that in mind.
 
 The website is currently deployed on [Netlify](https://www.netlify.com/). Netlify is a SAAS company that empowers people to build websites "without servers, DevOps, or costly infrastructure."[^3] Honestly, I don't quite know what all Netlify can do. So far, I'm only using them to host this blog.
 
 But I've found their product easy to use. It also has a free tier--which means that the variable costs for this blog sit at zero dollars. The free tier has limitations, but this little blog should never hit them. 
 
-I don't want to ramble on any further. This website should sustain our appetites for the time being. And there's plenty of unnecessary features to implement and essays to scribble out. Sigh. I'll get to work.
+I don't want to ramble on any further. This website should sustain our appetites for the time being. And there's plenty of features to implement and essays to scribble out. Sigh. I'll get to work.
 
-[^1]: I don't have all my thoughts together on Naval. Found him on Twitter. He has insightful ideas and a knack for speaking the profound precisely. [I'll link to the tweet, hopefully it doesn't disappear too quickly.](https://twitter.com/NavalBot/status/1264647582522970113?s=20)
+[^1]: I don't have all my thoughts together on Naval. I found him on Twitter. He has insightful ideas and a knack for speaking the profound precisely. [I'll link to the tweet the quote comes from, hopefully it doesn't disappear too quickly.](https://twitter.com/NavalBot/status/1264647582522970113?s=20)
 
 [^2]: David writes a lot about writing on the Internet. [This quote was taken from this article.](https://www.perell.com/blog/why-you-should-write)
 
