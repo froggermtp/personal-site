@@ -43,6 +43,10 @@ article {
     font-size: 1.1em;
 }
 
+.articleContent .math {
+    height: 2.5rem;
+}
+
 .articleContent p>a {
     color: #2A5DB0;
 }
