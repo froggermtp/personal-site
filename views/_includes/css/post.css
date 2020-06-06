@@ -1,23 +1,16 @@
 article {
+    width: 100%;
     margin-bottom: var(--space-xl);
 }
 
-.articleContent {
-    padding-left: var(--space-xl);
-    padding-right: var(--space-xl);
+.articleContent>* {
+    margin-left: var(--space-xl);
+    margin-right: var(--space-xl);
+    margin-bottom: var(--space-lg);
 }
 
 .articleContent p {
-    margin-left: 0;
-    margin-right: 0;
     font-size: 1em;
-    margin-bottom: var(--space-lg);
-}
-
-.articleContent h1 {
-    margin-left: 0;
-    margin-right: 0;
-    margin-bottom: var(--space-lg);
 }
 
 .articleContent img {
@@ -28,8 +21,6 @@ article {
 }
 
 .articleContent blockquote {
-    margin-left: 0;
-    margin-right: 0;
     position: relative;
 }
 
@@ -43,10 +34,17 @@ article {
 }
 
 .articleContent h2 {
-    margin-left: 0;
-    margin-bottom: var(--space-lg);
     font-weight: 700;
     font-size: 1.375em;
+}
+
+.articleContent h3 {
+    font-weight: 700;
+    font-size: 1.1em;
+}
+
+.articleContent .math {
+    height: 2.5rem;
 }
 
 .articleContent p>a {
