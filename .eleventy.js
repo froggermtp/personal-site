@@ -10,6 +10,7 @@ module.exports = function (eleventyConfig) {
     let markdownLib = markdownIt(options).use(require("markdown-it-footnote"));
     eleventyConfig.setLibrary("md", markdownLib);
 
+    eleventyConfig.addPlugin(require("eleventy-plugin-youtube-embed"));
     eleventyConfig.addPlugin(require("@11ty/eleventy-plugin-rss"));
     eleventyConfig.addPlugin(require("eleventy-plugin-typeset")({ only: '.articleContent p' }));
 
