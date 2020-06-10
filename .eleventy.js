@@ -10,7 +10,7 @@ module.exports = function (eleventyConfig) {
     let markdownLib = markdownIt(options).use(require("markdown-it-footnote"));
     eleventyConfig.setLibrary("md", markdownLib);
 
-    eleventyConfig.addPlugin(require("eleventy-plugin-youtube-embed"));
+    eleventyConfig.addPlugin(require("eleventy-plugin-youtube-embed"), { only: '.articleContent' });
     eleventyConfig.addPlugin(require("@11ty/eleventy-plugin-rss"));
     eleventyConfig.addPlugin(require("eleventy-plugin-typeset")({ only: '.articleContent p' }));
 
@@ -39,6 +39,11 @@ module.exports = function (eleventyConfig) {
         const regex = /\[.+\]/g
         return str.replace(regex, "");
     });
+
+    eleventyConfig.addFilter('removeYoutube', function (str) {
+        const regex = /<p>(\s*)(<a(.*)>)?(\s*)(https?:\/\/)?(w{3}\.)?(youtube\.com|youtu\.be)\/(watch\?v=|embed\/)?([A-Za-z0-9-_]{11})(\S*)(\s*)(<\/a>)?(\s*)<\/p>/g;
+        return str.replace(regex, '');
+    })
 
     eleventyConfig.addCollection('postInfo', function (collection) {
         const posts = collection.getFilteredByTag('post');
