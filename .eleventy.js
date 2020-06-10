@@ -40,11 +40,6 @@ module.exports = function (eleventyConfig) {
         return str.replace(regex, "");
     });
 
-    eleventyConfig.addFilter('removeYoutube', function (str) {
-        const regex = /<p>(\s*)(<a(.*)>)?(\s*)(https?:\/\/)?(w{3}\.)?(youtube\.com|youtu\.be)\/(watch\?v=|embed\/)?([A-Za-z0-9-_]{11})(\S*)(\s*)(<\/a>)?(\s*)<\/p>/g;
-        return str.replace(regex, '');
-    })
-
     eleventyConfig.addCollection('postInfo', function (collection) {
         const posts = collection.getFilteredByTag('post');
         let postInfo = {};
