@@ -27,7 +27,7 @@ Here, I want to keep things simple. The implementation below adds a random numbe
 
 Of course, you can experiment on your own. For example, try thinking of new ways to generate neighboring states.
 
-### Temperature Schedule Go Burrr
+### Temperature Schedule Go Brrr
 This temperature idea is what gives simulated annealing its name. The temperature value of the algorithm is analogous to the role of temperature when annealing metal. To anneal metal, the metal is first heated and then slowly cooled over time. This cooling process allows the metal to have improved ductility and reduced brittleness. By enduring a long cooling period, the metal is improved. Similarly, the rate at which the "heat" of the algorithm is decreased determines the accuracy of the approximation.
 
 The "heat" of the algorithm affects the probability that it will make a bad move on purpose. Surprisingly, the algorithm sometimes needs to make bad moves to reach the global optimum. Why? There is a chance that it might get stuck on a local optimum. By making bad moves, the algorithm can potentially stumble its way out of local optimum (but this isn't guaranteed).
@@ -60,4 +60,4 @@ I decided to capture the state for every iteration and graph the result. As you 
 
 ![Simulated annealing plot](/img/simulated_annealing_plot.svg)
 
-For this run, I got a final state of 4.703329. The corresponding sine value is -0.9999590, which is close to 1. These two values match what we expected.
+For this run, I got a final state of 4.703329. The corresponding sine value is -0.9999590, which is close to -1. These two values match what we expected.
