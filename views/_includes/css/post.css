@@ -51,6 +51,11 @@ article {
     color: #2A5DB0;
 }
 
+.eleventy-plugin-youtube-embed {
+    margin-left: 0;
+    margin-right: 0;
+}
+
 header {
     margin-top: var(--space-xl);
     margin-bottom: var(--space-xl);
