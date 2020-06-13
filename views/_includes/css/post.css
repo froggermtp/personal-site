@@ -47,7 +47,7 @@ article {
     height: 2.5rem;
 }
 
-.articleContent p>a {
+.articleContent p>a, .articleContent p>a * {
     color: #2A5DB0;
 }
 
