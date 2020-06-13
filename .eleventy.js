@@ -10,11 +10,13 @@ module.exports = function (eleventyConfig) {
     let markdownLib = markdownIt(options).use(require("markdown-it-footnote"));
     eleventyConfig.setLibrary("md", markdownLib);
 
+    eleventyConfig.addPlugin(require("eleventy-plugin-youtube-embed"), { only: '.articleContent' });
     eleventyConfig.addPlugin(require("@11ty/eleventy-plugin-rss"));
     eleventyConfig.addPlugin(require("eleventy-plugin-typeset")({ only: '.articleContent p' }));
 
     eleventyConfig.addPassthroughCopy({ "public/img": "img" });
     eleventyConfig.addPassthroughCopy({ "public/pdf": "pdf" });
+    eleventyConfig.addPassthroughCopy({ "public/robots.txt": "robots.txt" });
 
     eleventyConfig.addFilter("cssmin", function (code) {
         return new CleanCSS({}).minify(code).styles;
