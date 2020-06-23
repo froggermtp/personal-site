@@ -25,6 +25,13 @@ p {
     margin: 0 var(--space-xl) var(--space-med) var(--space-xl);
 }
 
+img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+}
+
 section {
     margin-bottom: var(--space-lg);
 }
