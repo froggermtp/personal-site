@@ -13,6 +13,14 @@ module.exports = function (eleventyConfig) {
     eleventyConfig.addPlugin(require("eleventy-plugin-youtube-embed"), { only: '.articleContent' });
     eleventyConfig.addPlugin(require("@11ty/eleventy-plugin-rss"));
     eleventyConfig.addPlugin(require("eleventy-plugin-typeset")({ only: '.articleContent p' }));
+    eleventyConfig.addPlugin(require("eleventy-plugin-lazyimages"), {
+        transformImgPath: (src) => {
+            items = src.split("\\");
+            index = items.indexOf("img") - 1;
+            items.splice(index, 0, "public");
+            return items.join("\\");
+        }
+    });
 
     eleventyConfig.addPassthroughCopy({ "public/img": "img" });
     eleventyConfig.addPassthroughCopy({ "public/pdf": "pdf" });
