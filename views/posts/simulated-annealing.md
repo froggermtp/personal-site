@@ -4,6 +4,7 @@ date: 2020-06-05
 description: Simulated annealing tutorial, with a code example written in R
 mainImage: /img/sheet-metal.jpg
 mainImageAltText: Sheet metal texture
+useMathJax: True
 ---
 
 Sometimes, a problem doesn't have a known, efficient, deterministic algorithm. This hiccup isn't necessarily a big deal because often we only care about getting an answer that is close enough. One algorithm that can give approximate values for hard to solve problems is simulated annealing. Before jumping into the R code, let's look at a motivating example.
@@ -45,7 +46,7 @@ Every iteration a neighboring state is generated. The algorithm will always repl
 
 The probability of choosing the new state is defined as the following formula:
 
-<img class="math" src="/img/simulated_annealing_probability.svg" alt="e^(△E/T)"/>
+$$\exp(\frac{\bigtriangleup E}{T})$$
 
 Two parameters affect the probability The "change in E" parameter is the difference between the function applied with the potential new state and the function applied with the current state. The bigger this difference, the smaller the probability. The next parameter is the temperature value, which we've already seen. Obviously, for every iteration of the algorithm, the temperature value will decrease--causing the probability to decrease slowly.
 
