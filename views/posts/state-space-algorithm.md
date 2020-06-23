@@ -4,6 +4,7 @@ date: 2020-06-19
 description: A tutorial over the state space algorithm, with code written using Racket.
 mainImage: /img/spiral-galaxy.jpg"
 mainImageAltText: NASA's Hubble space telescope image of NGC 1672 which is a barred spiral galaxy located in the constellation Dorado
+useMathJax: True
 ---
 Recently, I implemented the state space algorithm in [Racket](https://racket-lang.org/). It's a simple algorithm that can find a goal state in n-dimensional [Euclidean space](https://en.wikipedia.org/wiki/Euclidean_space). All one needs is a computable function, a starting domain, and a goal value.
 
@@ -15,23 +16,23 @@ The main idea of the algorithm is to tighten the domain around a state that sati
 
 The best state out of the set of K--i.e. the guess that gives an output closest to the goal--will be set aside. This guess is selected by finding the K range value that minimizes the formula below. Note that *y* is the guess and *y<sub>g</sub>* is the goal value.
 
-<img class="math" src="/img/state-space-math-1.svg" alt="|y - y_g|"/>
+$$|y - y_g|$$
 
 Obviously, in the beginning, the best state is likely far off from the goal state. The chance to generate a satisfiable guess increases as the domain shrinks around a goal-satisfying state, which happens every iteration. 
 
 To get this new domain, there are a few steps to follow. First, let's find the average of the absolute values of the differences of the K range values and the goal value, which we'll call *u*.
 
-<img class="math" src="/img/state-space-math-4.svg" alt="u = Σ | y_i - y_g |"/>
+$$u = \sum_{i=0}^{K} | y_i - y_g |$$
 
 Next, we'll need a so-called epsilon value to scale our new domain. To compute it, use the following formula:
 
-<img class="math" src="/img/state-space-math-2.svg" alt="Ɛ = |y - y_g| \ u"/>
+$$\epsilon = \frac{|y - y_g|}{u}$$
 
 The numerator is the absolute value of the difference of the best K range value and the goal--which we computed earlier. The denominator is the *u* we just computed. So, you should only be plugging in numbers here.
 
 Finally, insert our prerequisite work into this formula to generate the new domain.
 
-<img class="math" src="/img/state-space-math-3.svg" alt="bestGuess ± epsilon * (domainEnd - domainStart) / 2"/>
+$$x \pm \epsilon \frac{b - a}{2}$$
 
 The algorithm will thus generate K range values and use the best one to create the new domain for the next iteration. We'll continue this process until one of the generated guesses is within an error bound that we choose. 
 
