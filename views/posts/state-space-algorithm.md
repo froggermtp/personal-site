@@ -30,7 +30,7 @@ $$\epsilon = \frac{|y - y_g|}{u}$$
 
 The numerator is the absolute value of the difference of the best K range value and the goal--which we computed earlier. The denominator is the *u* we just computed. So, you should only be plugging in numbers here.
 
-Finally, insert our prerequisite work into this formula to generate the new domain.
+Finally, insert our prerequisite work into this formula to generate the new domain. Note that the *x* is the best state out of the set of K states. The *b* is the end value of the current domain; the *a* is the beginnning of the domain.
 
 $$x \pm \epsilon \frac{b - a}{2}$$
 
