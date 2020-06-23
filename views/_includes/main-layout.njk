@@ -22,7 +22,12 @@
         {{ css | cssmin | safe }}
     </style>
 
-    <link href="https://fonts.googleapis.com/css?family=Oxygen|Source+Sans+Pro&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Oxygen|Source+Sans+Pro&display=swap" rel="stylesheet">
+
+    {% if useMathJax %}
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    {% endif %}
     {% endblock %}
 </head>
 
