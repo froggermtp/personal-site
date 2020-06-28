@@ -129,4 +129,16 @@ header h1 {
         flex-flow: row;
         justify-content: space-between;
     }
+    #next, #previous {
+        width: 50%;
+    }
+    #next {
+        text-align: right;
+        order: 1;
+        margin-left: auto;
+    }
+    #previous {
+        order: 0;
+        margin-right: auto;
+    }
 }
