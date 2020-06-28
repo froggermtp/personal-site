@@ -104,26 +104,29 @@ header h1 {
 }
 
 #otherPosts {
+    display: flex;
+    flex-flow: column;
     margin-left: var(--space-xl);
     margin-bottom: var(--space-xl);
     margin-right: var(--space-xl);
 }
 
+#next {
+    margin-bottom: var(--space-lg);
+}
+
 #next, #previous {
     display: flex;
     flex-direction: column;
-    width: 50%;
-}
-
-#next {
-    float: right;
-    text-align: right;
-}
-
-#previous {
-    float: left;
 }
 
 #next span, #previous span {
     margin-bottom: var(--space-sm);
+}
+
+@media only screen and (min-width: 768px) {
+    #otherPosts {
+        flex-flow: row;
+        justify-content: space-between;
+    }
 }
