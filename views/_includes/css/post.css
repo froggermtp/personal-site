@@ -92,18 +92,6 @@ header h1 {
     font-weight: 600;
 }
 
-#shareButtons {
-    display: flex;
-    justify-content: flex-end;
-    margin-right: var(--space-xl);
-}
-
-#shareButtons a {
-    margin-left: var(--space-sm);
-    width: 30px;
-    height: 30px;
-}
-
 #mainImage {
     width: 100%;
     max-height: 400px;
