@@ -11,7 +11,7 @@
             </div>
         </header>
         <p>
-            {{ post.templateContent | striptags(true) | removeFootnote | truncate(280) }}
+            {{ post.templateContent | striptags(true) | removeFootnote | truncate(280) | replace("&quot;", '"') }}
         </p>
         <footer class="article-footer">
             <a class="readMore" href="{{ post.url | url }}">Read more</a>

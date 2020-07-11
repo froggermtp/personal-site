@@ -7,7 +7,7 @@
         </h3>
     </header>
     <p>
-        {{ most_recent_post.templateContent | striptags(true) | removeFootnote | truncate(280) }}
+        {{ most_recent_post.templateContent | striptags(true) | removeFootnote | truncate(280) | replace("&quot;", '"') }}
     </p>
     <footer class="article-footer">
         <a class="readMore" href="/blog">More Posts</a>
