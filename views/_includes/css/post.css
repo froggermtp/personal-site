@@ -58,38 +58,15 @@ article {
 
 header {
     margin-top: var(--space-xl);
-    margin-bottom: var(--space-xl);
+    margin-bottom: var(--space-lg);
     font-weight: 700;
     font-size: 1.5rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-    padding-bottom: 2rem;
 }
 
 header h1 {
     margin-bottom: var(--space-lg);
     font-family: 'Source Sans Pro', sans-serif;
     font-size: 1.5em;
-}
-
-#headerDiv {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-#postInfo {
-    display: flex;
-    flex-flow: column;
-    text-align: left;
-    margin-left: var(--space-xl);
-    color: var(--color-grey);
-    font-weight: 400;
-    font-size: .9rem;
-}
-
-#postInfo span {
-    margin-bottom: var(--space-sm);
-    font-weight: 600;
 }
 
 #mainImage {
@@ -101,6 +78,15 @@ header h1 {
 
 #mainImage img {
     width: 100%;
+}
+
+#date {
+    margin-bottom: var(--space-lg);
+    color: var(--color-light-grey);
+}
+
+#date * {
+    color: inherit;
 }
 
 #otherPosts {

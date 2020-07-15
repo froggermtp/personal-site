@@ -26,17 +26,14 @@
                 <img src="{{ mainImage | safe }}" alt="{{ mainImageAltText | safe }}"></img>
             </div>
             <h1 id="title">{{ title | safe }}</h1>
-            <div id="headerDiv">
-                <div id="postInfo">
-                    <span>{{ blogAuthor | safe }}</span>
-                    <time> {{ page.date | date("LL") | safe }} </span>
-                </div>
-            </div>
         </header>
         <div class="articleContent">
             {{ content | safe }}
         </div>
     </article>
+
+    <p id="date">Originally written: <time>{{ page.date | date("LL") | safe }}</time></p>
+
     <nav id="otherPosts">
     {% if collections.postInfo[page.url].nextTitle %}
         <div id="next">
