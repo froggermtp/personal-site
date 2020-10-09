@@ -1,0 +1,28 @@
+.wrapper {
+    height: 300px;
+    width: 300px;
+    overflow: hidden;
+    margin: var(--space-xl) auto 0 auto;
+}
+
+.wrapper__image {
+    display: block;
+    height: 100%;
+    width: auto;
+    margin: auto;
+}
+
+p:first-of-type {
+    margin-top: var(--space-xl)
+}
+
+p:last-of-type {
+    margin-bottom: var(--space-xl)
+}
+
+h2 {
+    font-weight: 700;
+    font-size: 1em;
+    margin-top: var(--space-lg);
+    margin-bottom: var(--space-sm);
+}

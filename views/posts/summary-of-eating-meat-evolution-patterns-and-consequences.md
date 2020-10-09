@@ -9,7 +9,7 @@ This blog post is a summary of Vaclav Smil's paper [*Eating Meat: Evolution, Pat
 
 As with any scientific article, the information may be wrong or out of date.   To note, this paper was published in 2002. Keep that in mind when I use words like "currently."
 
-# Introduction
+## Introduction
 
 Humans evolved to eat meat--and thus we should include at least some meat in our diet. Yet, meat isn't a requirement because humans can make up the needed nutrition from other sources. 
 
@@ -27,7 +27,7 @@ Fatty meats provide more energy and palatability. This is partially why greasy f
 
 The author concludes that affluent countries are consuming too much meat. In a sense, humans used to complement their diets with meat. We now dominate our diets with meat.
 
-# Evolutionary heritage and preagricultural meat consumption
+## Evolutionary heritage and preagricultural meat consumption
 
 A long time ago, humans learned how to use fire. The ability to cook meat greatly increased ancient humanity's meat-eating opportunities.
 
@@ -45,7 +45,7 @@ Even among rich European households in the late 18th century, eating meat was qu
 
 Around the 1930s, meat supplied only around 2% of all food energy.
 
-# Modern dietary transition and its outcomes
+## Modern dietary transition and its outcomes
 
 Diets started to change in Europe around the mid 19th century. Markedly, there was a dramatic increase in meat consumption, which was driven by the combined forces of improved agricultural productivity, rapid industrialization, and widespread urbanization.
 
@@ -59,7 +59,7 @@ By the end of the 20th century, the population of affluent countries represented
 
 To produce more meat, humans ironically need to produce more grain to feed the animals. Thus, meat is not a perfect substitute for plants; they're complements.
 
-# Animal feeding requirements
+## Animal feeding requirements
 
 There is a tradeoff when feeding grain crops to animals. For example, if foodgrains were cultivated instead of feed crops, we would produce more digestible energy and protein. Yet, animals produce higher quality protein.
 
@@ -67,7 +67,7 @@ Cows suck at turning feed grain into meat. They consume about 50% more energy th
 
 Overall, the three major animals--cows, pigs, and chickens--are extremely inefficient at creating protein. About 80 to 96% of plant protein consumed is not converted to animal protein.
 
-# Environmental consequences of meat production
+## Environmental consequences of meat production
 
 Nowadays, humans eat so much meat that domestic animals have become the dominant class of vertebrates on Earth. In summary, there's a lot of cows.
 
@@ -79,7 +79,7 @@ One needs large amounts of water to raise animals and grow feed crops. Thus, mea
 
 The main factor limiting the size and density of animal production is our inability to dispose of wastes effectively.
 
-# Health implications of meat production and consumption
+## Health implications of meat production and consumption
 
 Most of the animals we eat are social animals--and this leads to various ethical dilemmas. Modern farming techniques don't exactly take good care of the animals.
 
@@ -91,7 +91,7 @@ Many meals in the United States are high in fat. The author blames beef's high l
 
 We use more antibiotics on animals than on humans. This practice could potentially lead to bacteria gaining immunity to essential antibiotics.
 
-# Possible adjustments
+## Possible adjustments
 
 During the last four decades, humans have tripled our meat production.
 
