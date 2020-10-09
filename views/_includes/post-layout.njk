@@ -26,7 +26,9 @@
                 <img src="{{ mainImage | safe }}" alt="{{ mainImageAltText | safe }}"></img>
             </div>
             <h1 id="title">{{ title | safe }}</h1>
-            <p id="date">Originally written: <time>{{ page.date | date("LL") | safe }}</time></p>
+            <div class="box box--split js-share">
+                <p id="date">Originally written: <time>{{ page.date | date("LL") | safe }}</time></p>
+            </div>
         </header>
         <div class="articleContent">
             {{ content | safe }}
@@ -47,4 +49,11 @@
         </div>
     {% endif %}
     </nav>
+    {% set js %}
+        {% include "js/share.js" %}
+    {% endset %}
+
+    <script>
+        {{ js | jsmin | safe }}
+    </script>
 {% endblock %}
