@@ -1,19 +1,18 @@
-const CleanCSS = require("clean-css");
-const Terser = require("terser");
-const moment = require('moment');
+const pluginYoutube = require("eleventy-plugin-youtube-embed");
+const pluginRSS = require("@11ty/eleventy-plugin-rss");
+const pluginTypeset = require("eleventy-plugin-typeset");
+const pluginLazyImages = require("eleventy-plugin-lazyimages");
+const markdownIt = require("markdown-it");
+const markdownItFootnote = require("markdown-it-footnote");
 
-module.exports = function (eleventyConfig) {
-    let markdownIt = require("markdown-it");
-    let options = {
-        html: true
-    };
-    let markdownLib = markdownIt(options).use(require("markdown-it-footnote"));
-    eleventyConfig.setLibrary("md", markdownLib);
+const filters = require('./utils/filters.js');
 
-    eleventyConfig.addPlugin(require("eleventy-plugin-youtube-embed"), { only: '.articleContent' });
-    eleventyConfig.addPlugin(require("@11ty/eleventy-plugin-rss"));
-    eleventyConfig.addPlugin(require("eleventy-plugin-typeset")({ only: '.articleContent p' }));
-    eleventyConfig.addPlugin(require("eleventy-plugin-lazyimages"), {
+module.exports = function (config) {
+    // Plugins
+    config.addPlugin(pluginYoutube, { only: '.articleContent' });
+    config.addPlugin(pluginRSS);
+    config.addPlugin(pluginTypeset({ only: '.articleContent p' }));
+    config.addPlugin(pluginLazyImages, {
         transformImgPath: (src) => {
             items = src.split("\\");
             index = items.indexOf("img") - 1;
@@ -22,34 +21,27 @@ module.exports = function (eleventyConfig) {
         }
     });
 
-    eleventyConfig.addPassthroughCopy({ "public/img": "img" });
-    eleventyConfig.addPassthroughCopy({ "public/pdf": "pdf" });
-    eleventyConfig.addPassthroughCopy({ "public/robots.txt": "robots.txt" });
-
-    eleventyConfig.addFilter("cssmin", function (code) {
-        return new CleanCSS({}).minify(code).styles;
+    // Filters
+    Object.keys(filters).forEach(filterName => {
+        config.addFilter(filterName, filters[filterName]);
     });
 
-    eleventyConfig.addFilter("jsmin", function (code) {
-        let minified = Terser.minify(code);
-        if (minified.error) {
-            console.log("Terser error: ", minified.error);
-            return code;
-        }
+    // Markdown
+    config.setLibrary(
+        'md',
+        markdownIt({
+            html: true
+        })
+            .use(markdownItFootnote)
+    );
 
-        return minified.code;
-    });
+    // Pass-through files
+    config.addPassthroughCopy({ "public/img": "img" });
+    config.addPassthroughCopy({ "public/pdf": "pdf" });
+    config.addPassthroughCopy({ "public/robots.txt": "robots.txt" });
 
-    eleventyConfig.addFilter('date', function (date, format) {
-        return moment.utc(date).format(format);
-    });
-
-    eleventyConfig.addFilter('removeFootnote', function (str) {
-        const regex = /\[.+\]/g
-        return str.replace(regex, "");
-    });
-
-    eleventyConfig.addCollection('postInfo', function (collection) {
+    // Collections
+    config.addCollection('postInfo', function (collection) {
         const posts = collection.getFilteredByTag('post');
         let postInfo = {};
 
@@ -64,6 +56,7 @@ module.exports = function (eleventyConfig) {
         return postInfo;
     });
 
+    // Base config
     return {
         templateFormats: [
             "md",
