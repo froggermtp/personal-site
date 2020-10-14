@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "description": "Matthew Parris's personal website",
   "scripts": {
-    "build": "npx eleventy",
-    "watch": "npx eleventy --watch",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npm run dev",
+    "dev": "run-s clean eleventy:dev --print-label",
+    "build": "run-s clean eleventy:prod --print-label",
+    "eleventy:dev": "cross-env ELEVENTY_ENV=development eleventy --serve",
+    "eleventy:prod": "cross-env ELEVENTY_ENV=production eleventy",
+    "clean": "del-cli _site"
   },
   "author": "Matthew Parris",
   "license": "ISC",
@@ -14,16 +17,18 @@
     "url": "https://github.com/froggermtp/personal-site.git"
   },
   "dependencies": {
-    "clean-css": "^4.2.1",
+    "@11ty/eleventy": "^0.11.0",
+    "@11ty/eleventy-plugin-rss": "^1.0.9",
+    "clean-css": "^4.2.3",
+    "cross-env": "^7.0.2",
+    "del-cli": "^3.0.1",
+    "eleventy-plugin-lazyimages": "^2.0.1",
     "eleventy-plugin-typeset": "github:liamfiddler/eleventy-plugin-typeset",
     "eleventy-plugin-youtube-embed": "github:froggermtp/eleventy-plugin-youtube-embed",
     "markdown-it-footnote": "^3.0.2",
-    "moment": "^2.24.0",
-    "terser": "^4.4.3"
+    "moment": "^2.29.1",
+    "npm-run-all": "^4.1.5",
+    "terser": "^4.8.0"
   },
-  "devDependencies": {
-    "@11ty/eleventy": "^0.9.0",
-    "@11ty/eleventy-plugin-rss": "^1.0.7",
-    "eleventy-plugin-lazyimages": "^1.1.2"
-  }
+  "devDependencies": {}
 }
