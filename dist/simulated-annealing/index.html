@@ -1,0 +1,189 @@
+<!DOCTYPE html><html lang="en"><head>
+    
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Simulated Annealing | Matthew Parris</title>
+    <meta name="description" content="Simulated annealing tutorial, with a code example written in R">
+    <meta name="author" content="Matthew Parris">
+    <link rel="canonical" href="https://www.matthewparris.org/simulated-annealing/">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
+
+    
+
+    <style>
+        /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */html{line-height:1.15;-webkit-text-size-adjust:100%}body{margin:0}main{display:block}h1{font-size:2em;margin:.67em 0}hr{box-sizing:content-box;height:0;overflow:visible}pre{font-family:monospace,monospace;font-size:1em}a{background-color:transparent}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}b,strong{font-weight:bolder}code,kbd,samp{font-family:monospace,monospace;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}img{border-style:none}button,input,optgroup,select,textarea{font-family:inherit;font-size:100%;line-height:1.15;margin:0}button,input{overflow:visible}button,select{text-transform:none}[type=button],[type=reset],[type=submit],button{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText}fieldset{padding:.35em .75em .625em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}progress{vertical-align:baseline}textarea{overflow:auto}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}details{display:block}summary{display:list-item}template{display:none}[hidden]{display:none}:root{--space-sm:.25rem;--space-med:.5rem;--space-lg:1rem;--space-xl:2rem;--space-xxl:4rem;--color-dark:hsl(0, 0%, 13%);--color-grey:hsl(0, 0%, 29%);--color-light-grey:hsl(0, 0%, 45%)}*{color:var(--color-dark);font-weight:400;font-family:Oxygen,sans-serif}h1,h2,h3,h4,h5,h6{line-height:1.25;margin:0 var(--space-xl) var(--space-med) var(--space-xl)}p{line-height:1.7em;margin:0 var(--space-xl) var(--space-med) var(--space-xl)}img{display:block;width:100%;max-width:100%;height:auto}section{margin-bottom:var(--space-lg)}.bowlby{font-family:'Bowlby One SC',cursive}.sourceSansPro{font-family:'Source Sans Pro',sans-serif}#main-container{display:flex;flex-flow:column wrap;width:100%;max-width:730px;margin-top:50px;min-height:calc(100vh - 122px);overflow:hidden}#mainNav{position:fixed;top:0;left:0;width:100%;height:50px;box-shadow:0 .125rem .25rem 0 rgba(0,0,0,.11);z-index:2;background:#fff}#navContainer{display:flex;justify-content:space-between;align-items:center}#logo{margin-left:var(--space-xl);width:100%;font-size:18px;letter-spacing:0;font-weight:700;text-decoration:none}#header-buttons{display:none;flex-direction:column;justify-content:inherit;overflow:hidden;width:100%}#header-buttons a{text-decoration:none}.fullscreen #header-buttons{display:flex;margin-left:var(--space-xl)}.fullscreen #logo{display:none}.header-button{background-color:#fff;font-size:20px;font-weight:600;margin:var(--space-med) 0 var(--space-med) var(--space-lg);padding:5px 8px 5px 8px;position:relative}.fullscreen .header-button{padding-left:0;text-align:left}.hamburger-button{display:flex;flex-direction:column;justify-content:center;cursor:pointer;margin-right:var(--space-lg)}.bar1,.bar2,.bar3{width:18px;height:2.5px;background-color:#333;margin:3.5px 0 0 0;transition:.4s}.bar3{margin-bottom:6px}.change .bar1{-webkit-transform:rotate(-45deg) translate(-5px,4px);transform:rotate(-45deg) translate(-5px,4px)}.change .bar2{opacity:0}.change .bar3{-webkit-transform:rotate(45deg) translate(-4px,-4px);transform:rotate(45deg) translate(-4px,-4px)}#nav-header{display:flex;justify-content:flex-end;height:50px;width:100%}#mainNav.fullscreen{height:100%}.fullscreen #navContainer{flex-direction:column-reverse;justify-content:flex-end}#mainNav.fullscreen button{font-size:1.4rem;border:none;margin-left:0}#mainNav.fullscreen button:hover{background-color:inherit;color:initial}#pageFooter{display:flex;flex-direction:column;justify-content:space-around;height:75px;text-align:center}#social{display:flex;justify-content:center;margin-bottom:var(--space-lg)}#social>a+a{margin-left:var(--space-xl)}#social img{height:25px;width:25px}#copyright{margin-bottom:var(--space-lg);color:var(--color-grey)}@media only screen and (min-width:768px){#main-container{width:70%;margin:50px auto 0}#mainNav{justify-content:center}#navContainer{width:70%;max-width:730px;margin:auto}#nav-header{display:none}#header-buttons{display:flex;flex-direction:row;justify-content:flex-end}#home-button{display:none}.header-button{border:none;color:var(--color-light-grey);font-size:16px;font-weight:400}.header-button:hover{background-color:#fff;color:var(--color-black)}}@media only screen and (min-width:920px){#social>a+a{margin-left:var(--space-xxl)}}.small-caps{font-variant:small-caps}.pull-T,.pull-V,.pull-W,.pull-Y{margin-left:-.07em}.push-T,.push-V,.push-W,.push-Y{margin-right:.07em}.pull-C,.pull-O,.pull-c,.pull-o{margin-left:-.04em}.push-C,.push-O,.push-c,.push-o{margin-right:.04em}.pull-A{margin-left:-.03em}.push-A{margin-right:.03em}.pull-single{margin-left:-.27em}.push-single{margin-right:.27em}.pull-double,.pull-single,.push-double,.push-single{display:inline-block}.pull-double{margin-left:-.46em}.push-double{margin-right:.46em}
+    </style>
+
+    <link href="https://fonts.googleapis.com/css?family=Oxygen|Source+Sans+Pro&amp;display=swap" rel="stylesheet">
+
+    
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    
+    <meta property="og:title" content="Simulated Annealing">
+    <meta property="og:description" content="Simulated annealing tutorial, with a code example written in R">
+    <meta property="og:image" content="/img/sheet-metal.jpg">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Simulated Annealing">
+    <meta name="twitter:description" content="Simulated annealing tutorial, with a code example written in R">
+    <meta name="twitter:image" content="/img/sheet-metal.jpg">
+
+    
+
+    <style>
+        .box{display:flex}.box--split{justify-content:flex-start;margin-bottom:var(--space-lg);align-items:center}.link--share{font-size:1rem;color:var(--color-light-grey);margin-right:var(--space-xl);text-decoration:underline}.link--share:hover{color:var(--color-black)}article{width:100%;margin-bottom:var(--space-xl)}.articleContent>*{margin-left:var(--space-xl);margin-right:var(--space-xl);margin-bottom:var(--space-lg)}.articleContent p{font-size:1em}.articleContent img{width:100%;display:block;margin-left:auto;margin-right:auto}.articleContent blockquote{position:relative}.articleContent blockquote:before{content:'';border-left:4px solid #000;height:100%;width:4px;position:absolute;left:-15px}.articleContent h2{font-weight:700;font-size:1.375em}.articleContent h3{font-weight:700;font-size:1.1em}.articleContent .math{height:2.5rem}.articleContent p>a,.articleContent p>a *{color:#2a5db0}.eleventy-plugin-youtube-embed{margin-left:0;margin-right:0}header{margin-top:var(--space-xl);margin-bottom:var(--space-lg);font-weight:700;font-size:1.5rem}header h1{margin-bottom:var(--space-lg);font-family:'Source Sans Pro',sans-serif;font-size:1.5em}#mainImage{width:100%;max-height:400px;overflow:hidden;margin-bottom:var(--space-xl)}#mainImage img{width:100%}#date{font-size:.9rem;color:var(--color-light-grey);margin-bottom:0}#date *{color:inherit}#otherPosts{display:flex;flex-flow:column;margin-left:var(--space-xl);margin-bottom:var(--space-xl);margin-right:var(--space-xl)}#next{margin-bottom:var(--space-lg)}#next,#previous{display:flex;flex-direction:column}#next span,#previous span{margin-bottom:var(--space-sm)}@media only screen and (min-width:768px){#otherPosts{flex-flow:row;justify-content:space-between}#next,#previous{width:50%}#next{text-align:right;order:1;margin-left:auto}#previous{order:0;margin-right:auto}}
+    </style>
+
+</head>
+
+<body>
+    <div id="main-container">
+        <nav id="mainNav">
+    <div id="navContainer">
+        <a href="/" id="logo">Matthew Parris</a>
+        <div id="header-buttons">
+            <a class="header-button" id="home-button" href="/">Home</a>
+            <a class="header-button" href="/blog">Blog</a>
+            <a class="header-button" href="/about">About Me</a>
+        </div>
+        <div id="nav-header">
+            <div id="mobile-menu-button" class="hamburger-button" tabindex="0">
+                <div class="bar1"></div>
+                <div class="bar2"></div>
+                <div class="bar3"></div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+<script>
+    const menuButton=document.getElementById("mobile-menu-button");menuButton.addEventListener("click",(function(e){document.querySelector("nav").classList.toggle("fullscreen"),menuButton.classList.toggle("change")})),menuButton.addEventListener("keyup",(function(e){13===e.keyCode&&menuButton.click()}));
+</script>
+        
+    <article>
+        <header>
+            <div id="mainImage">
+                <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAA0JCgsKCA0LCgsODg0PEyAVExISEyccHhcgLikxMC4pLSwzOko+MzZGNywtQFdBRkxOUlNSMj5aYVpQYEpRUk8BDg4OExETJhUVJk81LTVPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT//AABEIAAgADAMBEQACEQEDEQH/xAGiAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgsQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+gEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoLEQACAQIEBAMEBwUEBAABAncAAQIDEQQFITEGEkFRB2FxEyIygQgUQpGhscEJIzNS8BVictEKFiQ04SXxFxgZGiYnKCkqNTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqCg4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2dri4+Tl5ufo6ery8/T19vf4+fr/2gAMAwEAAhEDEQA/AKU90CpxyT3oAoOqFjwKAP8A/9k=" alt="Sheet metal texture" data-src="/img/sheet-metal.jpg" class="lazyload" width="3888" height="2592">
+            </div>
+            <h1 id="title">Simulated Annealing</h1>
+            <div class="box box--split js-share">
+                <p id="date">Originally written: <time>June 5, 2020</time></p>
+            </div>
+        </header>
+        <div class="articleContent">
+            <p>Sometimes, a prob­lem doesn't have a known, ef­ﬁ­cient, de­ter­min­is­tic al­go­rithm. This hic­cup isn't nec­es­sar­ily a big deal be­cause of­ten we only care about get­ting an an­swer that is close enough. One al­go­rithm that can give ap­prox­i­mate val­ues for hard to solve prob­lems is sim­u­lated an­neal­ing. Before jump­ing into the R code, let's look at a mo­ti­vat­ing ex­am­ple.</p>
+<h2>Motivation</h2>
+<p>The trav­el­ing sales­man prob­lem doesn't have a poly­no­mial-time de­ter­min­is­tic al­go­rithm and thus is a good can­di­date for us to ex­plore. The prob­lem name it­self nearly gives away the de­tails. Imagine a map with some ﬁxed num­ber of ran­domly placed cities. We now want to hire a sales­per­son—let's name her Sally—who needs to visit every city, with­out re­vis­it­ing any city, to sell some prod­uct.</p>
+<p>When the num­ber of cities is small, we can use brute force tech­niques to try every pos­si­ble per­mu­ta­tion of city or­der­ings. Of course, for a rel­a­tively large amount of cities, try­ing to ﬁnd the route this way will be in­tractable. We aren't com­pletely doomed though. Do we care if Sally takes the most op­ti­mal route? For this sit­u­a­tion, not re­ally. While we want Sally to take a fast route, it doesn't have to be the fastest route. Luckily, it turns out that sim­u­lated an­neal­ing can tractably gen­er­ate fast routes.</p>
+<h2>How does it work?</h2>
+<p>The trav­el­ing sales­man prob­lem is a lit­tle com­pli­cated, so let's set up a toy prob­lem in­stead. For this demon­stra­tion, we are go­ing to ﬁnd the global min­i­mum of the sine func­tion for the do­main [0, 2π]. For the math­e­mat­i­cally in­clined, you could use tech­niques from cal­cu­lus class to ﬁnd that the an­swer is -1. Thus, if our al­go­rithm's an­swer is not in the same ball­park as -1, then we know some­thing went wrong.</p>
+<h3>State Spaces</h3>
+<p>Simulated an­neal­ing searches through a state space it­er­a­tively. An it­er­a­tive al­go­rithm be­gins with an ini­tial guess. This guess is then po­ten­tially up­graded every it­er­a­tion of the al­go­rithm to pro­duce a bet­ter ap­prox­i­ma­tion. For our demon­stra­tion, we'll end the al­go­rithm af­ter a ﬁxed num­ber of it­er­a­tions.</p>
+<p>Taking care of the ini­tial guess is easy–just choose a ran­dom valid state. From the ini­tial guess, we'll need to ﬁnd it's neigh­bor­ing states and check to see if they're bet­ter. Disappointingly, there is no sin­gle method to de­rive neigh­bor­ing states. We'll have to come up with a method spe­ciﬁc to our prob­lem.</p>
+<p>Here, I want to keep things sim­ple. The im­ple­men­ta­tion be­low adds a ran­dom num­ber from the range [-0.1, 0.1] to the cur­rent state to gen­er­ate the suc­ces­sor. I also wrap the new state value around if it ex­ceeds the range [0, 2π].</p>
+<script src="https://gist.github.com/froggermtp/8b9e5b6e999b5d77ef0acaadb1092a69.js"></script>
+<p>Of course, you can ex­per­i­ment on your own. For ex­am­ple, try think­ing of new ways to gen­er­ate neigh­bor­ing states.</p>
+<h3>Temperature Schedule Go Brrr</h3>
+<p>This tem­per­a­ture idea is what gives sim­u­lated an­neal­ing its name. The tem­per­a­ture value of the al­go­rithm is anal­o­gous to the role of tem­per­a­ture when an­neal­ing metal. To an­neal metal, the metal is ﬁrst heated and then slowly cooled over time. This cool­ing process al­lows the metal to have im­proved duc­til­ity and re­duced brit­tle­ness. By en­dur­ing a long cool­ing pe­riod, the metal is im­proved. Similarly, the rate at which the<span class="push-double"></span> <span class="pull-double">“</span>heat” of the al­go­rithm is de­creased de­ter­mines the ac­cu­racy of the ap­prox­i­ma­tion.</p>
+<p>The<span class="push-double"></span> <span class="pull-double">“</span>heat” of the al­go­rithm af­fects the prob­a­bil­ity that it will make a bad move on pur­pose. Surprisingly, the al­go­rithm some­times needs to make bad moves to reach the global op­ti­mum. Why? There is a chance that it might get stuck on a lo­cal op­ti­mum. By mak­ing bad moves, the al­go­rithm can po­ten­tially stum­ble its way out of lo­cal op­ti­mum (but this isn't guar­an­teed).</p>
+<p>You can choose any num­ber to be the ini­tial tem­per­a­ture. The tem­per­a­ture sched­ule then de­ter­mines how the tem­per­a­ture value will de­crease every it­er­a­tion. Like choos­ing neigh­bor­ing states, there is no right way to de­crease the tem­per­a­ture. The only rule of thumb is that the slower the tem­per­a­ture is dropped, the bet­ter the ap­prox­i­ma­tion will be. The trade­off is that you'll have to wait longer to get an an­swer. Thus, choose some­thing that short enough for your at­ten­tion span and long enough to get a good an­swer.</p>
+<p>For our toy ex­am­ple, I choose to sub­tract an ar­bi­trary num­ber every it­er­a­tion.</p>
+<script src="https://gist.github.com/froggermtp/cbae4d7960586428dd77b3514f444b1a.js"></script>
+<p>Once again, feel free to get cre­ative and try dif­fer­ent ini­tial val­ues and sched­ules for your im­ple­men­ta­tion.</p>
+<h3>Probabilistically Making Moves</h3>
+<p>Every it­er­a­tion a neigh­bor­ing state is gen­er­ated. The al­go­rithm will al­ways re­place the cur­rent state with the new state if it's bet­ter. As we just dis­cussed, the new state may be worse–drag­ging us fur­ther away from an op­ti­mum. Yet, we want to ran­domly make some bad moves with some prob­a­bil­ity. The key to sim­u­lated an­neal­ing is that this prob­a­bil­ity is not con­stant. Rather, it on av­er­age de­creases over time.</p>
+<p>The prob­a­bil­ity of choos­ing the new state is de­ﬁned as the fol­low­ing for­mula:</p>
+<p>$$\exp(\frac{\bigtriangleup E}{T})$$</p>
+<p>Two pa­ra­me­ters af­fect the prob­a­bil­ity The<span class="push-double"></span> <span class="pull-double">“</span>change in E” pa­ra­me­ter is the dif­fer­ence be­tween the func­tion ap­plied with the po­ten­tial new state and the func­tion ap­plied with the cur­rent state. The big­ger this dif­fer­ence, the smaller the prob­a­bil­ity. The next pa­ra­me­ter is the tem­per­a­ture value, which we've al­ready seen. Obviously, for every it­er­a­tion of the al­go­rithm, the tem­per­a­ture value will de­crease–caus­ing the prob­a­bil­ity to de­crease slowly.</p>
+<p>As the tem­per­a­ture gets closer to zero, the prob­a­bil­ity of choos­ing a bad move will also get closer to zero. Towards the end, the al­go­rithm will mostly take greedy moves to­wards bet­ter states. Once the tem­per­a­ture hits zero, then the al­go­rithm is done. We can get our an­swer and go home.</p>
+<h2>Put Everything Together</h2>
+<p>We've cov­ered all the im­por­tant parts of this al­go­rithm. Let's put every­thing to­gether and see it in ac­tion. Here is the full code for my so­lu­tion.</p>
+<script src="https://gist.github.com/froggermtp/bc36402fa41ec7733e6758e1e6a241e6.js"></script>
+<p>I de­cided to cap­ture the state for every it­er­a­tion and graph the re­sult. As you can see, the ini­tial state is nowhere near -1. As the al­go­rithm pro­gresses, it be­gins to slowly con­verge. Towards the end, the prob­a­bil­ity of choos­ing bad moves is near 0, which is why the down­ward slope for later it­er­a­tions is steep.</p>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAQCAYAAADj5tSrAAAACXBIWXMAAAsTAAALEwEAmpwYAAABbUlEQVQ4y7WU65LCIAyFef/XXEshQGtvXutkOaEo1tldndUfZ6IQ8uUCVfN85mGc2PuGiXy0gZsQOISbxZqlwCaKXFp7Rep8jpBhlMO6dlwbHwN6di4Jv7FWxb2q9td97+8VCq331Ol04r4f5OBGE28qElst2pSSPSfJGJuka4pgYmOQoBNr4zqRi0kmCWQYBmkJHHCohEA5KA7r6AMQVK38UjIJBt87yDiO0jssWHKSGWCQWWUloDqD6EFfFeAJROtKMuQv0QIqW2Nt2T4n84O1S3IKVXRd9zTkJ3nIp6p1vCC5xQLp+57btv03pKxUL5Wg2msl2+32bRCoNjcQKlPH4/E6EyJ6CyTPJs/l5cE/MxtLGeI/A5G50K0S3MCPQCCd5wIIvl3lY3yX8rvBJVDzPPN+v2dcZbyXUrh1Wfl/0zTpCx3t774dt4vU5XJhtAygUrvdTiqEpmniw+EgFkHwrhAIPtkfe9l/HesbyATiIfsQZzoAAAAASUVORK5CYII=" alt="Simulated annealing plot" data-src="/img/simulated_annealing_plot.svg" class="lazyload"></p>
+<p>For this run, I got a ﬁ­nal state of 4.703329. The cor­re­spond­ing sine value is -0.9999590, which is close to -1. These two val­ues match what we ex­pected.</p>
+
+        </div>
+    </article>
+
+    <nav id="otherPosts">
+    
+        <div id="next">
+            <span>Next post</span>
+            <a href="/coronavirus-brings-change-but-the-church-brings-hope/">Coronavirus Brings Change, but the Church Brings Hope</a>
+        </div>
+    
+    
+        <div id="previous">
+            <span>Previous post</span>
+            <a href="/hello-world/">Hello World</a>
+        </div>
+    
+    </nav>
+    
+
+    <script>
+        var matthewShare=function(t,e){"use strict";return{attemptToAddShareButton:function(){if(!navigator.share)return;e.querySelector(".js-share").insertAdjacentHTML("beforeend",'\n            <a href="javascript:matthewShare.doSharing()" class="link link--share">Share</a>\n        ')},doSharing:function(){navigator.share({title:e.querySelector("title").textContent,text:e.querySelector('meta[name="description"]').getAttribute("content"),url:e.querySelector('link[rel="canonical"]').getAttribute("href")})}}}(window,document);matthewShare.attemptToAddShareButton();
+    </script>
+
+    </div>
+    <footer id="pageFooter">
+    <div id="social">
+            <a href="javascript:decryptEmail('bWF0dGhld3BhcnJpc0BvdXRsb29rLmNvbQ==')">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAACXBIWXMAAAsTAAALEwEAmpwYAAAChklEQVRIx93W72tOYRzH8fMXeKCEtD3yZOWBRPmRJ2zMb3dsfsy0mWaGGkpSJCkZSa1tbLT8CC1s4QHRrZSIJvkRYdoa9oSJu+1sbmbv7/qcdXZ27iEnD6xerZ37uq/vdX2v7/c6c5z/6WcERmEc0pEWkXTNOcaCZCALhdgWsXWIeUEWYx8acAf3/pLN0Yj9WGNBJmEutuIi3sBFb8DPFILjXM1xCduxyIKsxxIFspTV4gm+4scvAgUDJPAUJ5Uqm3O2BbmBahTrYS7KcRcfhwnkf2ZjOnAfR7BC52yBDjra3ltcRhmysQC7tIAP+B6yao991o5b2KP02GK3oB7PHA1MauBN7MZ8ZGqgBW9BT0iAb2jVIdsC5+i7tsDreK8xg7b8SdVxSKU3S+d0Ci/Q6RvfqWenUaTcx5QeL9VeBobk1w7vgVYzBeNVGEfxEJ/xBU2o0MQ2ZjJ26lwSgTmHBLEzeqT8TlP3TlCgvSrNBvVVTJ/ZmKlKdVNICwz6oxsvUYMcpcCqrQALVRSrkYd5OuQCVZONXY5jSmN3WBA72Neowyod/CacxzUcxjJMlJhK/SouYLPKdqX65JUv0EAAK+OzWKsAJbiiEk6oQWsUuFQrfqymbVewEu0oH2fQrLkHyrBe3Z+l33bFtPkqxNVObyOulbq+Xnmn8/LmKNIO7YpxnitAqerccnxOvZEMnFlSE7taXPCzFqW3UA25EScsyAG1f7ZuzDpF70nR4anuLa85m9VX+QrUf9VPxwxVzfGQyviTIMEKzVOv9VeKlWml7pmu37zih7uRu3QMVUq/MxMbtIt4BC8sT1y72eGoq5fqqo/69VuslDkjMVov/bSI2Zxj/8m/Q32oNl663RZb4AAAAABJRU5ErkJggg==" alt="Email" data-src="/img/email.svg" class="lazyload">
+            </a>
+            <a href="https://github.com/froggermtp">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAACXBIWXMAAAsTAAALEwEAmpwYAAADN0lEQVRIx53WeWjPcRzH8e/m14ZmpmaRQo6cuS1nQtjcuUIxt9xnIn8IOctRZnMfRUMZQ1jWzMi1/GFkLGqTmNvYz2yz8Xqv509fs2nbtx7tu+8+3/f7+/l83p/PZ45T8eWRYGkhQ2WF7JNTiJXlEinNaetxKnn5SRDBI2Sh7JYzkiL3kcKzXbSJIFkQMSq8akio9JIFckiS5Ym8lLfyAXafzd+SaTufd0OJVW6ChjJYNkkSgb1S4vIL7mde2l7j3cHE+iuRv4TR5R2Sxpd+lwIp/k+SYtp4eSeNGBHE9PclqSv9ZJs8kCx5KLflkbyTr5Irn5HLMwucTtt0emQxthPTCsIJkHayUlLlPQkOymrZKMclXk7LMX63+7Pcr5c1ckQeM2epxOxsSerLWImTHMljbBdJV4yUSTJOhslw7ifKCOki3WUZVecllsWcbUl6yzrK8gdDcFGm8gEeyjJE6tDzAO5D+JuHiZ4hV+Qbse7JAUuylMWVxUTa+J+U0cxVZa969O4Uw1VCTBu20rG1ivgohZLBpPWUwCokqSl9ZadkShHJ7L60Il4xjl7G1BZiU6fql634JXKL8veS6E95FlKWvvkIq0YS97z4Yloy5ws3P0lySaKkQTWSNJKZcpUkRRSA85pEBSS7KYulWTWStGRnviP5xLQl4dyVF5Sdde+pa+IDqpAg0DXxz+mFxXzjcC6ksD1Y2X2SyzKP7T6wkpXVigWcyMiUENO2JWcK23QGW4r15AbPbNgGShsWZmCZLw9jSxrEaj/L2igkSSYf7LSngW3tz+hVglyQ8xIjcyXct9lx2WrvwRlio3GdzbGABHmcM1sdXrT9P5rVmcBJGEOiJOZoCIF9lx1ME+QEwfOYhxJ+2rzslTG+w6qJTGP12xftl1Wc6xuofdsEa7mS2J41Wc5RSe7zJYfnUe4qtZc7EjSesd0ic1iY/aVxmbPbw1fGuZIUMdmJ7IkdynxY6a4aTqKjDEM058l4aV3OPxyjaJePbHYMWyvdiPnPS8EcMnYG7KHLVh1rpU85pRvJuGeyAA/LLOlEAr+K/h2qLW1lOqdjMkM3oJz2Vt6bKY5YlkNrYvy5fgNFPQkUcCkgcQAAAABJRU5ErkJggg==" alt="Github logo" data-src="/img/github.svg" class="lazyload">
+            </a>
+            <a href="https://twitter.com/froggermtp">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAACXBIWXMAAAsTAAALEwEAmpwYAAACvElEQVRIx83WaYhNYRzH8TPGnRkMY65l7MsM5Y0tpBSyC82Yxs5IyZLU8EJSSpnilcJkKUaNZMmaIomGNKXwChEmW7mJsV2ua6zf//Q7Ok7n3DvzzlOfTvd0z/k/z//5P89zHOc/bxnIRh66oBPaITPsz5nSqpkBInrxcMzCYszDeBSho4LnK7iTgx7ohwJkpQnQGn318i2owTmcxG6sRQmmYyLG2EOd9aMcxeivnoa1Ar1kL+4ghg9owBNcxREF3IhFjnq1CodwEEsxCLkB6bOUjsY2PEASvzx+4pMC38UxbLYHCxWxDo9xCusxTmnM8UymBV6A0/jiC+D1A89wGCvtwV5Yg1r14hWua7grMAEDNIE26gpc8730t89n3NaIZzqqgBLlMaaH4hrVJeV+kwJaZ6pxP02QdyqGcmWjqdSmYJfynPA8bD16gVu4jIua7NchAdx7L3EAU5XipuqarUmv9wXx5zkp39MEqVe6x6KNW5ILcVQ9+BoSJOhlYfetsioxROvK6YDJ2KM6b0yT73Ts+RtYp0LJcFdwH8z3TOpHpaclQdxOvcUJzFFR/W3ZGtoGlXKDJ+8tCWAdu4ftGKU19k+zApiruYmlmNxUQaxzZ7EE3dxUeVueSq4KD0MKIFWAhBagbZojgkbhbt+F2jaqtKqfamGGBXHvf8MjLVzbfaNBo/DOje3CpdipRfg+IIh3dElVZY2Kp7dbtt6WrwPI9rCBmjAbzQ7c9AXxi6saq7WlF4WdRz0xGDO0N1WqV3UqgMaAlye0cGvVmVJlIPTAsxGMVE+s9M5oAp9ro4tr3bzRPVvNV7QNVejI7Z7moHPaajHa+bEcW7Efx3EeF3S13/s00tWYpvTmhn08+D8kslTCFmwYJqFMW/UyXct0TA/V6NsHTXBzP3Mi+rSJqiC66hrV/Uiq8gxqfwDVzC0nQ9iEnwAAAABJRU5ErkJggg==" alt="Twitter logo" data-src="/img/twitter.svg" class="lazyload">
+            </a>
+            <a href="https://www.linkedin.com/in/matthew-parris/">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAACXBIWXMAAAsTAAALEwEAmpwYAAACdUlEQVRIx83WS0hUURzH8WtFDxRaBWVlBEVQ1EJs50YUpH1BSkZRaQ30INJFyzbtRMFXTyiFInqAZRBNVgYZlBT5qKRFJEIZBTnFHcdx7Hvidy636d6YZlq0+MDM/55z/uee8z/3XsdxnBPoxhhm/7H3eOwowQt8Rkpso1RALBO2jxnzraM7+IK4LkzhG2KKzWSRyLY3/SedtKAZfBQPcA8j+JpDEssLmjt4g04cRQRnMYhEDkvmJZnV8vTiCDZiDerQozvMpQC8H2bt7qAWq7EENbgRkCSsIMLi3kUXQ+jAXuxAMwa0gWGDzfikAvySJKmSe4aruIQnmNC1hCbiav+mtMTm+jg+6v/0n5Ik1LgPF3BGFfZO8X5cUfIo7uOW7rwJ7fr/WssbuPFmhs/Rgt3YhkadWBNvw07FTeUdwi5UoBTl2KPJDWm8wOq6q41fgXxt/DXFD2AZFmI5VqEQCzBXlqJay/0pLElUZbsSBZr5dcUjGnQOFmMDKrEFmxSbh804qTOXTC/hTJM4OkM12o9T2If1SrIODXiq4sgqSR7K0IoPcl53tEhn7KAK6Hu2Scxst+KyZhrXga1WnyLtX6/vEP91kvnYroJI6lzcVNsC9a1Tn1i2SUw1VSn+/ybJ5JwELVe32uarb636/JbEVMIjlV8J1upU31alHEexqieieFLMgIfVp0Rj9AVtfFxvwouo9720BhTvwjHsx2nF7dPXfCOcU596jTHie3p7SexTeBgPtaaDerqa+Ctf/KXi9rExobZRtRlWH+/EjykQ1/q6vg8JV7FpXU+P2yS2X0xtXF+fnx8S/fpsmczhHR72/jdjjv8AmvTOUK+NQ6IAAAAASUVORK5CYII=" alt="LinkedIn logo" data-src="/img/linkedin.svg" class="lazyload">
+            </a>
+        </div>
+    <div id="copyright">Copyright © 2020 Matthew Parris</div>
+</footer>
+
+
+<script>
+    function decryptEmail(o){var a=atob(o);window.location.href="mailto:"+a}
+</script>
+
+
+<script>
+            (function (selector, src, preferNativeLazyLoad) {
+  var images = document.querySelectorAll(selector);
+  var numImages = images.length;
+
+  if (numImages > 0) {
+    if (preferNativeLazyLoad && 'loading' in HTMLImageElement.prototype) {
+      for (var i = 0; i < numImages; i++) {
+        var keys = ['src', 'srcset'];
+
+        for (var j = 0; j < keys.length; j++) {
+          if (images[i].hasAttribute('data-' + keys[j])) {
+            var value = images[i].getAttribute('data-' + keys[j]);
+            images[i].setAttribute(keys[j], value);
+          }
+        }
+      }
+
+      return;
+    }
+
+    var script = document.createElement('script');
+    script.async = true;
+    script.src = src;
+    document.body.appendChild(script);
+  }
+})(
+              'img',
+              'https://cdn.jsdelivr.net/npm/lazysizes@5/lazysizes.min.js',
+              false
+            );
+          </script></body></html>

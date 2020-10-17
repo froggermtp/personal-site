@@ -1,0 +1,45 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    {% block head %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{{ title }} | Matthew Parris</title>
+    <meta name="description" content="{{ description }}">
+    <meta name="author" content="Matthew Parris">
+    <link rel="canonical" href="{{ site.url }}{{ page.url | url }}">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
+
+    {% set css %}
+        {% include "src/assets/styles/normalize.css" %}
+        {% include "src/assets/styles/main.css" %}
+        {% include "src/assets/styles/typeset.css" %}
+    {% endset %}
+
+    <style>
+        {{ css | cssmin | safe }}
+    </style>
+
+    <link href="https://fonts.googleapis.com/css?family=Oxygen|Source+Sans+Pro&display=swap" rel="stylesheet">
+
+    {% if useMathJax %}
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    {% endif %}
+    {% endblock %}
+</head>
+
+<body>
+    <div id="main-container">
+        {% include "src/includes/_nav.njk" %}
+        {% block content %}
+
+        {% endblock %}
+    </div>
+    {% include "src/includes/_footer.njk" %}
+</body>
+
+</html>

@@ -35,10 +35,13 @@ module.exports = function (config) {
             .use(markdownItFootnote)
     );
 
+    // Layouts
+    config.addLayoutAlias('main', 'main-layout.njk');
+    config.addLayoutAlias('post', 'post-layout.njk');
+    config.addLayoutAlias('about', 'about-layout.njk');
+
     // Pass-through files
-    config.addPassthroughCopy({ "public/img": "img" });
-    config.addPassthroughCopy({ "public/pdf": "pdf" });
-    config.addPassthroughCopy({ "public/robots.txt": "robots.txt" });
+    config.addPassthroughCopy({ "src/assets/images": "img" });
 
     // Collections
     config.addCollection('postInfo', function (collection) {
@@ -58,12 +61,13 @@ module.exports = function (config) {
 
     // Base config
     return {
-        templateFormats: [
-            "md",
-            "njk"
-        ],
+        templateFormats: ['md', 'njk',],
         dir: {
-            input: "views"
+            input: 'src',
+            output: 'dist',
+            includes: 'includes',
+            layouts: 'layouts',
+            data: 'data',
         }
     };
 };

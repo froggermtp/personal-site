@@ -8,8 +8,9 @@
     "build": "run-s clean eleventy:prod --print-label",
     "eleventy:dev": "cross-env ELEVENTY_ENV=development eleventy --serve",
     "eleventy:prod": "cross-env ELEVENTY_ENV=production eleventy",
-    "clean": "del-cli _site",
-    "benchmark": "cross-env DEBUG=Eleventy:Benchmark* npm run build"
+    "clean": "del-cli dist",
+    "benchmark": "cross-env DEBUG=Eleventy:Benchmark* npm run build",
+    "debug": "cross-env DEBUG=Eleventy* & eleventy --dryrun"
   },
   "author": "Matthew Parris",
   "license": "ISC",
