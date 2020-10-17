@@ -1,0 +1,15 @@
+{% set mostRecentPost = collections.post[collections.post.length - 1] %}
+
+<article id="most-recent-post">
+    <header>
+        <h3>
+            <a href="{{ mostRecentPost.url | url }}">{{ mostRecentPost.data.title }}</a>
+        </h3>
+    </header>
+    <p>
+        {{ mostRecentPost.templateContent | striptags(true) | removeFootnote | truncate(280) | replace("&quot;", '"') }}
+    </p>
+    <footer class="article-footer">
+        <a class="readMore" href="/blog">More Posts</a>
+    </footer>
+</article>

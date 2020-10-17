@@ -1,5 +1,4 @@
-{% macro article(post) %}
-
+{% macro postListing(post) %}
 <article>
         <header>
             <h1 class="blogTitle">
@@ -17,5 +16,4 @@
             <a class="readMore" href="{{ post.url | url }}">Read more</a>
         </footer>
 </article>
-
 {% endmacro %}
