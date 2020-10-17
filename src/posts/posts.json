@@ -2,7 +2,7 @@
     "tags": [
         "post"
     ],
-    "layout": "post-layout.njk",
+    "layout": "post.njk",
     "blogAuthor": "Matthew Parris",
     "permalink": "/{{ page.fileSlug | slug }}/index.html",
     "changeFreq": "monthly"

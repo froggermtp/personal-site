@@ -1,6 +1,6 @@
 ---
 permalink: /about/
-layout: about-layout.njk
+layout: about.njk
 ---
 
 My name is Matthew Parris. I'm a Christian trying to figure out how to make money without losing my soul. Currently, I'm working at Paycom--trying to make HR services cheaper and easier to use.
