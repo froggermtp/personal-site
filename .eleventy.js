@@ -4,6 +4,7 @@ const pluginTypeset = require("eleventy-plugin-typeset");
 const pluginLazyImages = require("eleventy-plugin-lazyimages");
 const markdownIt = require("markdown-it");
 const markdownItFootnote = require("markdown-it-footnote");
+const nunjucks = require('nunjucks');
 
 const filters = require('./utils/filters.js');
 
@@ -35,10 +36,15 @@ module.exports = function (config) {
             .use(markdownItFootnote)
     );
 
-    // Layouts
-    config.addLayoutAlias('main', 'main-layout.njk');
-    config.addLayoutAlias('post', 'post-layout.njk');
-    config.addLayoutAlias('about', 'about-layout.njk');
+    // Nunjucks
+    const loaders = [
+        new nunjucks.FileSystemLoader('src/layouts'),
+        new nunjucks.FileSystemLoader('src/includes'),
+        new nunjucks.FileSystemLoader('src/assets/styles'),
+        new nunjucks.FileSystemLoader('src/assets/scripts'),
+    ];
+    const nunjucksEnvironment = new nunjucks.Environment(loaders);
+    config.setLibrary("njk", nunjucksEnvironment);
 
     // Pass-through files
     config.addPassthroughCopy({ "src/assets/images": "img" });

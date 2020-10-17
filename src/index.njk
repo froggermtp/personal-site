@@ -4,14 +4,14 @@ description: Homepage for Matthew Parris's personal website
 changeFreq: weekly
 ---
 
-{% extends "src/layouts/main-layout.njk" %}
+{% extends "main-layout.njk" %}
 
 {% block head %}
     {{ super() }}
 
     {% set css %}
-        {% include "src/assets/styles/index.css" %}
-        {% include "src/assets/styles/most-recent-post.css" %}
+        {% include "index.css" %}
+        {% include "most-recent-post.css" %}
     {% endset %}
 
     <style>
@@ -43,7 +43,7 @@ changeFreq: weekly
             <h2>Blog</h2>
         </div>
         <div class="right">
-            {% include "src/includes/_most-recent-post.njk" %}
+            {% include "_most-recent-post.njk" %}
         </div>
     </section>
 {% endblock %}

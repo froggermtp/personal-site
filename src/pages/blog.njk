@@ -8,14 +8,14 @@ pagination:
     alias: posts
 ---
 
-{% extends "src/layouts/main-layout.njk" %}
-{% import "src/includes/blog-macros.njk" as blogMacros %}
+{% extends "main-layout.njk" %}
+{% import "blog-macros.njk" as blogMacros %}
 
 {% block head %}
   {{ super() }}
 
   {% set css %}
-      {% include "src/assets/styles/blog.css" %}
+      {% include "blog.css" %}
   {% endset %}
 
   <style>

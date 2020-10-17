@@ -14,9 +14,9 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
 
     {% set css %}
-        {% include "src/assets/styles/normalize.css" %}
-        {% include "src/assets/styles/main.css" %}
-        {% include "src/assets/styles/typeset.css" %}
+        {% include "normalize.css" %}
+        {% include "main.css" %}
+        {% include "typeset.css" %}
     {% endset %}
 
     <style>
@@ -34,12 +34,12 @@
 
 <body>
     <div id="main-container">
-        {% include "src/includes/_nav.njk" %}
+        {% include "_nav.njk" %}
         {% block content %}
 
         {% endblock %}
     </div>
-    {% include "src/includes/_footer.njk" %}
+    {% include "_footer.njk" %}
 </body>
 
 </html>

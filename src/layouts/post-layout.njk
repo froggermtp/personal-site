@@ -1,4 +1,4 @@
-{% extends "src/layouts/main-layout.njk" %}
+{% extends "main-layout.njk" %}
 
 {% block head %}
     {{ super() }}
@@ -11,7 +11,7 @@
     <meta name="twitter:image" content="{{ mainImage }}" />
 
     {% set css %}
-        {% include "src/assets/styles/post.css" %}
+        {% include "post.css" %}
     {% endset %}
 
     <style>
@@ -50,7 +50,7 @@
     {% endif %}
     </nav>
     {% set js %}
-        {% include "src/assets/scripts/share.js" %}
+        {% include "share.js" %}
     {% endset %}
 
     <script>

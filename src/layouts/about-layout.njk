@@ -4,13 +4,13 @@ description: I'm Matthew Parris • Christian • Software Developer
 changeFreq: monthly
 ---
 
-{% extends "src/layouts/main-layout.njk" %}
+{% extends "main-layout.njk" %}
 
 {% block head %}
     {{ super() }}
 
     {% set css %}
-        {% include "src/assets/styles/about-me.css" %}
+        {% include "about-me.css" %}
     {% endset %}
 
     <style>
