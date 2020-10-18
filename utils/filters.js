@@ -5,9 +5,15 @@ const moment = require('moment');
 const cssCache = new Map();
 const jsCache = new Map();
 
+const shouldTransformHTML = process.env.ELEVENTY_ENV === 'production';
+
 module.exports = function (nunjucksEnv) {
     const filters = {
         cssmin: function (code) {
+            if (!shouldTransformHTML) {
+                return code;
+            }
+
             if (cssCache.has(code)) {
                 return cssCache.get(code);
             }
@@ -18,6 +24,10 @@ module.exports = function (nunjucksEnv) {
         },
 
         jsmin: function (code) {
+            if (!shouldTransformHTML) {
+                return code;
+            }
+
             if (jsCache.has(code)) {
                 return jsCache.get(code);
             }
