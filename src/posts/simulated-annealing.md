@@ -2,7 +2,7 @@
 title: Simulated Annealing
 date: 2020-06-05
 description: Simulated annealing tutorial, with a code example written in R
-mainImage: /img/sheet-metal.jpg
+mainImage: /assets/images/sheet-metal.jpg
 mainImageAltText: Sheet metal texture
 useMathJax: True
 ---
@@ -59,6 +59,6 @@ We've covered all the important parts of this algorithm. Let's put everything to
 
 I decided to capture the state for every iteration and graph the result. As you can see, the initial state is nowhere near -1. As the algorithm progresses, it begins to slowly converge. Towards the end, the probability of choosing bad moves is near 0, which is why the downward slope for later iterations is steep.
 
-![Simulated annealing plot](/img/simulated_annealing_plot.svg)
+![Simulated annealing plot](/assets/images/simulated_annealing_plot.svg)
 
 For this run, I got a final state of 4.703329. The corresponding sine value is -0.9999590, which is close to -1. These two values match what we expected.

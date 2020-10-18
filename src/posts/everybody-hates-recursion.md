@@ -2,7 +2,7 @@
 title: Everybody Hates Recursion
 date: 2020-07-11
 description: A tutorial covering recursion and tail call optimization, with code examples written in PHP
-mainImage: /img/recursive-hand-painting.jpg"
+mainImage: /assets/images/recursive-hand-painting.jpg"
 mainImageAltText: A painting showing hands painting other hands
 ---
 Everybody hates recursion. Well, maybe I'm exaggerating but the technique is often dismissed as useless and complicated. You may be thinking: "I'll just keep my loops please." And there's nothing wrong with that. In many situations, loops or higher-order functions are the natural solution. Not to mention, some languages have poor support for recursion—but I'll dive into that part later.
@@ -41,7 +41,7 @@ To convert our factorial function to be tail recursive, a few changes have to be
 
 So what makes tail recursive functions noteworthy? After all, like all functions, they must be allocated on the call stack.^[Ok, so in real life, there are multiple different ways to implement tail call optimization. The programming language isn't necessarily prematurely dropping stack frames. Yet, the ideas I show here give an intuition about why we can even attempt the optimization.] Yet, something special happens when nesting these types of functions: the final nested function call’s return value will be the final answer. To prove I'm not making stuff up, study the following diagram of a call stack for the tail recursive factorial function.
 
-<img src="/img/factorial_tail_call_stack.svg" style="max-width:193px">
+<img src="/assets/images/factorial_tail_call_stack.svg" style="max-width:193px">
 
 From the diagram, it's obvious that the final frame will have a return value of six, the final answer. If we bothered to maintain all the frames and bubble the value back down, then the six would get funneled straight through. Thus, there is no point in keeping the early frames. We can safely discard them.
 

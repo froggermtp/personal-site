@@ -2,7 +2,7 @@
 title: "Eating Meat: Evolution, Patterns, and Consequences"
 date: 2020-07-04
 description: My summary of Vaclav Smil's research paper. Discusses how humans evolved to eat meat and why current meat-eating practices may be bad for humanity.
-mainImage: /img/cow.jpg"
+mainImage: /assets/images/cow.jpg"
 mainImageAltText: A sad cow
 ---
 This blog post is a summary of Vaclav Smil's paper [*Eating Meat: Evolution, Patterns, and Consequences*](http://vaclavsmil.com/wp-content/uploads/docs/smil-article-2002-pdr2003.pdf). Although I eat meat, it should be noted that I am not an expert in meat. Thus, please take this summary with a grain of salt.

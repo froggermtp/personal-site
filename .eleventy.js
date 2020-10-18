@@ -22,14 +22,7 @@ module.exports = function (config) {
     config.addPlugin(pluginYoutube, { only: '.articleContent' });
     config.addPlugin(pluginRSS);
     config.addPlugin(pluginTypeset({ only: '.articleContent p' }));
-    config.addPlugin(pluginLazyImages, {
-        transformImgPath: (src) => {
-            items = src.split("\\");
-            index = items.indexOf("img") - 1;
-            items.splice(index, 0, "public");
-            return items.join("\\");
-        }
-    });
+    config.addPlugin(pluginLazyImages);
 
     // Filters
     const filters = require('./utils/filters.js')(nunjucksEnvironment);
@@ -47,7 +40,7 @@ module.exports = function (config) {
     );
 
     // Pass-through files
-    config.addPassthroughCopy({ "src/assets/images": "img" });
+    config.addPassthroughCopy('src/assets/images');
 
     // Collections
     config.addCollection('postInfo', function (collection) {

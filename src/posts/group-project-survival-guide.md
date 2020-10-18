@@ -2,7 +2,7 @@
 title: Group Project Survival Guide
 date: 2020-07-28
 description: How to be better at group projects, based on my college experiences.
-mainImage: /img/mount-doom-volcano.jpg"
+mainImage: /assets/images/mount-doom-volcano.jpg"
 mainImageAltText: A volcano spewing lava
 ---
 

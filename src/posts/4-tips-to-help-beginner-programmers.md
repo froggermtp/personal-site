@@ -2,7 +2,7 @@
 title: 4 Tips to Help Beginner Programmers
 date: 2020-06-27
 description: 4 high-level tips to help beginner programmers, based on my college and internship coding experiences
-mainImage: /img/wisdom-of-the-universe.jpg"
+mainImage: /assets/images/wisdom-of-the-universe.jpg"
 mainImageAltText: A painting representing the wisdom of the universe via a flowering tree and a dove
 useMathJax: True
 ---
