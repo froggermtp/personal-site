@@ -5,6 +5,7 @@ const pluginLazyImages = require("eleventy-plugin-lazyimages");
 const markdownIt = require("markdown-it");
 const markdownItFootnote = require("markdown-it-footnote");
 const nunjucks = require('nunjucks');
+const pairedShortcodes = require("./utils/pairedShortcodes.js");
 
 module.exports = function (config) {
     // Nunjucks
@@ -28,6 +29,11 @@ module.exports = function (config) {
     const filters = require('./utils/filters.js')(nunjucksEnvironment);
     Object.keys(filters).forEach(filterName => {
         config.addFilter(filterName, filters[filterName]);
+    });
+
+    // Paired Shortcodes
+    Object.keys(pairedShortcodes).forEach(pairedShortcodeName => {
+        config.addPairedShortcode(pairedShortcodeName, pairedShortcodes[pairedShortcodeName]);
     });
 
     // Markdown

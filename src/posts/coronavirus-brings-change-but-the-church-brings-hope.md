@@ -2,7 +2,7 @@
 title: Coronavirus Brings Change, but the Church Brings Hope
 date: 2020-06-12
 description: The coronavirus is projected to change our lives, but does this change bring hope?
-mainImage: /assets/images/church-round-colorful-window.jpg"
+mainImage: /church-round-colorful-window.jpg
 mainImageAltText: A round, colorful church window
 ---
 Let's discuss briefly discuss the notion of change. I think the topic is relevant to our current circumstances. After all, since the coronavirus has invaded our lives, things haven't been the same. And so-called experts have been predicting that our lives will likely be altered moving forward even post COVID-19. The new normal is change--or is it? 

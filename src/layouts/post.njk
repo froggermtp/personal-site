@@ -23,7 +23,10 @@
     <article>
         <header>
             <div id="mainImage">
-                <img src="{{ mainImage | safe }}" alt="{{ mainImageAltText | safe }}"></img>
+                {# <img src="{{ mainImage | safe }}" alt="{{ mainImageAltText | safe }}"></img> #}
+                {% image mainImage %}
+                    {{ mainImageAltText }}
+                {% endimage %}
             </div>
             <h1 id="title">{{ title | safe }}</h1>
             <div class="box box--split js-share">
