@@ -19,9 +19,12 @@ changeFreq: monthly
 {% endblock %}
 
 {% block content %}
-    <div class="wrapper">
+    {# <div class="wrapper">
         <img class="wrapper__image" src="/assets/images/matthew-parris-by-tree.jpg" alt="Matthew with hand on chin next to a swaying tree"/>
-    </div>
+    </div> #}
+    {% wrappedImage "/matthew-parris-by-tree.jpg" %}
+        Matthew with hand on chin next to a swaying tree
+    {% endwrappedImage %}
     <article class=".article">
         {{ content | safe }}
     <article>
