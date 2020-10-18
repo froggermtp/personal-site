@@ -6,9 +6,18 @@ const markdownIt = require("markdown-it");
 const markdownItFootnote = require("markdown-it-footnote");
 const nunjucks = require('nunjucks');
 
-const filters = require('./utils/filters.js');
-
 module.exports = function (config) {
+    // Nunjucks
+    const loaders = [
+        new nunjucks.FileSystemLoader('src/layouts'),
+        new nunjucks.FileSystemLoader('src/includes'),
+        new nunjucks.FileSystemLoader('src/assets/styles'),
+        new nunjucks.FileSystemLoader('src/assets/scripts'),
+    ];
+    const nunjucksEnvironment = new nunjucks.Environment(loaders);
+    config.setLibrary("njk", nunjucksEnvironment);
+
+
     // Plugins
     config.addPlugin(pluginYoutube, { only: '.articleContent' });
     config.addPlugin(pluginRSS);
@@ -23,6 +32,7 @@ module.exports = function (config) {
     });
 
     // Filters
+    const filters = require('./utils/filters.js')(nunjucksEnvironment);
     Object.keys(filters).forEach(filterName => {
         config.addFilter(filterName, filters[filterName]);
     });
@@ -35,16 +45,6 @@ module.exports = function (config) {
         })
             .use(markdownItFootnote)
     );
-
-    // Nunjucks
-    const loaders = [
-        new nunjucks.FileSystemLoader('src/layouts'),
-        new nunjucks.FileSystemLoader('src/includes'),
-        new nunjucks.FileSystemLoader('src/assets/styles'),
-        new nunjucks.FileSystemLoader('src/assets/scripts'),
-    ];
-    const nunjucksEnvironment = new nunjucks.Environment(loaders);
-    config.setLibrary("njk", nunjucksEnvironment);
 
     // Pass-through files
     config.addPassthroughCopy({ "src/assets/images": "img" });

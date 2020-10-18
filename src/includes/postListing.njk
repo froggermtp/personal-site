@@ -10,7 +10,7 @@
             </div>
         </header>
         <p>
-            {{ post.templateContent | striptags(true) | removeFootnote | truncate(280) | replace("&quot;", '"') }}
+            {{ post.templateContent | postPreview }}
         </p>
         <footer class="article-footer">
             <a class="readMore" href="{{ post.url | url }}">Read more</a>
