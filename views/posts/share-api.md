@@ -1,6 +1,6 @@
 ---
 title: The Share API
-date: 2020-10-21
+date: 2020-11-04
 description: An introduction to the Share API
 mainImage: /img/forest-landscape.jpg
 mainImageAltText: A beautiful forest
