@@ -9,13 +9,13 @@ const pairedShortcodes = require("./utils/pairedShortcodes.js");
 
 module.exports = function (config) {
     // Nunjucks
-    const loaders = [
-        new nunjucks.FileSystemLoader('src/layouts'),
-        new nunjucks.FileSystemLoader('src/includes'),
-        new nunjucks.FileSystemLoader('src/assets/styles'),
-        new nunjucks.FileSystemLoader('src/assets/scripts'),
-    ];
-    const nunjucksEnvironment = new nunjucks.Environment(loaders);
+    const loaders = new nunjucks.FileSystemLoader([
+        'src/layouts',
+        'src/includes',
+        'src/assets/styles',
+        'src/assets/scripts',
+    ]);
+    const nunjucksEnvironment = new nunjucks.Environment(loaders, { noCache: true });
     config.setLibrary("njk", nunjucksEnvironment);
 
 
@@ -42,11 +42,15 @@ module.exports = function (config) {
         markdownIt({
             html: true
         })
+            .disable('code')
             .use(markdownItFootnote)
     );
 
     // Pass-through files
     config.addPassthroughCopy('src/assets/images');
+
+    // Additional watch targets
+    config.addWatchTarget('./src/assets/');
 
     // Collections
     config.addCollection('postInfo', function (collection) {
@@ -67,6 +71,8 @@ module.exports = function (config) {
     // Base config
     return {
         templateFormats: ['md', 'njk',],
+        markdownTemplateEngine: "njk",
+        htmlTemplateEngine: "njk",
         dir: {
             input: 'src',
             output: 'dist',
