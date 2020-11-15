@@ -44,4 +44,13 @@ Let's stop talking theory and look at some code. Below, I wrote a solution in Ra
 
 Here's the output from the code--with the size parameter set to three. The left-hand side is the top of each stack. With a little squinting, you should be able to trace out the correct series of moves to solve the puzzle.
 
-![The console output showing the steps to solve the three disk version of the Tower of Hanoi puzzle](/assets/images/tower-of-hanoi-output.jpg)
+{% consoleOutput { header: "Console Output", prefix: "$" } %}
+#(struct:board (2 3) () (1))
+#(struct:board (3) (2) (1))
+#(struct:board (3) (1 2) ())
+#(struct:board () (1 2) (3))
+#(struct:board (1) (2) (3))
+#(struct:board (1) () (2 3))
+#(struct:board () () (1 2 3))
+(board '() '() '(1 2 3))
+{% endconsoleOutput %}

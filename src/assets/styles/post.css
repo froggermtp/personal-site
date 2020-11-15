@@ -1,11 +1,91 @@
+/* Console Output */
+
+.console {
+    background-color: purple;
+    color: white;
+    padding: var( --space-med);
+    font-family: monospace;
+}
+
+.console__header {
+    color: inherit;
+    margin: 0 0 var(--space-med) 0;
+    font-size: 1.2em;
+    font-size: clamp(0.9rem, .6750rem + 1vw, 1.2rem);
+    font-weight: 400;
+    font-family: inherit;
+}
+
+.console__header-text {
+    color: inherit;
+    font-family: inherit;
+}
+
+.console__copy-button {
+    margin: 0;
+    padding: 0;
+    color: inherit;
+    font-size: inherit;
+    font-weight: 400;
+    font-family: inherit;
+    border: none;
+    cursor: pointer;
+    background-color: inherit;
+}
+
+.console__lines {
+    color: inherit;
+    font-family: inherit;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-light-grey) black;
+}
+
+.console__lines::-webkit-scrollbar {
+    /* Delete this once deprecated */
+    height: 6px;
+}
+
+.console__lines::-webkit-scrollbar-thumb {
+    /* Delete this once deprecated */
+    background-color: var(--color-light-grey);
+}
+
+.console__line {
+    color: inherit;
+    margin: 0 0 var(--space-sm) 0;
+    font-size: 1.1em;
+    font-size: clamp(.8rem, .5750rem + 1vw, 1.1rem);
+    font-family: inherit;
+    white-space: nowrap;
+}
+
+/* Box */
+
 .box {
     display: flex;
 }
 
-.box--split {
+.box--start {
     justify-content: flex-start;
-    margin-bottom: var(--space-lg);
+}
+
+.box--end {
+    justify-content: flex-end;
+}
+
+.box--split {
+    justify-content: space-between;
+}
+
+.box--vertical-center {
     align-items: center;
+}
+
+/* Metadata */
+
+.metadata {
+    margin-bottom: var(--space-lg);
 }
 
 .link--share {

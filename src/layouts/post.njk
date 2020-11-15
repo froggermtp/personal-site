@@ -23,13 +23,12 @@
     <article>
         <header>
             <div id="mainImage">
-                {# <img src="{{ mainImage | safe }}" alt="{{ mainImageAltText | safe }}"></img> #}
                 {% image mainImage %}
                     {{ mainImageAltText }}
                 {% endimage %}
             </div>
             <h1 id="title">{{ title | safe }}</h1>
-            <div class="box box--split js-share">
+            <div class="metadata box box--start box--vertical-center js-share">
                 <p id="date">Originally written: <time>{{ page.date | date("LL") | safe }}</time></p>
             </div>
         </header>
