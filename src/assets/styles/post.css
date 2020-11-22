@@ -1,7 +1,7 @@
 /* Console Output */
 
 .console {
-    background-color: purple;
+    background-color: black;
     color: white;
     padding: var( --space-med);
     font-family: monospace;
