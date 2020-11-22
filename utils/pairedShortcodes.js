@@ -25,6 +25,42 @@ module.exports = {
         `;
     },
 
+    script: function (content, options = {}) {
+        const pathPrefix = '/assets/scripts/';
+        const regex = RegExp(/^.*\.js/);
+        const srcs = content
+            .split('\n')
+            .map(line => line.replace(/[\s\n\r]+/g, ''))
+            .filter(line => regex.test(line));
+        return srcs.reduce((total, currentValue) => {
+            return total += outdent`
+            <script
+                ${options.async ? 'async ' : ''}
+                ${options.defer ? 'defer ' : ''}
+                src="${pathPrefix}${currentValue}"
+            ></script>
+            `;
+        }, '');
+    },
+
+    style: function (content, options = {}) {
+        const pathPrefix = '/assets/styles/';
+        const regex = RegExp(/^.*\.css/);
+        const srcs = content
+            .split('\n')
+            .map(line => line.replace(/[\s\n\r]+/g, ''))
+            .filter(line => regex.test(line));
+        return srcs.reduce((total, currentValue) => {
+            return total += outdent`
+            <link
+                rel="stylesheet"
+                href="${pathPrefix}${currentValue}"
+                media="${options.media ? options.media : 'screen'}"
+            ></link>
+            `;
+        }, '');
+    },
+
     consoleOutput: function (content, options = {}) {
         const classes = options.classes ? options.classes.join(' ') : '';
         const header = options.header ?

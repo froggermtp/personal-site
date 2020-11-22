@@ -9,13 +9,10 @@ changeFreq: yearly
 
 {% block head %}
     {{ super() }}
-    {% set css %}
-        {% include "404.css" %}
-    {% endset %}
 
-    <style>
-        {{ css | cssmin | safe }}
-    </style>
+    {% style %}
+        404.css
+    {% endstyle %}
 {% endblock %}
 
 {% block content %}

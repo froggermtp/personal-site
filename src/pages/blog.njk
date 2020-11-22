@@ -14,13 +14,9 @@ pagination:
 {% block head %}
   {{ super() }}
 
-  {% set css %}
-      {% include "blog.css" %}
-  {% endset %}
-
-  <style>
-      {{ css | cssmin | safe }}
-  </style>
+  {% style %}
+    blog.css
+  {% endstyle %}
 {% endblock %}
 
 {% block content %}

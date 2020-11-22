@@ -15,10 +15,3 @@
         </div>
     </div>
 </nav>
-{% set js %}
-    {% include "nav.js" %}
-{% endset %}
-
-<script>
-    {{ js | jsmin | safe }}
-</script>

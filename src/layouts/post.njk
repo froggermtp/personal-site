@@ -10,13 +10,13 @@
     <meta name="twitter:description" content="{{ description }}" />
     <meta name="twitter:image" content="{{ mainImage }}" />
 
-    {% set css %}
-        {% include "post.css" %}
-    {% endset %}
+    {% style %}
+        post.css
+    {% endstyle %}
 
-    <style>
-        {{ css | cssmin | safe }}
-    </style>
+    {% script { defer: true } %}
+        share.js
+    {% endscript %}
 {% endblock %}
 
 {% block content %}
@@ -51,11 +51,4 @@
         </div>
     {% endif %}
     </nav>
-    {% set js %}
-        {% include "share.js" %}
-    {% endset %}
-
-    <script>
-        {{ js | jsmin | safe }}
-    </script>
 {% endblock %}

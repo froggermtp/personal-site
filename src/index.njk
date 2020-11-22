@@ -9,14 +9,10 @@ changeFreq: weekly
 {% block head %}
     {{ super() }}
 
-    {% set css %}
-        {% include "index.css" %}
-        {% include "most-recent-post.css" %}
-    {% endset %}
-
-    <style>
-        {{ css | cssmin | safe }}
-    </style>
+    {% style %}
+        index.css
+        most-recent-post.css
+    {% endstyle %}
 {% endblock %}
 
 {% block content %}

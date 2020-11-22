@@ -9,19 +9,12 @@ changeFreq: monthly
 {% block head %}
     {{ super() }}
 
-    {% set css %}
-        {% include "about-me.css" %}
-    {% endset %}
-
-    <style>
-        {{ css | cssmin | safe }}
-    </style>
+    {% style %}
+        about-me.css
+    {% endstyle %}
 {% endblock %}
 
 {% block content %}
-    {# <div class="wrapper">
-        <img class="wrapper__image" src="/assets/images/matthew-parris-by-tree.jpg" alt="Matthew with hand on chin next to a swaying tree"/>
-    </div> #}
     {% wrappedImage "/matthew-parris-by-tree.jpg" %}
         Matthew with hand on chin next to a swaying tree
     {% endwrappedImage %}

@@ -13,15 +13,16 @@
     <link rel="canonical" href="{{ site.url }}{{ page.url | url }}">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
 
-    {% set css %}
-        {% include "normalize.css" %}
-        {% include "main.css" %}
-        {% include "typeset.css" %}
-    {% endset %}
+    {% style %}
+        normalize.css
+        main.css
+        typeset.css
+    {% endstyle %}
 
-    <style>
-        {{ css | cssmin | safe }}
-    </style>
+    {% script { defer: true } %}
+        nav.js
+        footer.js
+    {% endscript %}
 
     <link href="https://fonts.googleapis.com/css?family=Oxygen|Source+Sans+Pro&display=swap" rel="stylesheet">
 

@@ -4,10 +4,12 @@
   "description": "Matthew Parris's personal website",
   "scripts": {
     "start": "npm run dev",
-    "dev": "run-s clean eleventy:dev --print-label",
-    "build": "run-s clean eleventy:prod --print-label",
+    "dev": "npm run clean && run-p gulp:watch eleventy:dev --print-label",
+    "build": "npm run clean && run-p gulp:build eleventy:prod --print-label",
     "eleventy:dev": "cross-env ELEVENTY_ENV=development eleventy --serve",
     "eleventy:prod": "cross-env ELEVENTY_ENV=production eleventy",
+    "gulp:build": "gulp build",
+    "gulp:watch": "gulp watch",
     "clean": "del-cli dist",
     "benchmark": "cross-env DEBUG=Eleventy:Benchmark* npm run build",
     "debug": "cross-env DEBUG=Eleventy* & eleventy --dryrun"
@@ -21,18 +23,22 @@
   "dependencies": {
     "@11ty/eleventy": "^0.11.0",
     "@11ty/eleventy-plugin-rss": "^1.0.9",
-    "clean-css": "^4.2.3",
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
     "cross-env": "^7.0.2",
     "del-cli": "^3.0.1",
     "eleventy-plugin-lazyimages": "^2.0.1",
     "eleventy-plugin-typeset": "github:liamfiddler/eleventy-plugin-typeset",
     "eleventy-plugin-youtube-embed": "github:froggermtp/eleventy-plugin-youtube-embed",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-terser": "^1.4.1",
     "markdown-it-footnote": "^3.0.2",
     "moment": "^2.29.1",
     "npm-run-all": "^4.1.5",
     "nunjucks": "^3.2.2",
-    "outdent": "^0.7.1",
-    "terser": "^4.8.0"
+    "outdent": "^0.7.1"
   },
   "devDependencies": {}
 }

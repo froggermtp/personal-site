@@ -15,10 +15,3 @@
         </div>
     <div id="copyright">Copyright &copy 2020 Matthew Parris</div>
 </footer>
-{% set js %}
-    {% include "footer.js" %}
-{% endset %}
-
-<script>
-    {{ js | jsmin | safe }}
-</script>

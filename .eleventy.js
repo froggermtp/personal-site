@@ -12,8 +12,6 @@ module.exports = function (config) {
     const loaders = new nunjucks.FileSystemLoader([
         'src/layouts',
         'src/includes',
-        'src/assets/styles',
-        'src/assets/scripts',
     ]);
     const nunjucksEnvironment = new nunjucks.Environment(loaders, { noCache: true });
     config.setLibrary("njk", nunjucksEnvironment);
@@ -48,9 +46,6 @@ module.exports = function (config) {
 
     // Pass-through files
     config.addPassthroughCopy('src/assets/images');
-
-    // Additional watch targets
-    config.addWatchTarget('./src/assets/');
 
     // Collections
     config.addCollection('postInfo', function (collection) {
