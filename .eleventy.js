@@ -44,6 +44,8 @@ module.exports = function (config) {
             .use(markdownItFootnote)
     );
 
+    config.setDataDeepMerge(true);
+
     // Pass-through files
     config.addPassthroughCopy('src/assets/images');
 

@@ -3,17 +3,12 @@ permalink: 404.html
 title: Oops! Not Found
 description: The page you are looking for is unavailable
 changeFreq: yearly
+assets:
+    styles:
+        - 404.css
 ---
 
 {% extends "main.njk" %}
-
-{% block head %}
-    {{ super() }}
-
-    {% style %}
-        404.css
-    {% endstyle %}
-{% endblock %}
 
 {% block content %}
     <h1>{{ title }}</h1>

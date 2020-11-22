@@ -1,0 +1,11 @@
+{
+    "scripts": [
+        "nav.js",
+        "footer.js"
+    ],
+    "styles": [
+        "normalize.css",
+        "main.css",
+        "typeset.css"
+    ]
+}

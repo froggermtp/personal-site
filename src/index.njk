@@ -2,18 +2,13 @@
 title: Home
 description: Homepage for Matthew Parris's personal website
 changeFreq: weekly
+assets:
+    styles:
+        - index.css
+        - most-recent-post.css
 ---
 
 {% extends "main.njk" %}
-
-{% block head %}
-    {{ super() }}
-
-    {% style %}
-        index.css
-        most-recent-post.css
-    {% endstyle %}
-{% endblock %}
 
 {% block content %}
     <section id="introduction-section">

@@ -2,17 +2,12 @@
 title: About Me
 description: I'm Matthew Parris • Christian • Software Developer
 changeFreq: monthly
+assets:
+    styles:
+        - about-me.css
 ---
 
 {% extends "main.njk" %}
-
-{% block head %}
-    {{ super() }}
-
-    {% style %}
-        about-me.css
-    {% endstyle %}
-{% endblock %}
 
 {% block content %}
     {% wrappedImage "/matthew-parris-by-tree.jpg" %}

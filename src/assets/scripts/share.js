@@ -1,17 +1,16 @@
-var matthewShare = (function (window, document) {
-    'use strict';
-
-    function attemptToAddShareButton() {
+(function (document, navigator) {
+    function ready() {
         if (!navigator.share) {
             return;
         }
 
-        const containerEl = document.querySelector(".js-share");
-        const html = `
-            <a href="javascript:matthewShare.doSharing()" class="link link--share">Share</a>
-        `;
+        const linkEl = document.createElement('a');
+        linkEl.innerHTML = 'Share';
+        linkEl.classList.add('link', 'link--share');
+        linkEl.addEventListener('click', doSharing);
 
-        containerEl.insertAdjacentHTML("beforeend", html);
+        const containerEl = document.querySelector(".js-share");
+        containerEl.appendChild(linkEl);
     }
 
     function doSharing() {
@@ -22,10 +21,9 @@ var matthewShare = (function (window, document) {
         });
     }
 
-    return {
-        attemptToAddShareButton,
-        doSharing
+    if (document.readyState === 'complete') {
+        ready();
+    } else {
+        document.addEventListener('DOMContentLoaded', ready);
     }
-})(window, document);
-
-matthewShare.attemptToAddShareButton();
+})(document, navigator);

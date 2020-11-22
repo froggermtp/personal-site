@@ -1,3 +1,11 @@
+---
+assets:
+    styles:
+        - post.css
+    scripts:
+        - share.js
+        - consoleCopy.js
+---
 {% extends "main.njk" %}
 
 {% block head %}
@@ -9,14 +17,6 @@
     <meta name="twitter:title" content="{{ title }}" />
     <meta name="twitter:description" content="{{ description }}" />
     <meta name="twitter:image" content="{{ mainImage }}" />
-
-    {% style %}
-        post.css
-    {% endstyle %}
-
-    {% script { defer: true } %}
-        share.js
-    {% endscript %}
 {% endblock %}
 
 {% block content %}
