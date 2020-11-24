@@ -2,8 +2,11 @@
 title: The Share API
 date: 2020-11-04
 description: An introduction to the Share API
-mainImage: /img/forest-landscape.jpg
+mainImage: /forest-landscape.jpg
 mainImageAltText: A beautiful forest
+assets:
+    scripts:
+        - shareApiPost.js
 ---
 
 As an introvert, I don't really want people to see my website, so I put in a share button.
@@ -17,7 +20,7 @@ For real though, we have become acclimated to those colorful social media share 
 Luckily, the Internet gods have tried to help us from slapping gaudy buttons into the DOM. We now have the Share API. Introduced in 2017, the Share API allows the browser to tap into your device's native share behavior.
 
 <img 
-    src="/img/share-api-dialog.jpg" 
+    src="/assets/images/share-api-dialog.jpg" 
     alt="The Share API dialog on an Android phone"
     style="max-width: 200px; transform: rotate(-45deg)"
 />
@@ -43,40 +46,6 @@ For this example, we'll literally only need a single function: navigator.share.
 I do a quick check to see if the function exists. Browsers that don't support the share API won't have it, and our fallback can kick in. And I'm just passing the API some generic information about this webpage. [You can read more about how to format the parameter here](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/share)--but it's not much more complicated then what I show above.
 
 Behold! A share button:
-
-<script>
-(function () {
-    function ready() {
-        const button = document.querySelector('.js-tutorial-share');
-        const title = document.querySelector('title').textContent;
-        const text = document.querySelector('meta[name="description"]').getAttribute('content');
-        const url = document.querySelector('link[rel="canonical"]').getAttribute('href');
-        let timer = null;
-
-        function doShare() {
-            if (navigator.share) {
-                navigator.share({ title, text, url });
-            } else {
-                button.innerHTML = 'No Share API available ☹️';
-
-                if (timer) {
-                    clearTimeout(timer);
-                }
-
-                timer = setTimeout(() => button.innerHTML = 'Share!!!', 2000);
-            }
-        }
-
-        button.addEventListener('click', doShare);
-    }
-
-    if (document.readyState === 'complete') {
-        ready();
-    } else {
-        document.addEventListener('DOMContentLoaded', ready);
-    }
-})();
-</script>
 
 <button class="js-tutorial-share" style="background-color: black; border: none; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px;">Share!!!</button>
 
