@@ -1,4 +1,5 @@
 ---
+layout: main.njk
 title: About Me
 description: I'm Matthew Parris • Christian • Software Developer
 changeFreq: monthly
@@ -6,14 +7,9 @@ assets:
     styles:
         - about-me.css
 ---
-
-{% extends "main.njk" %}
-
-{% block content %}
-    {% wrappedImage "/matthew-parris-by-tree.jpg" %}
-        Matthew with hand on chin next to a swaying tree
-    {% endwrappedImage %}
-    <article class=".article">
-        {{ content | safe }}
-    <article>
-{% endblock %}
+{% wrappedImage "/matthew-parris-by-tree.jpg" %}
+    Matthew with hand on chin next to a swaying tree
+{% endwrappedImage %}
+<article class=".article">
+    {{ content | safe }}
+<article>

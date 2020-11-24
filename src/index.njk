@@ -1,4 +1,5 @@
 ---
+layout: main.njk
 title: Home
 description: Homepage for Matthew Parris's personal website
 changeFreq: weekly
@@ -7,34 +8,29 @@ assets:
         - index.css
         - most-recent-post.css
 ---
-
-{% extends "main.njk" %}
-
-{% block content %}
-    <section id="introduction-section">
-        <header class="left">
-            <div id="header-content">
-                <img src="/assets/images/header-avatar.jpg" id="header-avatar" alt="A not so professional headshot of Matthew">
-            </div>
-        </header>
-        <div class="right">
-            <h2>Hi, I'm Matthew</h2>
-
-            <p>
-                I've just recently graduated from the University of Tulsa with a degree in computer science.
-                Right now, I am stuck at my house due to coronavirus.
-            </p>
-
-            <p>On here, I am writing about topics tangent to the important stuff.</p>
-        </div>   
-    </section>
-
-    <section>
-        <div class="left">
-            <h2>Blog</h2>
+<section id="introduction-section">
+    <header class="left">
+        <div id="header-content">
+            <img src="/assets/images/header-avatar.jpg" id="header-avatar" alt="A not so professional headshot of Matthew">
         </div>
-        <div class="right">
-            {% include "mostRecentPost.njk" %}
-        </div>
-    </section>
-{% endblock %}
+    </header>
+    <div class="right">
+        <h2>Hi, I'm Matthew</h2>
+
+        <p>
+            I've just recently graduated from the University of Tulsa with a degree in computer science.
+            Right now, I am stuck at my house due to coronavirus.
+        </p>
+
+        <p>On here, I am writing about topics tangent to the important stuff.</p>
+    </div>   
+</section>
+
+<section>
+    <div class="left">
+        <h2>Blog</h2>
+    </div>
+    <div class="right">
+        {% include "mostRecentPost.njk" %}
+    </div>
+</section>

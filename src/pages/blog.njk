@@ -1,4 +1,5 @@
 ---
+layout: main.njk
 permalink: /blog/{% if pagination.pageNumber > 0 %}{{ pagination.pageNumber }}/{% endif %}
 title: Blog
 pagination:
@@ -6,20 +7,12 @@ pagination:
     size: 6
     reverse: true
     alias: posts
+assets:
+  styles:
+    - blog.css
 ---
-
-{% extends "main.njk" %}
 {% from "postListing.njk" import postListing %}
 
-{% block head %}
-  {{ super() }}
-
-  {% style %}
-    blog.css
-  {% endstyle %}
-{% endblock %}
-
-{% block content %}
 <header id="blog-page-header">
   <h1>Blog</h1>
 </header>
@@ -38,4 +31,3 @@ pagination:
   <a href="{{ pagination.nextPageHref }}" class="old">Older posts</a>
 {% endif %}
 </nav>
-{% endblock %}
