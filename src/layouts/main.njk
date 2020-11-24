@@ -1,47 +1,29 @@
 <!doctype html>
 
 <html lang="en">
-
-<head>
+    <head>
     {% block head %}
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% include "metadata.njk" %}
 
-    <title>{{ title if title else site.title }} | Matthew Parris</title>
-    <meta name="description" content="{{ description if description else site.description }}">
-    <meta name="author" content="Matthew Parris">
-    <link rel="canonical" href="{{ site.url }}{{ page.url | url }}">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
+        {% style %}
+            {% for style in assets.styles %}
+                {{ style }}
+            {% endfor %}
+        {% endstyle %}
 
-    {% style %}
-        {% for style in assets.styles %}
-            {{ style }}
-        {% endfor %}
-    {% endstyle %}
-
-    {% script { defer: true } %}
-        {% for script in assets.scripts %}
-            {{ script }}
-        {% endfor %}
-    {% endscript %}
-
-    <link href="https://fonts.googleapis.com/css?family=Oxygen|Source+Sans+Pro&display=swap" rel="stylesheet">
-
-    {% if useMathJax %}
-        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    {% endif %}
+        {% script { defer: true } %}
+            {% for script in assets.scripts %}
+                {{ script }}
+            {% endfor %}
+        {% endscript %}
     {% endblock %}
-</head>
-
-<body>
-    <div id="main-container">
-        {% include "nav.njk" %}
-        {% block content %}
-
-        {% endblock %}
-    </div>
-    {% include "footer.njk" %}
-</body>
-
+    </head>
+    
+    <body>
+        <div id="main-container">
+            {% include "nav.njk" %}
+            {{ content | safe }}
+        </div>
+        {% include "footer.njk" %}
+    </body>
 </html>
