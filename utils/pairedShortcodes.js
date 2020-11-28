@@ -1,4 +1,5 @@
 const outdent = require('outdent');
+const hash = require('../src/data/hash.json');
 
 module.exports = {
     image: function (content, href, options = {}) {
@@ -33,11 +34,18 @@ module.exports = {
             .map(line => line.replace(/[\s\n\r]+/g, ''))
             .filter(line => regex.test(line));
         return srcs.reduce((total, currentValue) => {
+            let queryStr = null;
+            if (hash[currentValue]) {
+                queryStr = `?_=${hash[currentValue]}`;
+            } else {
+                throw Error(`Hash for JavaScript ${currentValue} not found!`);
+            }
+
             return total += outdent`
             <script
                 ${options.async ? 'async ' : ''}
                 ${options.defer ? 'defer ' : ''}
-                src="${pathPrefix}${currentValue}"
+                src="${pathPrefix}${currentValue}${queryStr}"
             ></script>
             `;
         }, '');
@@ -51,10 +59,17 @@ module.exports = {
             .map(line => line.replace(/[\s\n\r]+/g, ''))
             .filter(line => regex.test(line));
         return srcs.reduce((total, currentValue) => {
+            let queryStr = null;
+            if (hash[currentValue]) {
+                queryStr = `?_=${hash[currentValue]}`;
+            } else {
+                throw Error(`Hash for CSS ${currentValue} not found!`);
+            }
+
             return total += outdent`
             <link
                 rel="stylesheet"
-                href="${pathPrefix}${currentValue}"
+                href="${pathPrefix}${currentValue}${queryStr}"
                 media="${options.media ? options.media : 'screen'}"
             ></link>
             `;
