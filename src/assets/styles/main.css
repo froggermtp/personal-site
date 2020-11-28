@@ -1,3 +1,12 @@
+@font-face {
+    font-family: 'Oxygen';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('../fonts/oxygen-v10-latin-regular.eot');
+    src: url('../fonts/oxygen-v10-latin-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/oxygen-v10-latin-regular.woff2') format('woff2'), url('../fonts/oxygen-v10-latin-regular.woff') format('woff'), url('../fonts/oxygen-v10-latin-regular.ttf') format('truetype'), url('../fonts/oxygen-v10-latin-regular.svg#Oxygen') format('svg');
+}
+
 :root {
     --space-sm: .25rem;
     --space-med: .5rem;
@@ -34,14 +43,6 @@ img {
 
 section {
     margin-bottom: var(--space-lg);
-}
-
-.bowlby {
-    font-family: 'Bowlby One SC', cursive;
-}
-
-.sourceSansPro {
-    font-family: 'Source Sans Pro', sans-serif;
 }
 
 /* Main navigation */

@@ -166,7 +166,6 @@ header {
 
 header h1 {
     margin-bottom: var(--space-lg);
-    font-family: 'Source Sans Pro', sans-serif;
     font-size: 1.5em;
 }
 
