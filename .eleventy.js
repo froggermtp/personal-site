@@ -21,7 +21,7 @@ module.exports = function (config) {
     config.addPlugin(pluginYoutube, { only: '.articleContent' });
     config.addPlugin(pluginRSS);
     config.addPlugin(pluginTypeset({ only: '.articleContent p' }));
-    config.addPlugin(pluginLazyImages);
+    config.addPlugin(pluginLazyImages, { preferNativeLazyLoad: true });
 
     // Filters
     const filters = require('./utils/filters.js')(nunjucksEnvironment);
