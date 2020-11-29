@@ -23,6 +23,7 @@
   "dependencies": {
     "@11ty/eleventy": "^0.11.0",
     "@11ty/eleventy-plugin-rss": "^1.0.9",
+    "@area403/markdown-it-mathjax": "^1.0.0",
     "@babel/core": "^7.12.3",
     "@babel/preset-env": "^7.12.1",
     "cross-env": "^7.0.2",

@@ -4,7 +4,6 @@ date: 2020-06-27
 description: 4 high-level tips to help beginner programmers, based on my college and internship coding experiences
 mainImage: /wisdom-of-the-universe.jpg
 mainImageAltText: A painting representing the wisdom of the universe via a flowering tree and a dove
-useMathJax: True
 ---
 For this post, I am assuming you already have some programming skills, but feel stuck. There is a lot of stuff you could potentially learn. Yet, this diversity of options makes decision making difficult. What will give you the best bang for your buck, so to speak? Well, I am going to try giving some advice here. Some of this advice will be obvious, but sometimes we need to repeatedly hear common sense truths for them to sink into our psyche. Thus, programmers with years of experience may not find much value in this post, but my early college self would have eagerly absorbed the knowledge--maybe you'll find the tips useful too.
 
@@ -18,7 +17,7 @@ Data structures are necessary to code much of anything--but it may be worth revi
 
 Of course, once you know a bunch of data structures, you need to make use of them. Thus, let's bring on the algorithms. While investing time learning and implementing new algorithms is worth it, I would encourage you to learn [algorithmic patterns](https://cs.lmu.edu/~ray/notes/algpatterns/). Some of the new problems you run into will look like problems you've already seen. Be smart and leverage that knowledge instead of reinventing the wheel.
 
-In addition, you should already be familiar with measuring the runtime and space complexity of an algorithm using [asymptotic analysis](http://www.cs.cornell.edu/courses/cs312/2004fa/lectures/lecture16.htm). Asymptotic analysis gives a machine-independent way of measuring performance. It's useful to say that mergesort has an \\(O(n \log n)\\) worse case running time, which is superior to bubble sort's \\(O(n^2)\\) worse case running time. If this notation looks like hieroglyphics to you, consider brushing up on this topic.
+In addition, you should already be familiar with measuring the runtime and space complexity of an algorithm using [asymptotic analysis](http://www.cs.cornell.edu/courses/cs312/2004fa/lectures/lecture16.htm). Asymptotic analysis gives a machine-independent way of measuring performance. It's useful to say that mergesort has an O(n log(n)) worse case running time, which is superior to bubble sort's O(n<sup>2</sup>) worse case running time. If this notation looks like hieroglyphics to you, consider brushing up on this topic.
 
 I would also recommend people get comfortable using [recursion](https://www.cs.cmu.edu/~adamchik/15-121/lectures/Recursions/recursions.html). Yes, it's not always useful and can sometimes make the code more convoluted. It can also have the opposite effect. Look at the recursive algorithm to solve the [Tower of Hanoi game](https://en.wikipedia.org/wiki/Tower_of_Hanoi#Iterative_solution)--and then compare it to the iterative version. There are just some problems in the world that lend themselves to recursive solutions. Plus, it will help expand your mind. Challenging yourself is worth it in the long run.
 

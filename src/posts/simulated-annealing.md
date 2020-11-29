@@ -4,7 +4,6 @@ date: 2020-06-05
 description: Simulated annealing tutorial, with a code example written in R
 mainImage: /sheet-metal.jpg
 mainImageAltText: Sheet metal texture
-useMathJax: True
 ---
 
 Sometimes, a problem doesn't have a known, efficient, deterministic algorithm. This hiccup isn't necessarily a big deal because often we only care about getting an answer that is close enough. One algorithm that can give approximate values for hard to solve problems is simulated annealing. Before jumping into the R code, let's look at a motivating example.

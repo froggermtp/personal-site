@@ -4,6 +4,7 @@ const pluginTypeset = require("eleventy-plugin-typeset");
 const pluginLazyImages = require("eleventy-plugin-lazyimages");
 const markdownIt = require("markdown-it");
 const markdownItFootnote = require("markdown-it-footnote");
+const markdownItMathjax = require('@area403/markdown-it-mathjax');
 const nunjucks = require('nunjucks');
 const pairedShortcodes = require("./utils/pairedShortcodes.js");
 
@@ -42,6 +43,7 @@ module.exports = function (config) {
         })
             .disable('code')
             .use(markdownItFootnote)
+            .use(markdownItMathjax)
     );
 
     config.setDataDeepMerge(true);

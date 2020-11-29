@@ -157,6 +157,17 @@ article {
     margin-right: 0;
 }
 
+.articleContent mjx-container {
+    display: flex;
+    max-height: 40px;
+}
+
+.articleContent mjx-container svg {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+}
+
 header {
     margin-top: var(--space-xl);
     margin-bottom: var(--space-lg);
