@@ -2,7 +2,8 @@
 title: Hello World
 date: 2020-05-29
 description: Learn why I am blogging and how I built the blog
-mainImage: /pale-blue-dot.jpg
+mainImage: pale-blue-dot.jpg
+smallImage: pale-blue-dot-small.jpg
 mainImageAltText: The Earth in a sunbeam
 ---
 

@@ -2,7 +2,8 @@
 title: State Space Algorithm
 date: 2020-06-19
 description: A tutorial over the state space algorithm, with code written using Racket.
-mainImage: /spiral-galaxy.jpg
+mainImage: spiral-galaxy.jpg
+smallImage: spiral-galaxy-small.jpg
 mainImageAltText: NASA's Hubble space telescope image of NGC 1672 which is a barred spiral galaxy located in the constellation Dorado
 ---
 Recently, I implemented the state space algorithm in [Racket](https://racket-lang.org/). It's a simple algorithm that can find a goal state in n-dimensional [Euclidean space](https://en.wikipedia.org/wiki/Euclidean_space). All one needs is a computable function, a starting domain, and a goal value.

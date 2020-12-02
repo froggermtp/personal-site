@@ -2,7 +2,8 @@
 title: Simulated Annealing
 date: 2020-06-05
 description: Simulated annealing tutorial, with a code example written in R
-mainImage: /sheet-metal.jpg
+mainImage: sheet-metal.jpg
+smallImage: sheet-metal-small.jpg
 mainImageAltText: Sheet metal texture
 ---
 

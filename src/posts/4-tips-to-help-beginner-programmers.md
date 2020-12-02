@@ -2,7 +2,8 @@
 title: 4 Tips to Help Beginner Programmers
 date: 2020-06-27
 description: 4 high-level tips to help beginner programmers, based on my college and internship coding experiences
-mainImage: /wisdom-of-the-universe.jpg
+mainImage: wisdom-of-the-universe.jpg
+smallImage: wisdom-of-the-universe-small.jpg
 mainImageAltText: A painting representing the wisdom of the universe via a flowering tree and a dove
 ---
 For this post, I am assuming you already have some programming skills, but feel stuck. There is a lot of stuff you could potentially learn. Yet, this diversity of options makes decision making difficult. What will give you the best bang for your buck, so to speak? Well, I am going to try giving some advice here. Some of this advice will be obvious, but sometimes we need to repeatedly hear common sense truths for them to sink into our psyche. Thus, programmers with years of experience may not find much value in this post, but my early college self would have eagerly absorbed the knowledge--maybe you'll find the tips useful too.

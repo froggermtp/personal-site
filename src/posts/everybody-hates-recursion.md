@@ -2,7 +2,8 @@
 title: Everybody Hates Recursion
 date: 2020-07-11
 description: A tutorial covering recursion and tail call optimization, with code examples written in PHP
-mainImage: /recursive-hand-painting.jpg
+mainImage: recursive-hand-painting.jpg
+smallImage: recursive-hand-painting-small.jpg
 mainImageAltText: A painting showing hands painting other hands
 ---
 Everybody hates recursion. Well, maybe I'm exaggerating but the technique is often dismissed as useless and complicated. You may be thinking: "I'll just keep my loops please." And there's nothing wrong with that. In many situations, loops or higher-order functions are the natural solution. Not to mention, some languages have poor support for recursion—but I'll dive into that part later.

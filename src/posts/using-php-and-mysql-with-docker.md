@@ -2,7 +2,8 @@
 title: Using PHP and MySQL with Docker
 date: 2020-09-26
 description: A tutorial on using Docker containers with PHP and MySQL
-mainImage: /whale.jpg
+mainImage: whale.jpg
+smallImage: whale-small.jpg
 mainImageAltText: A whale jumping out of the water
 ---
 Recently, I’ve been doing some work with containers. For the uninitiated, a container is like a virtual machine because your application is run in an isolated, consistent environment. Yet, this environment is more lightweight than a virtual machine. It utilizes the underlying operating system rather than running an entire operating system for each application. Thus, containers are cheap-ish to spin up and easy to share.

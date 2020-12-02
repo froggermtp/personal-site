@@ -2,7 +2,8 @@
 title: The Tower of Hanoi
 date: 2020-07-19
 description: A tutorial explaining the Tower of Hanoi puzzle, with a code solution written in Racket.
-mainImage: /tower-of-hanoi.jpg
+mainImage: tower-of-hanoi.jpg
+smallImage: tower-of-hanoi-small.jpg
 mainImageAltText: A wooden version of the Tower of Hanoi
 ---
 

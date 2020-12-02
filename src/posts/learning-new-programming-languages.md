@@ -2,7 +2,8 @@
 title: Learning New Programming Languages
 date: 2020-08-12
 description: Some tips for learning new programming languages
-mainImage: /algol-60.jpg
+mainImage: algol-60.jpg
+smallImage: algol-60-small.jpg
 mainImageAltText: Some Algol 60 code
 ---
 

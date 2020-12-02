@@ -10,9 +10,12 @@ assets:
 <article>
     <header>
         <div id="mainImage">
-            {% image mainImage %}
-                {{ mainImageAltText }}
-            {% endimage %}
+            <picture>
+                {% if smallImage %}
+                <source media="(max-width: 420px)" srcset="/assets/images/{{ smallImage }}" type="image/jpeg">
+                {% endif %}
+                <img class="img" src="/assets/images/{{ mainImage }}" alt="{{ mainImageAltText }}">
+            </picture>
         </div>
         <h1 id="title">{{ title | safe }}</h1>
         <div class="metadata box box--start box--vertical-center js-share">
