@@ -57,6 +57,7 @@ function hashAssets(cb) {
         src([
             'src/assets/scripts/*.js',
             'src/assets/styles/*.css',
+            'src/assets/images/*'
         ])
             .pipe(hash())
             .pipe(toJson())

@@ -21,7 +21,7 @@ For real though, we have become acclimated to those colorful social media share 
 Luckily, the Internet gods have tried to help us from slapping gaudy buttons into the DOM. We now have the Share API. Introduced in 2017, the Share API allows the browser to tap into your device's native share behavior.
 
 <img 
-    src="/assets/images/share-api-dialog.jpg" 
+    src="{{ "share-api-dialog.jpg" | imagePath }}
     alt="The Share API dialog on an Android phone"
     style="max-width: 200px; transform: rotate(-45deg)"
 />

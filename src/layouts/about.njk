@@ -7,9 +7,13 @@ assets:
     styles:
         - about-me.css
 ---
-{% wrappedImage "/matthew-parris-by-tree.jpg" %}
-    Matthew with hand on chin next to a swaying tree
-{% endwrappedImage %}
+<div class="wrapper">
+    <img 
+        class="img wrapper__image"
+        src="{{ "matthew-parris-by-tree.jpg" | imagePath }}"
+        alt="Matthew with hand on chin next to a swaying tree"
+    />
+</div>
 <article class=".article">
     {{ content | safe }}
 <article>

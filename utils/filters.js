@@ -1,9 +1,35 @@
 const moment = require('moment');
-
-const shouldTransformHTML = process.env.ELEVENTY_ENV === 'production';
+const hash = require('../src/data/hash.json');
 
 module.exports = function (nunjucksEnv) {
     const filters = {
+        scriptPath: function (filename) {
+            if (!hash[filename]) {
+                throw Error(`Hash for JavaScript ${filename} not found!`);
+            }
+
+            const basepath = '/assets/scripts/';
+            return `${basepath}${filename}?_=${hash[filename]}`;
+        },
+
+        stylePath: function (filename) {
+            if (!hash[filename]) {
+                throw Error(`Hash for CSS ${filename} not found!`);
+            }
+
+            const basepath = '/assets/styles/';
+            return `${basepath}${filename}?_=${hash[filename]}`;
+        },
+
+        imagePath: function (filename) {
+            if (!hash[filename]) {
+                throw Error(`Hash for image ${filename} not found!`);
+            }
+
+            const basepath = '/assets/images/';
+            return `${basepath}${filename}?_=${hash[filename]}`;
+        },
+
         date: function (date, format) {
             return moment.utc(date).format(format);
         },

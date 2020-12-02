@@ -19,7 +19,7 @@ Given the paragraph above, I am going to emphasize that recursion isn't a superf
 
 For those unfamiliar with the puzzle, I'll quickly explain the rules. There is a board with three poles and an arrangement of disks. The disks are each of a different size, and initially, they are arranged in a cone shape on a single pole. The goal is to move all the disks--one at a time--to another a pole, once again forming the cone shape. Also, a larger disk cannot be stacked on top of a smaller disk at any time.
 
-![Initial state for the Tower of Hanoi Puzzle](/assets/images/tower-of-hanoi-init.jpg)
+![Initial state for the Tower of Hanoi Puzzle]({{ "tower-of-hanoi-init.jpg" | imagePath }})
 
 ## Recursive Solution
 
@@ -35,7 +35,7 @@ Now, in general, once the largest disk of a subpuzzle has moved been moved the t
 
 In summary, we are repeatedly moving the large disk of a subpuzzle after the smaller disks above have been moved to the auxiliary pole. The key is to correctly track which poles should be the target and the auxiliary as the algorithm twists through the self calls. Assuming we do this correctly, the puzzle will be solved by solving all the subpuzzles in turn.
 
-![An animation showing a solution to the three disk version of the Tower of Hanoi puzzle](/assets/images/tower-of-hanoi-solution.gif)
+![An animation showing a solution to the three disk version of the Tower of Hanoi puzzle]({{ "tower-of-hanoi-solution.gif" | imagePath }})
 
 ## Some Code
 

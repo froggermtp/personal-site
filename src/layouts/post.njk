@@ -12,9 +12,9 @@ assets:
         <div id="mainImage">
             <picture>
                 {% if smallImage %}
-                <source media="(max-width: 420px)" srcset="/assets/images/{{ smallImage }}" type="image/jpeg">
+                <source media="(max-width: 420px)" srcset="{{ smallImage | imagePath }}" type="image/jpeg">
                 {% endif %}
-                <img class="img" src="/assets/images/{{ mainImage }}" alt="{{ mainImageAltText }}">
+                <img class="img" src="{{ mainImage | imagePath }}" alt="{{ mainImageAltText }}">
             </picture>
         </div>
         <h1 id="title">{{ title | safe }}</h1>

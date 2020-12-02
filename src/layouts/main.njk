@@ -5,17 +5,21 @@
     {% block head %}
         {% include "metadata.njk" %}
 
-        {% style %}
-            {% for style in assets.styles %}
-                {{ style }}
-            {% endfor %}
-        {% endstyle %}
+        {% for style in assets.styles %}
+            <link
+                rel="stylesheet"
+                href="{{ style | stylePath }}"
+                media="all"
+            ></link>
+        {% endfor %}
 
-        {% script { defer: true } %}
-            {% for script in assets.scripts %}
-                {{ script }}
-            {% endfor %}
-        {% endscript %}
+        {% for script in assets.scripts %}
+            <script 
+                defer
+                src="{{ script | scriptPath }}"
+            >
+            </script>
+        {% endfor %}
     {% endblock %}
     </head>
     

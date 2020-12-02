@@ -42,7 +42,7 @@ To convert our factorial function to be tail recursive, a few changes have to be
 
 So what makes tail recursive functions noteworthy? After all, like all functions, they must be allocated on the call stack.^[Ok, so in real life, there are multiple different ways to implement tail call optimization. The programming language isn't necessarily prematurely dropping stack frames. Yet, the ideas I show here give an intuition about why we can even attempt the optimization.] Yet, something special happens when nesting these types of functions: the final nested function call’s return value will be the final answer. To prove I'm not making stuff up, study the following diagram of a call stack for the tail recursive factorial function.
 
-<img src="/assets/images/factorial_tail_call_stack.svg" style="max-width:193px">
+<img src="{{ "factorial_tail_call_stack.svg" | imagePath }}" style="max-width:193px">
 
 From the diagram, it's obvious that the final frame will have a return value of six, the final answer. If we bothered to maintain all the frames and bubble the value back down, then the six would get funneled straight through. Thus, there is no point in keeping the early frames. We can safely discard them.
 
