@@ -6,3 +6,23 @@
 [dev]
   command = "npm run start"
   publish = "dist/"
+
+[[headers]]
+  for = "/assets/scripts/*"
+  [headers.values]
+    cache-control = ```
+    public,
+    max-age=31536000,
+    immutable```
+  for = "/assets/styles/*"
+  [headers.values]
+    cache-control = ```
+    public,
+    max-age=31536000,
+    immutable```
+  for = "/assets/images/*"
+  [headers.values]
+    cache-control = ```
+    public,
+    max-age=31536000,
+    immutable```
