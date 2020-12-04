@@ -8,19 +8,7 @@
   publish = "dist/"
 
 [[headers]]
-  for = "/assets/scripts/*"
-  [headers.values]
-    cache-control = '''
-    public,
-    max-age=31536000,
-    immutable'''
-  for = "/assets/styles/*"
-  [headers.values]
-    cache-control = '''
-    public,
-    max-age=31536000,
-    immutable'''
-  for = "/assets/images/*"
+  for = "/assets/*/*"
   [headers.values]
     cache-control = '''
     public,
