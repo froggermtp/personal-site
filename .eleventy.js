@@ -7,6 +7,7 @@ const markdownItFootnote = require("markdown-it-footnote");
 const markdownItMathjax = require('@area403/markdown-it-mathjax');
 const nunjucks = require('nunjucks');
 const pairedShortcodes = require("./utils/pairedShortcodes.js");
+const transforms = require('./utils/transforms.js');
 
 module.exports = function (config) {
     // Nunjucks
@@ -33,6 +34,11 @@ module.exports = function (config) {
     // Paired Shortcodes
     Object.keys(pairedShortcodes).forEach(pairedShortcodeName => {
         config.addPairedShortcode(pairedShortcodeName, pairedShortcodes[pairedShortcodeName]);
+    });
+
+    // Paired Shortcodes
+    Object.keys(transforms).forEach(transformName => {
+        config.addTransform(transformName, transforms[transformName]);
     });
 
     // Markdown
