@@ -19,7 +19,7 @@
 <meta name="twitter:description" content="{{ _description }}">
 {% if mainImage %}
 {% set mainImageUrl %}
-    {{ site.url }}/assets/images{{ mainImage }}
+    {{ site.url }}{{ mainImage | imagePath }}
 {% endset %}
 <meta property="og:image" content="{{ mainImageUrl }}">
 <meta name="twitter:image" content="{{ mainImageUrl }}">
