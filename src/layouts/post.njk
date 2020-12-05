@@ -14,7 +14,7 @@ assets:
                 {% if smallImage %}
                 <source media="(max-width: 420px)" srcset="{{ smallImage | imagePath }}" type="image/jpeg">
                 {% endif %}
-                <img class="img" src="{{ mainImage | imagePath }}" alt="{{ mainImageAltText }}">
+                <img class="img" src="{{ mainImage | imagePath }}" alt="{{ mainImageAltText }}" width="730" height="645">
             </picture>
         </div>
         <h1 id="title">{{ title | safe }}</h1>
