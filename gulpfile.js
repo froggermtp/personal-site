@@ -48,25 +48,17 @@ function hashAssets(cb) {
         );
     }
 
-    const dest = 'src/data/hash.json';
-    fs.unlink(`${__dirname}/${dest}`, err => {
-        if (err) {
-            console.error(err);
-        }
-
-        src([
-            'src/assets/scripts/*.js',
-            'src/assets/styles/*.css',
-            'src/assets/images/*'
-        ])
-            .pipe(hash())
-            .pipe(toJson())
-            .pipe(fs.createWriteStream(dest));
-        return cb();
-    });
+    return src([
+        'src/assets/scripts/*.js',
+        'src/assets/styles/*.css',
+        'src/assets/images/*'
+    ])
+        .pipe(hash())
+        .pipe(toJson())
+        .pipe(fs.createWriteStream('src/data/hash.json'));
 }
 
-exports.build = parallel(scripts, styles);
+exports.build = parallel(hashAssets, scripts, styles);
 exports.hashAssets = hashAssets;
 exports.watch = function () {
     watch('src/assets/scripts/*.js', { ignoreInitial: false }, scripts);

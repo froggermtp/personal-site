@@ -4,8 +4,8 @@
   "description": "Matthew Parris's personal website",
   "scripts": {
     "start": "npm run dev",
-    "dev": "npm run clean && run-p gulp:watch eleventy:dev --print-label",
-    "build": "npm run clean && run-p gulp:build eleventy:prod --print-label",
+    "dev": "npm-run-all clean --parallel gulp:watch eleventy:dev --print-label",
+    "build": "run-s clean gulp:build eleventy:prod --print-label",
     "eleventy:dev": "cross-env ELEVENTY_ENV=development eleventy --serve",
     "eleventy:prod": "cross-env ELEVENTY_ENV=production eleventy",
     "gulp:build": "gulp build",
