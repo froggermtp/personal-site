@@ -1,7 +1,6 @@
 const pluginYoutube = require("eleventy-plugin-youtube-embed");
 const pluginRSS = require("@11ty/eleventy-plugin-rss");
 const pluginTypeset = require("eleventy-plugin-typeset");
-const pluginLazyImages = require("eleventy-plugin-lazyimages");
 const markdownIt = require("markdown-it");
 const markdownItFootnote = require("markdown-it-footnote");
 const markdownItMathjax = require('@area403/markdown-it-mathjax');
@@ -23,7 +22,6 @@ module.exports = function (config) {
     config.addPlugin(pluginYoutube, { only: '.articleContent' });
     config.addPlugin(pluginRSS);
     config.addPlugin(pluginTypeset({ only: '.articleContent p' }));
-    config.addPlugin(pluginLazyImages, { preferNativeLazyLoad: true });
 
     // Filters
     const filters = require('./utils/filters.js')(nunjucksEnvironment);
