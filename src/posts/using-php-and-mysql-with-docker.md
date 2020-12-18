@@ -22,11 +22,37 @@ To create a new image, we’ll need to create a YAML file, commonly known as a D
 
 Here is the Dockerfile itself.
 
-<script src="https://gist.github.com/froggermtp/161a68d68e10967a4e853edbeb75614e.js"></script>
+```dockerfile
+FROM mysql:8.0
+
+# Set an insecure password
+ENV MYSQL_ROOT_PASSWORD=example
+
+# Copy over our SQL queries
+COPY ./mysql/init.sql /init.sql
+
+# Startup MySQL and run the queries
+CMD ["mysqld", "--init-file=/init.sql"]
+```
 
 And you’ll need the requisite SQL file. I’ve put both of these files in a folder called mysql in our tutorial directory.
 
-<script src="https://gist.github.com/froggermtp/2a5b0999e7170b7fb5cd653168ecb69f.js"></script>
+```sql
+CREATE DATABASE app;
+USE app;
+
+CREATE TABLE message (
+    id INT NOT NULL AUTO_INCREMENT,
+    message VARCHAR(50) NOT NULL,
+    PRIMARY KEY(id)
+);
+
+INSERT INTO message (message)
+VALUES
+    ("Hello World"),
+    ("A second message"),
+    ("J.Cole went double platinum with no features");
+```
 
 ## Some Dockerfile Commands
 
@@ -49,13 +75,70 @@ Cool—we have a database Dockerfile. Let’s do something with it by creating a
 
 The PHP file itself creates an html table displaying the contents of the database table—pretty much in a one-to-one fashion. Most of this file is html. You don’t have to understand all the details of the PHP part, but it’s just querying our database.
 
-<script src="https://gist.github.com/froggermtp/bf8ae58f819368b888091757cdc802ed.js"></script>
+```php
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Docker Tutorial</title>
+    <meta name="description" content="Learn how to use Docker with PHP">
+    <meta name="author" content="Matthew Parris">
+</head>
+
+<body>
+    <h1>Docker Tutorial</h1>
+    <div class=".db-table">
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>Message</th>
+            </tr>
+            <?php
+            $user = 'root';
+            $pass = 'example';
+
+            try {
+                $dbh = new PDO('mysql:host=db;port=3306;dbname=app', $user, $pass);
+                foreach ($dbh->query('SELECT * from message') as $row) {
+                    $html = "<tr><td>${row['id']}</td><td>${row['message']}</td></tr>";
+                    echo $html;
+                }
+                $dbh = null;
+            } catch (PDOException $e) {
+                print "Error!: " . $e->getMessage() . "<br/>";
+                die();
+            }
+            ?>
+        </table>
+    </div>
+</body>
+
+</html>
+```
 
 An interesting thing to point out here is the database container's hostname. It's the same name as the container. Thus, you don't have to figure out what IP the container has been assigned. Some DNS magic is making our lives easier behind the scenes.
 
 Now, let's look at the Docker file. It's similar to the one from earlier—so I'm not going to review the syntax again. [We are going to build from the base image found at this link.](https://hub.docker.com/_/php) One thing to note is that we have to install a PHP extension for PDO to establish a connection to our MySQL database. Luckily, the base PHP image provides some utility scripts to work with these extensions. It's an easy thing to implement but could be easily overlooked.
 
-<script src="https://gist.github.com/froggermtp/da629c016cd8763d1610beb50bc07238.js"></script>
+```dockerfile
+FROM php:7.4-cli
+
+# Move our PHP file into the container
+COPY ./php/index.php /usr/src/app/index.php
+
+# Make things easier if you shell in
+WORKDIR /usr/src/app
+
+# Our PHP will be running on port 8000
+EXPOSE 8000
+
+# Install the PDO MySQL extension so we can database
+RUN docker-php-ext-install pdo_mysql
+
+# Set up a web server
+CMD ["php", "-S", "0.0.0.0:8000"]
+```
 
 To note, I’ve placed both this Dockerfile as well as the PHP file in a folder called php. You'll need to be careful about the directory structure because it will matter for the next step. Things will crash if you screw up 🙃
 
@@ -65,7 +148,26 @@ Phew—we're almost there. We have our images and could imperatively use the Doc
 
 Docker Compose is an abstraction on top of Docker to fire up a set of containers, volumes, networks, and other environment stuff. In other words, it is basically a declarative way of interfacing with Docker. We can create a single YAML file to spin an environment up and down.
 
-<script src="https://gist.github.com/froggermtp/a73cb2e2a189a9b6c0ce574a37fffa63.js"></script>
+```yaml
+version: '3.7'
+services:
+  db:
+    build:
+      context: .
+      dockerfile: ./mysql/Dockerfile.yaml
+    image: tutorial-db
+    restart: always
+    ports:
+      - 3306:3306
+  app:
+    build:
+      context: .
+      dockerfile: ./php/Dockerfile.yaml
+    image: tutorial-php
+    restart: always
+    ports:
+      - 8000:8000
+```
 
 ## Run the Containers
 

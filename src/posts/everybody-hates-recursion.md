@@ -20,7 +20,28 @@ To solve a problem using recursion, it must take on a pattern, which I'll descri
 
 I am going to interrupt our train of thought to inject an example. So, let’s stare at this code representing the [factorial function](https://en.wikipedia.org/wiki/Factorial). For contingency reasons, in case your highschool math teacher failed you, I’ll explain this super quick. Say we want to compute one factorial. Well, that’s just one--and hint, it’s one of the base cases. But what if you want to compute 2 factorial. Then, you simply take 2 * 1. Following the pattern, three factorial is 3 * 2 * 1. Yeah, there's not much to this. The formal definition is that the factorial of a positive integer *n*, denoted by *n!*, is the product of all positive integers less than or equal to *n*. As an aside, we randomly assign that zero factorial is equal to one--this is the other base case. Ok, some code stuff.
 
-<script src="https://gist.github.com/froggermtp/831585008fcef792e71420a8b9345e9b.js"></script>
+```php
+function factorial($n) {
+    if ($n < 0) {
+        throw new Exception("\$n parameter cannot be negative");
+    }
+    else if($n <= 1) {
+        // base cases
+        return 1;
+    }
+    else if($n > 1) {
+        // self call; note how the problem is reduced
+        return $n * factorial($n - 1);
+        // also, the multiplication is the last operation
+        // this is not tail recursive
+    }
+}
+
+assert(factorial(0) === 1);
+assert(factorial(1) === 1);
+assert(factorial(2) === 2);
+assert(factorial(11) === 39916800);
+```
 
 Hopefully, the base case and the self call are obvious. If you're confused about how the code works, I recommend getting out a sheet of paper and tracing out what happens for different inputs. Also, please note that the $n parameter must be greater than zero. Otherwise, everything will break because the factorial sequence is only defined for positive values and zero.
 
@@ -36,7 +57,27 @@ Assuming the language has tail call optimization, a tail recursive function will
 
 To convert our factorial function to be tail recursive, a few changes have to be made. Importantly--and this is worth repeating--the self call has to be the last operation. To pull this off, it turns out an extra parameter has to added to track the accumulated changes to the answer. Let's just look at the code.
 
-<script src="https://gist.github.com/froggermtp/56b8690b39c517ac0fff043a3e996088.js"></script>
+```php
+function factorial_tail($n, $acc=1) {
+    if($n < 0) {
+        throw new Exception("\$n parameter cannot be negative");
+    }
+    else if($n <= 1) {
+        // base cases
+        return $acc;
+    }
+    else if($n > 1) {
+        // self call
+        return factorial_tail($n - 1, $n * $acc);
+        // function call is last operation; tail recursion!
+    }
+}
+      
+assert(factorial_tail(0) === 1);
+assert(factorial_tail(1) === 1);
+assert(factorial_tail(2) === 2);
+assert(factorial_tail(11) === 39916800);
+```
 
 ## Proving the Constant Space Hypothesis
 

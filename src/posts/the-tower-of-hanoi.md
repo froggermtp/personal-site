@@ -41,7 +41,55 @@ In summary, we are repeatedly moving the large disk of a subpuzzle after the sma
 
 Let's stop talking theory and look at some code. Below, I wrote a solution in Racket that allows you to change the number of disks. Since immutable data structures are used, the code is a little different than what you typically find on the Internet; however, the core concepts are still the same. You should be able to map my natural language description to the code. At the very least, note what the base case is and how the problem space is reduced every self call.
 
-<script src="https://gist.github.com/froggermtp/7fd6a4af66ce033db9783d31451b38b8.js"></script>
+```racket
+#lang racket
+
+(struct board (A B C) #:transparent)
+
+(define (new-board size)
+  (board (range 1 (add1 size)) '() '()))
+
+(define (pop stack)
+  (cond
+    [(empty? stack) '()]
+    [else (cdr stack)]))
+
+(define (peak stack)
+  (cond
+    [(empty? stack) '()]
+    [else (list (car stack))]))
+
+(define (move brd pole1 pole2)
+  (define table
+    (hash 'A (board-A brd)
+          'B (board-B brd)
+          'C (board-C brd)))
+  (define (check stack pole)
+    (cond
+      [(eq? pole pole1) (pop stack)]
+      [(eq? pole pole2) (append (peak (hash-ref table pole1)) stack)]
+      [else stack]))
+  (board (check (board-A brd) 'A) (check (board-B brd) 'B) (check (board-C brd) 'C)))
+
+(define (solve size)
+  (cond
+    [(<= size 2) (raise-user-error "Size must be greater than two")]
+    [else
+     (define board (new-board size))
+     (helper size board 'A 'C 'B)]))
+
+(define (helper n brd source target auxiliary)
+  (cond
+    [(n . > . 0)
+     (define new-brd-1 (helper (sub1 n) brd source auxiliary target))
+     (define new-brd-2 (move new-brd-1 source target))
+     (displayln new-brd-2)
+     (helper (sub1 n) new-brd-2 auxiliary target source)]
+    [else brd]))
+    
+(module+ main
+  (solve 3))
+```
 
 Here's the output from the code--with the size parameter set to three. The left-hand side is the top of each stack. With a little squinting, you should be able to trace out the correct series of moves to solve the puzzle.
 

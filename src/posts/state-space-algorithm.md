@@ -42,6 +42,53 @@ Astute readers may have noticed that this is a variation of a beam search. Accor
 
 Here is the code for my complete solution. As a reminder, the algorithm is looking for a zero of the cosine function for the domain 0 to 2π. To note, K is set to 3, and the error bound is set to .01.
 
-<script src="https://gist.github.com/froggermtp/694ea127181205157f27261dd4508c57.js"></script>
+```racket
+#lang racket
+
+(require math/distributions)
+
+(struct domain (x y))
+
+(define (state-space fn goal [domain (domain 0 (* 2 pi))] [k 3] [error-bound .01])
+  (let loop ([x 0] [min (domain-x domain)] [max (domain-y domain)])
+    (cond
+      [(within-bound? (fn x) goal error-bound) x]
+      [else
+       (define k-values (gen-k-values k min max))
+       (define best-value (select-best-value k-values fn goal))
+       (define-values (new-min new-max) (gen-new-bound k-values best-value goal min max))
+       (displayln (format "~a < ~a < ~a" new-min best-value new-max))
+       (loop best-value new-min new-max)])))
+
+(define (gen-k-values k min max)
+  (define dist (uniform-dist min max))
+  (for/list ([ii k])
+   (sample dist)))
+
+(define (select-best-value k-values fn goal)
+  (argmin (lambda (x) (abs (- goal (fn x)))) k-values))
+
+(define (gen-new-bound k-values best-value goal min max)
+  (define errors (map (lambda (x) (abs (- goal x))) k-values))
+  (define avg-error (average errors))
+  (define e (/ (abs (- best-value goal)) avg-error))
+  (define term (* e (/ (- max min) 2)))
+  (values (- best-value term) (+ best-value term)))
+
+(define (within-bound? y goal error-bound)
+  (define diff (- goal y))
+  (<= (abs diff) error-bound))
+
+(define (average xs (return /))
+  (if (empty? xs)
+      (return 0 0)
+      (average (cdr xs)
+               (lambda (sum len)
+                 (return (+ sum (car xs))
+                         (+ len 1))))))
+
+(module+ main
+  (state-space cos 0))
+```
 
 For a single run, I got a state value of about 1.566, which is close to π/2. Since π/2 is one of the valid zeros, the algorithm's outcome is what we expected. You should keep in mind that it's possible to get a state value near 3π/2, the other zero. Consider running the algorithm multiple times to get a feel for how things work.

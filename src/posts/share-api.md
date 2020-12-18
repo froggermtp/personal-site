@@ -21,10 +21,9 @@ For real though, we have become acclimated to those colorful social media share 
 Luckily, the Internet gods have tried to help us from slapping gaudy buttons into the DOM. We now have the Share API. Introduced in 2017, the Share API allows the browser to tap into your device's native share behavior.
 
 <img 
-    src="{{ "share-api-dialog.jpg" | imagePath }}
-    alt="The Share API dialog on an Android phone"
-    style="max-width: 200px; transform: rotate(-45deg)"
-/>
+    src="{{ "share-api-dialog.jpg" | imagePath }}" 
+    alt="The Share API dialog on an Android phone" 
+    style="max-width: 200px; transform: rotate(-45deg)">
 
 Since this API is relatively new, [support is a little shaky.](https://caniuse.com/mdn-api_navigator_share) It will at least work on Safari, Microsoft Edge, and mobile versions of Chrome. And I'm sure we'll see better adoptance in the future. In the meantime, we can implement a simple check for browser support. On my site, if it's not supported, I just don't show anything to the user; however, you could just as easily create a fallback.
 
@@ -42,7 +41,39 @@ On the other hand, many browsers still don't support the API. We'll implement a 
 
 For this example, we'll literally only need a single function: navigator.share.
 
-<script src="https://gist.github.com/froggermtp/39dd5be8fe03f6d28ee6f5f0be33e910.js"></script>
+```js
+(function () {
+    function ready() {
+        const button = document.querySelector('.js-tutorial-share');
+        const title = document.querySelector('title').textContent;
+        const text = document.querySelector('meta[name="description"]').getAttribute('content');
+        const url = document.querySelector('link[rel="canonical"]').getAttribute('href');
+        let timer = null;
+
+        function doShare() {
+            if (navigator.share) {
+                navigator.share({ title, text, url });
+            } else {
+                button.innerHTML = 'No Share API available ☹️';
+
+                if (timer) {
+                    clearTimeout(timer);
+                }
+
+                timer = setTimeout(() => button.innerHTML = 'Share!!!', 2000);
+            }
+        }
+
+        button.addEventListener('click', doShare);
+    }
+
+    if (document.readyState === 'complete') {
+        ready();
+    } else {
+        document.addEventListener('DOMContentLoaded', ready);
+    }
+})();
+```
 
 I do a quick check to see if the function exists. Browsers that don't support the share API won't have it, and our fallback can kick in. And I'm just passing the API some generic information about this webpage. [You can read more about how to format the parameter here](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/share)--but it's not much more complicated then what I show above.
 

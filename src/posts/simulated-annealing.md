@@ -24,7 +24,21 @@ Taking care of the initial guess is easy--just choose a random valid state. From
 
 Here, I want to keep things simple. The implementation below adds a random number from the range [-0.1, 0.1] to the current state to generate the successor. I also wrap the new state value around if it exceeds the range [0, 2π]. 
 
-<script src="https://gist.github.com/froggermtp/8b9e5b6e999b5d77ef0acaadb1092a69.js"></script>
+```r
+gen_successor <- function(x) {
+  TWO_PI <- 2 * pi
+  successor <- x + runif(1, -.1, .1)
+  
+  if(successor < 0) {
+    return(TWO_PI + successor)
+  }
+  else if(successor > TWO_PI) {
+    return(0 + (successor - TWO_PI))
+  }
+    
+  successor
+}
+```
 
 Of course, you can experiment on your own. For example, try thinking of new ways to generate neighboring states.
 
@@ -37,7 +51,11 @@ You can choose any number to be the initial temperature. The temperature schedul
 
 For our toy example, I choose to subtract an arbitrary number every iteration. 
 
-<script src="https://gist.github.com/froggermtp/cbae4d7960586428dd77b3514f444b1a.js"></script>
+```r
+schedule <- function(t) {
+  t - .00009
+}
+```
 
 Once again, feel free to get creative and try different initial values and schedules for your implementation.
 
@@ -55,7 +73,77 @@ As the temperature gets closer to zero, the probability of choosing a bad move w
 ## Put Everything Together
 We've covered all the important parts of this algorithm. Let's put everything together and see it in action. Here is the full code for my solution.
 
-<script src="https://gist.github.com/froggermtp/bc36402fa41ec7733e6758e1e6a241e6.js"></script>
+```r
+library(ggplot2)
+
+simulated_annealing <- function(gen_successor, get_value, schedule) {
+  generated_states <- c()
+  temp <- 10 # initial temperature
+  current_state <- .5 # initial state
+  current_state_value <- get_value(current_state)
+  
+  while(temp > 0) {
+    generated_states <- append(generated_states, current_state)
+    temp <- schedule(temp)
+    next_state <- gen_successor(current_state)
+    next_state_value <- get_value(next_state)
+    change_in_e = next_state_value - current_state_value
+    
+    if(change_in_e < 0) {
+      current_state <- next_state
+      current_state_value <- next_state_value
+    }
+    else {
+      probability <- exp(-change_in_e / temp)
+      samp <- runif(1)
+      
+      if(samp <= probability) {
+        current_state <- next_state
+        current_state_value <- next_state_value
+      }
+    }
+  }
+  
+  return(generated_states)
+}
+
+gen_successor <- function(x) {
+  TWO_PI <- 2 * pi
+  successor <- x + runif(1, -.1, .1)
+  
+  if(successor < 0) {
+    return(TWO_PI + successor)
+  }
+  else if(successor > TWO_PI) {
+    return(0 + (successor - TWO_PI))
+  }
+    
+  successor
+}
+
+get_value <- function(x) {
+  sin(x)
+}
+
+schedule <- function(t) {
+  t - .00009
+}
+
+generated_states <- simulated_annealing(gen_successor, get_value, schedule)
+index <- seq(length(generated_states))
+sin_values <- sin(generated_states)
+
+data <- data.frame(
+  index = index, 
+  x = generated_states, 
+  sin = sin_values
+  )
+
+ggplot(data, aes(x = index, y = sin)) +
+  geom_smooth() +
+  ylab("Sine value") +
+  xlab("Iteration")
+```
 
 I decided to capture the state for every iteration and graph the result. As you can see, the initial state is nowhere near -1. As the algorithm progresses, it begins to slowly converge. Towards the end, the probability of choosing bad moves is near 0, which is why the downward slope for later iterations is steep.
 
