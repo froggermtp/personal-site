@@ -1,5 +1,6 @@
 const pluginYoutube = require("eleventy-plugin-youtube-embed");
 const pluginRSS = require("@11ty/eleventy-plugin-rss");
+const pluginSyntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const pluginTypeset = require("eleventy-plugin-typeset");
 const markdownIt = require("markdown-it");
 const markdownItFootnote = require("markdown-it-footnote");
@@ -22,6 +23,7 @@ module.exports = function (config) {
     config.addPlugin(pluginYoutube, { only: '.articleContent' });
     config.addPlugin(pluginRSS);
     config.addPlugin(pluginTypeset({ only: '.articleContent p' }));
+    config.addPlugin(pluginSyntaxHighlight);
 
     // Filters
     const filters = require('./utils/filters.js')(nunjucksEnvironment);
