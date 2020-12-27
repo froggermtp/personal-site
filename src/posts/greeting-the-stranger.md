@@ -1,7 +1,7 @@
 ---
-title: Organic Friendships
-date: 2020-12-17
-description: An essay about making friends in the modern age.
+title: Greeting the Stranger
+date: 2020-12-27
+description: I complain about humans becoming unhuman.
 mainImage: st-bartholomew.jpg
 smallImage: st-bartholomew-small.jpg
 mainImageAltText: St. Bartholomew The Great Church, located in London
