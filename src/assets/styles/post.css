@@ -1,0 +1,246 @@
+/* Console Output */
+
+.console {
+    background-color: black;
+    color: white;
+    padding: var( --space-med);
+    font-family: monospace;
+}
+
+.console__header {
+    color: inherit;
+    margin: 0 0 var(--space-med) 0;
+    font-size: 1.2em;
+    font-size: clamp(0.9rem, .6750rem + 1vw, 1.2rem);
+    font-weight: 400;
+    font-family: inherit;
+}
+
+.console__header-text {
+    color: inherit;
+    font-family: inherit;
+}
+
+.console__copy-button {
+    margin: 0;
+    padding: 0;
+    color: inherit;
+    font-size: inherit;
+    font-weight: 400;
+    font-family: inherit;
+    border: none;
+    cursor: pointer;
+    background-color: inherit;
+}
+
+.console__lines {
+    color: inherit;
+    font-family: inherit;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-light-grey) black;
+}
+
+.console__lines::-webkit-scrollbar {
+    /* Delete this once deprecated */
+    height: 6px;
+}
+
+.console__lines::-webkit-scrollbar-thumb {
+    /* Delete this once deprecated */
+    background-color: var(--color-light-grey);
+}
+
+.console__line {
+    color: inherit;
+    margin: 0 0 var(--space-sm) 0;
+    font-size: 1.1em;
+    font-size: clamp(.8rem, .5750rem + 1vw, 1.1rem);
+    font-family: inherit;
+    white-space: nowrap;
+}
+
+/* Box */
+
+.box {
+    display: flex;
+}
+
+.box--start {
+    justify-content: flex-start;
+}
+
+.box--end {
+    justify-content: flex-end;
+}
+
+.box--split {
+    justify-content: space-between;
+}
+
+.box--vertical-center {
+    align-items: center;
+}
+
+/* Metadata */
+
+.metadata {
+    margin-bottom: var(--space-lg);
+}
+
+.link--share {
+    font-size: 1rem;
+    color: var(--color-light-grey);
+    margin-right: var(--space-xl);
+    text-decoration: underline;
+}
+
+.link--share:hover {
+    color: var(--color-black);
+}
+
+article {
+    width: 100%;
+    margin-bottom: var(--space-xl);
+}
+
+.articleContent>* {
+    margin-left: var(--space-xl);
+    margin-right: var(--space-xl);
+    margin-bottom: var(--space-lg);
+}
+
+.articleContent p {
+    font-size: 1em;
+}
+
+.articleContent img {
+    width: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.articleContent blockquote {
+    position: relative;
+}
+
+.articleContent blockquote p {
+    margin-left: 0;
+}
+
+.articleContent blockquote:before {
+    content: '';
+    border-left: 4px solid #000;
+    height: 100%;
+    width: 4px;
+    position: absolute;
+    left: -25px;
+}
+
+.articleContent h2 {
+    font-weight: 700;
+    font-size: 1.375em;
+}
+
+.articleContent h3 {
+    font-weight: 700;
+    font-size: 1.1em;
+}
+
+.articleContent .math {
+    height: 2.5rem;
+}
+
+.articleContent p>a, .articleContent p>a * {
+    color: #2A5DB0;
+}
+
+.eleventy-plugin-youtube-embed {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.articleContent mjx-container {
+    display: flex;
+    max-height: 40px;
+}
+
+.articleContent mjx-container svg {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+}
+
+header {
+    margin-top: var(--space-xl);
+    margin-bottom: var(--space-lg);
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+header h1 {
+    margin-bottom: var(--space-lg);
+    font-size: 1.5em;
+}
+
+#mainImage {
+    width: 100%;
+    max-height: 400px;
+    overflow: hidden;
+    margin-bottom: var(--space-xl);
+}
+
+#mainImage img {
+    width: 100%;
+}
+
+#date {
+    font-size: .9rem;
+    color: var(--color-light-grey);
+    margin-bottom: 0;
+}
+
+#date * {
+    color: inherit;
+}
+
+#otherPosts {
+    display: flex;
+    flex-flow: column;
+    margin-left: var(--space-xl);
+    margin-bottom: var(--space-xl);
+    margin-right: var(--space-xl);
+}
+
+#next {
+    margin-bottom: var(--space-lg);
+}
+
+#next, #previous {
+    display: flex;
+    flex-direction: column;
+}
+
+#next span, #previous span {
+    margin-bottom: var(--space-sm);
+}
+
+@media only screen and (min-width: 768px) {
+    #otherPosts {
+        flex-flow: row;
+        justify-content: space-between;
+    }
+    #next, #previous {
+        width: 50%;
+    }
+    #next {
+        text-align: right;
+        order: 1;
+        margin-left: auto;
+    }
+    #previous {
+        order: 0;
+        margin-right: auto;
+    }
+}

@@ -1,0 +1,33 @@
+---
+layout: main.njk
+permalink: /blog/{% if pagination.pageNumber > 0 %}{{ pagination.pageNumber }}/{% endif %}
+title: Blog
+pagination:
+    data: collections.post
+    size: 6
+    reverse: true
+    alias: posts
+assets:
+  styles:
+    - blog.css
+---
+{% from "postListing.njk" import postListing %}
+
+<header id="blog-page-header">
+  <h1>Blog</h1>
+</header>
+
+<div id="posts">
+{% for post in posts %}
+  {{ postListing(post) }}
+{% endfor %}
+</div>
+
+<nav id="pagination">
+{% if pagination.previousPageHref %}
+  <a href="{{ pagination.previousPageHref }}" class="new">Newer posts</a>
+{% endif %}
+{% if pagination.nextPageHref %}
+  <a href="{{ pagination.nextPageHref }}" class="old">Older posts</a>
+{% endif %}
+</nav>

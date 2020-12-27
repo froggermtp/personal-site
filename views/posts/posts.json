@@ -1,9 +1,0 @@
-{
-    "tags": [
-        "post"
-    ],
-    "layout": "post-layout.njk",
-    "blogAuthor": "Matthew Parris",
-    "permalink": "/{{ page.fileSlug | slug }}/index.html",
-    "changeFreq": "monthly"
-}

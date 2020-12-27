@@ -1,55 +1,65 @@
-const CleanCSS = require("clean-css");
-const Terser = require("terser");
-const moment = require('moment');
+const pluginYoutube = require("eleventy-plugin-youtube-embed");
+const pluginRSS = require("@11ty/eleventy-plugin-rss");
+const pluginSyntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
+const pluginTypeset = require("eleventy-plugin-typeset");
+const markdownIt = require("markdown-it");
+const markdownItFootnote = require("markdown-it-footnote");
+const markdownItMathjax = require('@area403/markdown-it-mathjax');
+const nunjucks = require('nunjucks');
+const pairedShortcodes = require("./utils/pairedShortcodes.js");
+const transforms = require('./utils/transforms.js');
 
-module.exports = function (eleventyConfig) {
-    let markdownIt = require("markdown-it");
-    let options = {
-        html: true
-    };
-    let markdownLib = markdownIt(options).use(require("markdown-it-footnote"));
-    eleventyConfig.setLibrary("md", markdownLib);
+module.exports = function (config) {
+    // Nunjucks
+    const loaders = new nunjucks.FileSystemLoader([
+        'src/layouts',
+        'src/includes',
+    ]);
+    const nunjucksEnvironment = new nunjucks.Environment(loaders, { noCache: true });
+    config.setLibrary("njk", nunjucksEnvironment);
 
-    eleventyConfig.addPlugin(require("eleventy-plugin-youtube-embed"), { only: '.articleContent' });
-    eleventyConfig.addPlugin(require("@11ty/eleventy-plugin-rss"));
-    eleventyConfig.addPlugin(require("eleventy-plugin-typeset")({ only: '.articleContent p' }));
-    eleventyConfig.addPlugin(require("eleventy-plugin-lazyimages"), {
-        transformImgPath: (src) => {
-            items = src.split("\\");
-            index = items.indexOf("img") - 1;
-            items.splice(index, 0, "public");
-            return items.join("\\");
-        }
+
+    // Plugins
+    config.addPlugin(pluginYoutube, { only: '.articleContent' });
+    config.addPlugin(pluginRSS);
+    config.addPlugin(pluginTypeset({ only: '.articleContent p' }));
+    config.addPlugin(pluginSyntaxHighlight);
+
+    // Filters
+    const filters = require('./utils/filters.js')(nunjucksEnvironment);
+    Object.keys(filters).forEach(filterName => {
+        config.addFilter(filterName, filters[filterName]);
     });
 
-    eleventyConfig.addPassthroughCopy({ "public/img": "img" });
-    eleventyConfig.addPassthroughCopy({ "public/pdf": "pdf" });
-    eleventyConfig.addPassthroughCopy({ "public/robots.txt": "robots.txt" });
-
-    eleventyConfig.addFilter("cssmin", function (code) {
-        return new CleanCSS({}).minify(code).styles;
+    // Paired Shortcodes
+    Object.keys(pairedShortcodes).forEach(pairedShortcodeName => {
+        config.addPairedShortcode(pairedShortcodeName, pairedShortcodes[pairedShortcodeName]);
     });
 
-    eleventyConfig.addFilter("jsmin", function (code) {
-        let minified = Terser.minify(code);
-        if (minified.error) {
-            console.log("Terser error: ", minified.error);
-            return code;
-        }
-
-        return minified.code;
+    // Paired Shortcodes
+    Object.keys(transforms).forEach(transformName => {
+        config.addTransform(transformName, transforms[transformName]);
     });
 
-    eleventyConfig.addFilter('date', function (date, format) {
-        return moment.utc(date).format(format);
-    });
+    // Markdown
+    config.setLibrary(
+        'md',
+        markdownIt({
+            html: true
+        })
+            .disable('code')
+            .use(markdownItFootnote)
+            .use(markdownItMathjax)
+    );
 
-    eleventyConfig.addFilter('removeFootnote', function (str) {
-        const regex = /\[.+\]/g
-        return str.replace(regex, "");
-    });
+    config.setDataDeepMerge(true);
 
-    eleventyConfig.addCollection('postInfo', function (collection) {
+    // Pass-through files
+    config.addPassthroughCopy('src/assets/images');
+    config.addPassthroughCopy('src/assets/fonts');
+
+    // Collections
+    config.addCollection('postInfo', function (collection) {
         const posts = collection.getFilteredByTag('post');
         let postInfo = {};
 
@@ -64,13 +74,17 @@ module.exports = function (eleventyConfig) {
         return postInfo;
     });
 
+    // Base config
     return {
-        templateFormats: [
-            "md",
-            "njk"
-        ],
+        templateFormats: ['md', 'njk',],
+        markdownTemplateEngine: "njk",
+        htmlTemplateEngine: "njk",
         dir: {
-            input: "views"
+            input: 'src',
+            output: 'dist',
+            includes: 'includes',
+            layouts: 'layouts',
+            data: 'data',
         }
     };
 };

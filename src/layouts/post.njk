@@ -1,0 +1,44 @@
+---
+layout: main.njk
+assets:
+    styles:
+        - post.css
+        - syntax-highlighting.css
+    scripts:
+        - share.js
+        - consoleCopy.js
+---
+<article>
+    <header>
+        <div id="mainImage">
+            <picture>
+                {% if smallImage %}
+                <source media="(max-width: 420px)" srcset="{{ smallImage | imagePath }}" type="image/jpeg">
+                {% endif %}
+                <img class="img" src="{{ mainImage | imagePath }}" alt="{{ mainImageAltText }}" width="730" height="645">
+            </picture>
+        </div>
+        <h1 id="title">{{ title | safe }}</h1>
+        <div class="metadata box box--start box--vertical-center js-share">
+            <p id="date">Originally written: <time>{{ page.date | date("LL") | safe }}</time></p>
+        </div>
+    </header>
+    <div class="articleContent">
+        {{ content | safe }}
+    </div>
+</article>
+
+<nav id="otherPosts">
+{% if collections.postInfo[page.url].nextTitle %}
+    <div id="next">
+        <span>Next post</span>
+        <a href="{{ collections.postInfo[page.url].nextUrl }}">{{ collections.postInfo[page.url].nextTitle }}</a>
+    </div>
+{% endif %}
+{% if collections.postInfo[page.url].previousTitle %}
+    <div id="previous">
+        <span>Previous post</span>
+        <a href="{{ collections.postInfo[page.url].previousUrl }}">{{ collections.postInfo[page.url].previousTitle }}</a>
+    </div>
+{% endif %}
+</nav>

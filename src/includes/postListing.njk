@@ -1,0 +1,19 @@
+{% macro postListing(post) %}
+<article>
+        <header>
+            <h1 class="blogTitle">
+                <a href="{{ post.url | url }}">{{ post.data.title }}</a>
+            </h1>
+            <div class="metadata">
+                <span>Posted on</span>
+                <time>{{ post.date | date("LL") | safe }}</time>
+            </div>
+        </header>
+        <p>
+            {{ post.templateContent | postPreview }}
+        </p>
+        <footer class="article-footer">
+            <a class="readMore" href="{{ post.url | url }}">Read more</a>
+        </footer>
+</article>
+{% endmacro %}

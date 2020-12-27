@@ -1,0 +1,33 @@
+<!doctype html>
+
+<html lang="en">
+    <head>
+    {% block head %}
+        {% include "metadata.njk" %}
+
+        {% for style in assets.styles %}
+            <link
+                rel="stylesheet"
+                href="{{ style | stylePath }}"
+                media="all"
+            ></link>
+        {% endfor %}
+
+        {% for script in assets.scripts %}
+            <script 
+                defer
+                src="{{ script | scriptPath }}"
+            >
+            </script>
+        {% endfor %}
+    {% endblock %}
+    </head>
+    
+    <body>
+        <div id="main-container">
+            {% include "nav.njk" %}
+            {{ content | safe }}
+        </div>
+        {% include "footer.njk" %}
+    </body>
+</html>

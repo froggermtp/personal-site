@@ -1,0 +1,26 @@
+{% set _title = title if title else site.title %}
+{% set _description = description if description else site.description %}
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>{{ _title }} | Matthew Parris</title>
+<meta name="description" content="{{ _description }}">
+<meta name="author" content="Matthew Parris">
+<link rel="canonical" href="{{ site.url }}{{ page.url | url }}">
+<link rel="alternate" type="application/atom+xml" title="RSS Feed for matthewparris.org" href="/feed.xml">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
+<link rel="preload" href="/assets/fonts/oxygen-v10-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+
+<meta property="og:title" content="{{ _title }}">
+<meta property="og:description" content="{{ _description }}">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="{{ _title }}">
+<meta name="twitter:description" content="{{ _description }}">
+{% if mainImage %}
+{% set mainImageUrl %}
+    {{ site.url }}{{ mainImage | imagePath }}
+{% endset %}
+<meta property="og:image" content="{{ mainImageUrl }}">
+<meta name="twitter:image" content="{{ mainImageUrl }}">
+{% endif %}
