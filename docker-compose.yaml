@@ -1,0 +1,11 @@
+version: "3.8"
+services:
+  personal-site:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./.eleventy.js:/app/.eleventy.js
+      - ./gulpfile.js:/app/gulpfile.js
+      - ./src:/app/src
+      - ./utils:/app/utils
