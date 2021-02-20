@@ -36,7 +36,7 @@ module.exports = function (config) {
         config.addPairedShortcode(pairedShortcodeName, pairedShortcodes[pairedShortcodeName]);
     });
 
-    // Paired Shortcodes
+    // Transforms
     Object.keys(transforms).forEach(transformName => {
         config.addTransform(transformName, transforms[transformName]);
     });
