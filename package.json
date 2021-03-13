@@ -10,6 +10,7 @@
     "eleventy:prod": "cross-env ELEVENTY_ENV=production eleventy",
     "gulp:build": "gulp build",
     "gulp:watch": "gulp watch",
+    "gulp:hashAssets": "gulp hashAssets",
     "clean": "del-cli dist",
     "benchmark": "cross-env DEBUG=Eleventy:Benchmark* npm run build",
     "debug": "cross-env DEBUG=Eleventy* & eleventy --dryrun"
