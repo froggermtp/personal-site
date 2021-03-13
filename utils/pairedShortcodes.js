@@ -27,5 +27,8 @@ module.exports = {
             </div>
         </div>
         `;
+    },
+    highlightCode: function(content) {
+        return outdent`<code class="highlight highlight__code">${content}</code>`;
     }
 }

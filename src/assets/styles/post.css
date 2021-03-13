@@ -82,6 +82,19 @@
     align-items: center;
 }
 
+/* Highlights */
+
+.highlight {
+    color: var(--color-dark);
+}
+
+.highlight__code {
+    background: #f0f0f0;
+    display: inline-block;
+    font-size: 12.8px;
+    padding: 1px 6px;
+}
+
 /* Metadata */
 
 .metadata {
