@@ -58,7 +58,7 @@ section {
     width: 100%;
     max-width: 730px;
     margin-top: 50px;
-    min-height: calc(100vh - 122px);
+    min-height: calc(100vh - 152px);
     overflow: hidden;
     padding-bottom: var(--space-xl);
 }
