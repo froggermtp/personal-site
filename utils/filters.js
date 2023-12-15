@@ -51,6 +51,18 @@ module.exports = function (nunjucksEnv) {
         removeFootnote: function (str) {
             const regex = /\[.+\]/g
             return str.replace(regex, "");
+        },
+
+        unique: function (arr) {
+            return arr.filter((value, index, array) => array.indexOf(value) === index);
+        },
+
+        mapGetAttr: function (arr, attr) {
+            return arr.map(i => i[attr]);
+        },
+
+        flatten: function (arr) {
+            return arr.flat(1);
         }
     };
 

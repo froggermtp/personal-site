@@ -16,10 +16,6 @@ p:first-of-type {
     margin-top: var(--space-xl)
 }
 
-p:last-of-type {
-    margin-bottom: var(--space-xl)
-}
-
 h2 {
     font-weight: 700;
     font-size: 1em;

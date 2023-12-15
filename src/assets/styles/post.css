@@ -222,7 +222,6 @@ header h1 {
     display: flex;
     flex-flow: column;
     margin-left: var(--space-xl);
-    margin-bottom: var(--space-xl);
     margin-right: var(--space-xl);
 }
 

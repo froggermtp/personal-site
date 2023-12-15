@@ -1,0 +1,156 @@
+---
+layout: main.njk
+permalink: /links/
+title: Links
+description: Collection of links for Matthew Parris's personal website
+changeFreq: weekly
+assets:
+  styles:
+    - links.css
+links:
+  - url: https://mereorthodoxy.com/
+    tags: ["Christian", "various-authors"]
+  - url: https://www.firstthings.com/
+    tags: ["Christian", "various-authors"]
+  - url: https://www.plough.com/
+    tags: ["Christian", "various-authors"]
+  - url: https://adfontesjournal.com/
+    tags: ["Christian", "various-authors"]
+  - url: https://americanreformer.org/
+    tags: ["Christian", "various-authors"]
+  - url: https://theopolisinstitute.com/
+    tags: ["Christian", "various-authors"]
+  - url: https://www.thegospelcoalition.org/
+    tags: ["Christian", "various-authors"]
+  - url: https://www.desiringgod.org/
+    tags: ["Christian", "various-authors"]
+  - url: https://comment.org/
+    tags: ["Christian", "various-authors"]
+  - url: https://thinktheology.co.uk/
+    tags: ["Christian", "various-authors"]
+  - url: https://www.christianitytoday.com/
+    tags: ["Christian", "various-authors"]
+  - url: https://northamanglican.com/
+    tags: ["Christian", "various-authors"]
+  - url: https://www.logos.com/grow/
+    tags: ["Christian", "various-authors"]
+  - url: https://thelampmagazine.com/
+    tags: ["Christian", "various-authors"]
+  - url: https://anglicancompass.com/
+    tags: ["Christian", "various-authors"]
+  - url: https://www.dailyoffice2019.com/
+    tags: ["Christian", "book"]
+  - url: https://www.frontporchrepublic.com/
+    tags: ["politics", "various-authors"]
+  - url: https://blog.ayjay.org/
+    tags: ["Christian", "personal-site"]
+  - url: https://www.bradeast.org/blog
+    tags: ["Christian", "personal-site"]
+  - url: https://hedgehogreview.com/
+    tags: ["various-authors"]
+  - url: https://experimentaltheology.blogspot.com/
+    tags: ["Christian", "personal-site"]
+  - url: https://paulvanderklay.me/
+    tags: ["Christian", "personal-site"]
+  - url: https://augustinus.cc/
+    tags: ["Christian", "book"]
+  - url: https://alastairadversaria.com/
+    tags: ["Christian", "personal-site"]
+  - url: https://benmakuh.com/
+    tags: ["Christian", "personal-site"]
+  - url: https://v5.chriskrycho.com/
+    tags: ["Christian", "personal-site"]
+  - url: https://bradlittlejohn.com/
+    tags: ["Christian", "personal-site"]
+  - url: https://worksinprogress.co/
+    tags: ["various-authors"]
+  - url: https://credomag.com/
+    tags: ["Christian", "various-authors"]
+  - url: https://www.newadvent.org/
+    tags: ["Christian"]
+  - url: https://www.aquinasinstitute.org/
+    tags: ["Christian"]
+  - url: https://compactmag.com/
+    tags: ["politics", "various-authors"]
+  - url: https://www.moonshinemagnolias.com/
+    tags: ["various-authors"]
+  - url: https://ravenmagazine.org/
+    tags: ["philosophy", "various-authors"]
+  - url: https://thepointmag.com/
+    tags: ["philosophy", "various-authors"]
+  - url: https://aeon.co/
+    tags: ["various-authors"]
+  - url: https://matt.might.net/articles/
+    tags: ["computers", "personal-site"]
+---
+<header id="links-page-header">
+  <h1>Links</h1>
+</header>
+
+<div class="text-container">
+  <p>
+    These are some links to other websites that I like reading or want to bookmark.
+    Obviously, I don't necessaryly endorse or agree with everything posted.
+    There are tags to organize them into categories.
+    I might implement a way to sort through them one day.
+  </p>
+  <div class="space-xl"></div>
+  <div class="tag-list">
+    {% set tags = links | mapGetAttr("tags") | flatten | unique %}
+    {% for tag in tags %}
+    <div class="tag-list-item js-tag-selector">#{{ tag }}</div>
+    {% endfor %}
+  </div>
+  <div id="links">
+    {% for link in links %}
+    <div class="link-container js-link-container {% for tag in link.tags %}js-{{ tag }} {% endfor %}">
+      <a class="link-href" href="{{ link.url }}">{{ link.url }}</a>
+      <span class="link-description">{{ link.description }}</span>
+      <div class="link-tags">
+      {% for tag in link.tags %}
+        <span class="link-tag">#{{ tag }}</span>
+      {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+  (function() {
+    const linkContainersAll = document.querySelectorAll('.js-link-container');
+    const selectors = [...document.querySelectorAll('.js-tag-selector')];
+    for (let selector of selectors) {
+      selector.addEventListener('click', (e) => {
+        const isSelected = e.target.classList.toggle('js-selected');
+        if (isSelected) {
+          document.numOfTagsSelected++;
+        } else {
+          document.numOfTagsSelected--;
+        }
+        const selectedTags = [...document.querySelectorAll('.js-selected')].map(i => i.innerHTML.substring(1));
+        const numOfTagsSelected = selectedTags.length;
+        if (numOfTagsSelected === 1) {
+          for (let linkContainer of linkContainersAll) {
+            linkContainer.classList.add('js-click');
+          }
+        } else if (numOfTagsSelected === 0) {
+          for (let linkContainer of linkContainersAll) {
+            linkContainer.classList.remove('js-click');
+          }
+        }
+        for (let linkContainer of linkContainersAll) {
+          let shouldShow = true;
+          for (let selectedTag of selectedTags) {
+            if (!linkContainer.classList.contains(`js-${selectedTag}`)) {
+              linkContainer.classList.remove('js-show');
+              shouldShow = false;
+              continue;
+            }
+          }
+          shouldShow && linkContainer.classList.add('js-show')
+        }
+      });
+    }
+  })();
+</script>
