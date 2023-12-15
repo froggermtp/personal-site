@@ -222,7 +222,7 @@ section {
     color: var(--color-grey);
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 730px) {
     #logo {
         margin-left: 0;
     }
