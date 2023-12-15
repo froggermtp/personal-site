@@ -34,9 +34,14 @@
 
 .tag-list {
     display: flex;
-    justify-content: space-around;
     flex-wrap: wrap;
     row-gap: 30px;
+    margin-bottom: var(--space-xl);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.tag-list-item:hover {
+    cursor: pointer;
 }
 
 .tag-list-item::before {
