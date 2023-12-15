@@ -8,7 +8,7 @@
     }
 
     function decryptEmail() {
-        var address = atob('bWF0dGhld3BhcnJpc0BvdXRsb29rLmNvbQ==');
+        var address = atob('bWF0dGhld0BtYXR0aGV3cGFycmlzLm9yZwo=');
         window.location.href = "mailto:" + address;
     }
 

@@ -5,8 +5,6 @@ layout: about.njk
 
 My name is Matthew Parris. I'm a Christian trying to figure out how to make money without losing my soul. Currently, I'm working at Paycom--trying to make HR services cheaper and easier to use.
 
-My email address is matthewparris@outlook.com. I try to read all my emails. Assuming I have time, I'll try to reply as soon as possible. 
-
 ## Who the heck are you?
 
 Good question! I'm an Internet-savvy Christian with a degree in computer science. Thus, I am mostly trying to pick at the intersection between Christianity and technical work. Despite my online and in-person escapades, there has seemed to be a dearth of people with this two-pronged identity. Other than that, there is not much to say about me. I only recently graduated from college and started working a full-time job. So check back in for more updates?
