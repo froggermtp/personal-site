@@ -1,4 +1,8 @@
-on: push
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
     
 jobs:
   build:
@@ -17,6 +21,7 @@ jobs:
           path: |
             dist/
             netlify.toml
+
   deploy-stg:
     needs: build
     runs-on: ubuntu-latest
@@ -30,12 +35,37 @@ jobs:
           netlify-config-path: ./netlify.toml
           alias: stg
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          deploy-message: Deploying commit ${{ github.sha }}
+          deploy-message: Deploying commit ${{ github.sha }} with workflow ${{ github.run_id }} attempt ${{ github.run_attempt }}
           enable-pull-request-comment: false
           overwrites-pull-request-comment: false
           enable-commit-comment: true
           github-deployment-environment: stage
-          github-deployment-description: Deploying commit ${{ github.sha }}
+          github-deployment-description: Deploying commit ${{ github.sha }} with workflow ${{ github.run_id }} attempt ${{ github.run_attempt }}
+          fails-without-credentials: true
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        timeout-minutes: 1
+
+  deploy-prod:
+    needs: deploy-stg
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+      - uses: nwtgck/actions-netlify@v2.1
+        with:
+          publish-dir: ./dist
+          netlify-config-path: ./netlify.toml
+          production-deploy: true
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message: Deploying commit ${{ github.sha }} with workflow ${{ github.run_id }} attempt ${{ github.run_attempt }}
+          enable-pull-request-comment: false
+          overwrites-pull-request-comment: false
+          enable-commit-comment: true
+          github-deployment-environment: production
+          github-deployment-description: Deploying commit ${{ github.sha }} with workflow ${{ github.run_id }} attempt ${{ github.run_attempt }}
           fails-without-credentials: true
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
