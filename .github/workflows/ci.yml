@@ -1,0 +1,43 @@
+on: push
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/upload-artifact@v4
+        with:
+          if-no-files-found: error
+          name: dist
+          path: |
+            dist/
+            netlify.toml
+  deploy-stg:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+      - uses: nwtgck/actions-netlify@v2.1
+        with:
+          publish-dir: ./dist
+          netlify-config-path: ./netlify.toml
+          alias: stg
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message: Deploying commit ${{ github.sha }}
+          enable-pull-request-comment: false
+          overwrites-pull-request-comment: false
+          enable-commit-comment: true
+          github-deployment-environment: stage
+          github-deployment-description: Deploying commit ${{ github.sha }}
+          fails-without-credentials: true
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        timeout-minutes: 1
