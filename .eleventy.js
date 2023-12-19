@@ -1,4 +1,3 @@
-const pluginYoutube = require("eleventy-plugin-youtube-embed");
 const pluginRSS = require("@11ty/eleventy-plugin-rss");
 const pluginSyntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const pluginTypeset = require("eleventy-plugin-typeset");
@@ -20,7 +19,6 @@ module.exports = function (config) {
 
 
     // Plugins
-    config.addPlugin(pluginYoutube, { only: '.articleContent' });
     config.addPlugin(pluginRSS);
     config.addPlugin(pluginTypeset({ only: '.articleContent p' }));
     config.addPlugin(pluginSyntaxHighlight);
