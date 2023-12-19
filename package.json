@@ -22,28 +22,27 @@
     "url": "https://github.com/froggermtp/personal-site.git"
   },
   "dependencies": {
-    "@11ty/eleventy": "^0.11.0",
+    "@11ty/eleventy": "^2.0.1",
     "@11ty/eleventy-plugin-rss": "^1.0.9",
-    "@11ty/eleventy-plugin-syntaxhighlight": "^3.0.4",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.0",
     "@area403/markdown-it-mathjax": "^1.0.0",
     "@babel/core": "^7.12.3",
     "@babel/preset-env": "^7.12.1",
     "cheerio": "^1.0.0-rc.3",
     "cross-env": "^7.0.2",
-    "del-cli": "^3.0.1",
+    "del-cli": "^5.1.0",
     "eleventy-plugin-typeset": "github:liamfiddler/eleventy-plugin-typeset",
     "eleventy-plugin-youtube-embed": "github:froggermtp/eleventy-plugin-youtube-embed",
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
     "gulp-clean-css": "^4.3.0",
-    "gulp-terser": "^1.4.1",
+    "gulp-terser": "^2.1.0",
     "html-minifier": "^4.0.0",
-    "markdown-it-footnote": "^3.0.2",
+    "markdown-it-footnote": "^4.0.0",
     "moment": "^2.29.1",
     "npm-run-all": "^4.1.5",
     "nunjucks": "^3.2.2",
-    "outdent": "^0.7.1",
+    "outdent": "^0.8.0",
     "through2": "^4.0.2"
-  },
-  "devDependencies": {}
+  }
 }
