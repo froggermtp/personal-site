@@ -1,5 +1,5 @@
 const htmlMinfier = require('html-minifier');
-const cheerio = require('cheerio');
+const htmlParser = require('node-html-parser');
 
 function shouldTransformHtml(outputPath) {
     return outputPath &&
@@ -25,12 +25,13 @@ module.exports = {
             return content;
         }
 
-        const $ = cheerio.load(content);
-        $('img').map(function (i, el) {
-            if (!$(this).attr('loading')) {
-                $(this).attr('loading', 'lazy');
+        const root = htmlParser.parse(content);
+        root.querySelectorAll('img').forEach(function(el) {
+            if (el.getAttribute('loading')) {
+                return;
             }
+            el.setAttribute('loading', 'lazy');
         });
-        return $.html();
+        return root.toString();
     }
 };
