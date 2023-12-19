@@ -28,7 +28,7 @@ section {
 
 section:last-of-type {
     border-bottom: none;
-    margin-bottom: var(--space-xxl);
+    margin-bottom: 0;
 }
 
 h2 {
