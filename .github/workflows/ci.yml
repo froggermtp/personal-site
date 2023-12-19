@@ -25,6 +25,7 @@ jobs:
   deploy-stg:
     needs: build
     runs-on: ubuntu-latest
+    environment: stage
     steps:
       - uses: actions/download-artifact@v4
         with:
@@ -50,6 +51,7 @@ jobs:
   deploy-prod:
     needs: deploy-stg
     runs-on: ubuntu-latest
+    environment: production
     steps:
       - uses: actions/download-artifact@v4
         with:
