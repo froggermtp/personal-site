@@ -24,8 +24,8 @@
     </head>
     
     <body>
+        {% include "nav.njk" %}
         <div id="main-container">
-            {% include "nav.njk" %}
             {{ content | safe }}
         </div>
         {% include "footer.njk" %}
