@@ -1,8 +1,5 @@
 {
-    "scripts": [
-        "nav.js",
-        "footer.js"
-    ],
+    "scripts": [],
     "styles": [
         "normalize.css",
         "main.css",
