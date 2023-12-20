@@ -5,9 +5,9 @@ const markdownIt = require("markdown-it");
 const markdownItFootnote = require("markdown-it-footnote");
 const markdownItMathjax = require('@area403/markdown-it-mathjax');
 
-const filters = require('./utils/filters.js');
-const pairedShortcodes = require("./utils/pairedShortcodes.js");
-const transforms = require('./utils/transforms.js');
+const filters = require('./eleventy/filters.js');
+const pairedShortcodes = require("./eleventy/pairedShortcodes.js");
+const transforms = require('./eleventy/transforms.js');
 
 module.exports = function (config) {
     // Plugins
