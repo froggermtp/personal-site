@@ -4,3 +4,11 @@ eleventyExcludeFromCollections: true
 ---
 LAST BUILD: {{ build.timestamp | date }}
 ENV: {{ build.env }}
+{%- if build.env === "production" %}
+Git Ref Name: {{ build.gitRefName }}
+Git SHA: {{ build.gitSha }}
+GitHub Workflow ID: {{ build.workflowRunID }}
+GitHub Workflow Attempt: {{ build.workflowRunAttempt }}
+GitHub Workflow Number: {{ build.workflowRunNumber }}
+GitHub Workflow URL: {{ build.workflowURL }}
+{% endif %}
