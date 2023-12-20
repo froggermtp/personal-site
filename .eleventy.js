@@ -49,8 +49,8 @@ module.exports = function (config) {
     config.setDataDeepMerge(true);
 
     // Pass-through files
-    config.addPassthroughCopy('src/assets/images');
-    config.addPassthroughCopy('src/assets/fonts');
+    config.addPassthroughCopy({'src/assets/images': 'assets/images'});
+    config.addPassthroughCopy({'src/assets/fonts': 'assets/fonts'});
 
     // Extra watch targets
     config.addWatchTarget("./src/assets/**/*");
