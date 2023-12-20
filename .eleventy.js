@@ -52,6 +52,9 @@ module.exports = function (config) {
     config.addPassthroughCopy('src/assets/images');
     config.addPassthroughCopy('src/assets/fonts');
 
+    // Extra watch targets
+    config.addWatchTarget("./src/assets/**/*");
+
     // Collections
     config.addCollection('postInfo', function (collection) {
         const posts = collection.getFilteredByTag('post');
@@ -74,11 +77,11 @@ module.exports = function (config) {
         markdownTemplateEngine: "njk",
         htmlTemplateEngine: "njk",
         dir: {
-            input: 'src',
+            input: 'src/views',
             output: 'dist',
-            includes: 'includes',
-            layouts: 'layouts',
-            data: 'data',
+            includes: '../includes',
+            layouts: '../layouts',
+            data: '../data',
         }
     };
 };
