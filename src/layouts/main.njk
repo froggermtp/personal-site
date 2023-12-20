@@ -5,21 +5,25 @@
     {% block head %}
         {% include "metadata.njk" %}
 
-        {% for style in assets.styles %}
-            <link
-                rel="stylesheet"
-                href="{{ style | stylePath }}"
-                media="all"
-            ></link>
-        {% endfor %}
+        {% set css %}
+            {% for style in assets.styles %}
+                {% include "../assets/styles/" + style %}
+            {% endfor %}
+        {% endset %}
 
-        {% for script in assets.scripts %}
-            <script 
-                defer
-                src="{{ script | scriptPath }}"
-            >
-            </script>
-        {% endfor %}
+        <style>
+            {{ css | cssmin | safe }}
+        </style>
+
+        {% set js %}
+            {% for script in assets.scripts %}
+                {% include "../assets/scripts/" + script %}
+            {% endfor %}
+        {% endset %}
+
+        <script>
+            {{ js | jsmin | safe }}
+        </script>
     {% endblock %}
     </head>
     

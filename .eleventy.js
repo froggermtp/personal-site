@@ -4,29 +4,25 @@ const pluginTypeset = require("eleventy-plugin-typeset");
 const markdownIt = require("markdown-it");
 const markdownItFootnote = require("markdown-it-footnote");
 const markdownItMathjax = require('@area403/markdown-it-mathjax');
-const nunjucks = require('nunjucks');
+
+const filters = require('./utils/filters.js');
 const pairedShortcodes = require("./utils/pairedShortcodes.js");
 const transforms = require('./utils/transforms.js');
 
 module.exports = function (config) {
-    // Nunjucks
-    const loaders = new nunjucks.FileSystemLoader([
-        'src/layouts',
-        'src/includes',
-    ]);
-    const nunjucksEnvironment = new nunjucks.Environment(loaders, { noCache: true });
-    config.setLibrary("njk", nunjucksEnvironment);
-
-
     // Plugins
     config.addPlugin(pluginRSS);
     config.addPlugin(pluginTypeset({ only: '.articleContent p' }));
     config.addPlugin(pluginSyntaxHighlight);
-
+        
     // Filters
-    const filters = require('./utils/filters.js')(nunjucksEnvironment);
     Object.keys(filters).forEach(filterName => {
-        config.addFilter(filterName, filters[filterName]);
+        const fn = filters[filterName];
+        if (fn.constructor.name == 'AsyncFunction') {
+            config.addAsyncFilter(filterName, fn);
+        } else {
+            config.addFilter(filterName, fn);
+        }
     });
 
     // Paired Shortcodes

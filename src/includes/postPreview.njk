@@ -1,0 +1,3 @@
+{% macro postPreview(post) %}
+{{ post | removeFootnote | striptags(true) | truncate(280) | replace('&quot;', '"') }}
+{% endmacro %}

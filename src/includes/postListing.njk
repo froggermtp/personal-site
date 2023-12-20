@@ -1,3 +1,4 @@
+{% from "postPreview.njk" import postPreview %}
 {% macro postListing(post) %}
 <article>
         <header>
@@ -10,7 +11,7 @@
             </div>
         </header>
         <p>
-            {{ post.templateContent | postPreview }}
+            {{ postPreview(post.templateContent) }}
         </p>
         <footer class="article-footer">
             <a class="readMore" href="{{ post.url | url }}">Read more</a>

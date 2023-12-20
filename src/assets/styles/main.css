@@ -3,8 +3,8 @@
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url('../fonts/oxygen-v10-latin-regular.eot');
-    src: url('../fonts/oxygen-v10-latin-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/oxygen-v10-latin-regular.woff2') format('woff2'), url('../fonts/oxygen-v10-latin-regular.woff') format('woff'), url('../fonts/oxygen-v10-latin-regular.ttf') format('truetype'), url('../fonts/oxygen-v10-latin-regular.svg#Oxygen') format('svg');
+    src: url('/assets/fonts/oxygen-v10-latin-regular.eot');
+    src: url('/assets/fonts/oxygen-v10-latin-regular.eot?#iefix') format('embedded-opentype'), url('/assets/fonts/oxygen-v10-latin-regular.woff2') format('woff2'), url('/assets/fonts/oxygen-v10-latin-regular.woff') format('woff'), url('/assets/fonts/oxygen-v10-latin-regular.ttf') format('truetype'), url('/assets/fonts/oxygen-v10-latin-regular.svg#Oxygen') format('svg');
 }
 
 :root {

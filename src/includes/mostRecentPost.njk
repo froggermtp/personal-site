@@ -1,3 +1,4 @@
+{% from "postPreview.njk" import postPreview %}
 {% set mostRecentPost = collections.post[collections.post.length - 1] %}
 
 <article id="most-recent-post">
@@ -7,7 +8,7 @@
         </h3>
     </header>
     <p>
-        {{ mostRecentPost.templateContent | postPreview }}
+        {{ postPreview(mostRecentPost.templateContent) }}
     </p>
     <footer class="article-footer">
         <a class="readMore" href="/blog">More Posts</a>
