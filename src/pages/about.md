@@ -1,7 +1,22 @@
 ---
+layout: main.njk
 permalink: /about/
-layout: about.njk
+title: About Me
+description: I'm Matthew Parris • Christian • Software Developer
+changeFreq: monthly
+assets:
+    styles:
+        - about-me.css
 ---
+<div class="wrapper">
+    <img 
+        class="img wrapper__image"
+        src="{{ "matthew-parris-by-tree.jpg" | imagePath }}"
+        alt="Matthew with hand on chin next to a swaying tree"
+        width="225"
+        height="300"
+    />
+</div>
 
 My name is Matthew Parris. I'm a Christian trying to figure out how to make money without losing my soul. Currently, I'm working at Paycom--trying to make HR services cheaper and easier to use.
 
