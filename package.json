@@ -2,19 +2,7 @@
   "name": "matthew-parris-site",
   "version": "1.0.0",
   "description": "Matthew Parris's personal website",
-  "scripts": {
-    "start": "npm run dev",
-    "dev": "npm-run-all clean --parallel gulp:watch eleventy:dev --print-label",
-    "build": "run-s clean gulp:build eleventy:prod --print-label",
-    "eleventy:dev": "cross-env ELEVENTY_ENV=development eleventy --serve",
-    "eleventy:prod": "cross-env ELEVENTY_ENV=production eleventy",
-    "gulp:build": "gulp build",
-    "gulp:watch": "gulp watch",
-    "gulp:hashAssets": "gulp hashAssets",
-    "clean": "del-cli dist",
-    "benchmark": "cross-env DEBUG=Eleventy:Benchmark* npm run build",
-    "debug": "cross-env DEBUG=Eleventy* & eleventy --dryrun"
-  },
+  "scripts": {},
   "author": "Matthew Parris",
   "license": "ISC",
   "repository": {
