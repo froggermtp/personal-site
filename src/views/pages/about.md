@@ -18,22 +18,14 @@ assets:
     />
 </div>
 
-My name is Matthew Parris. I'm a Christian trying to figure out how to make money without losing my soul. Currently, I'm working at Paycom--trying to make HR services cheaper and easier to use.
+Hello! If you're looking for the British politician, you've made a wrong turn. I'm Matthew Parris, a DevOps software engineer from Oklahoma—where the wind, as they say, comes sweepin' down the plain.
 
-## Who the heck are you?
+By day, I build and maintain systems at Paycom. On this site, I enjoy diving deep into technical topics and sharing what I'm learning along the way.
 
-Good question! I'm an Internet-savvy Christian with a degree in computer science. Thus, I am mostly trying to pick at the intersection between Christianity and technical work. Despite my online and in-person escapades, there has seemed to be a dearth of people with this two-pronged identity. Other than that, there is not much to say about me. I only recently graduated from college and started working a full-time job. So check back in for more updates?
+I'm also a Christian, a fact I sometimes explore here. My faith is a core part of who I am. If that's not your cup of tea, feel free to scroll on by.
 
-## Why are you a Christian? That's stupid.
+I maintain a love-hate relationship with running, a hobby I picked up in high school and have kept up ever since. You won't catch me running on a holiday—some lines must be drawn.
 
-Well, I'm not good at apologetics or evangelization--and the point of this blog isn't to convert people to my point of view. Also, there's not enough space here to get into this topic. All you need to know is that I was raised Christian and have found its weirdness compelling as I've gotten older. Besides, a lot of stuff I've written here has nothing to do with Christianity. You can easily avoid my Jesus content.
+This site is evolving. Instead of a traditional blog, it's becoming my personal collection of notes, links, and internet riffraff. Think of it as my digital garden, which I'll be tending to more in the near future.
 
-## You got X thing wrong! You're an idiot.
-
-I expect to get some things wrong. After all, I'm human. Thus, if you notice a mistake somewhere on the website, just let me know. I'll try to fix it, pinky promise. Also, I don't think I'm an idiot, although I occasionally do idiotic things. All my greatest achievements have involved me failing a lot. So let me fail.
-
-## How/when/why programming?
-
-I started programming in middle school because I wanted to make video games. Ironically, I now rarely play video games. As I've aged, I've become increasingly interested in trying to solve problems for people and optimizing my time. Video games don't fit well into either of those categories.
-
-Anyway, thanks for stopping by.
+The best way to reach me is by email. I'm not very active on social media. For secure communication, just ask.
