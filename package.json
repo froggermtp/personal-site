@@ -10,17 +10,18 @@
     "url": "https://github.com/froggermtp/personal-site.git"
   },
   "dependencies": {
-    "@11ty/eleventy": "^3.0.0",
-    "@11ty/eleventy-plugin-rss": "^1.0.9",
-    "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.0",
+    "@11ty/eleventy": "^3.1.6",
+    "@11ty/eleventy-plugin-rss": "^3.0.0",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2",
     "@area403/markdown-it-mathjax": "^1.0.0",
+    "cheerio": "0.22.0",
     "clean-css": "^5.3.3",
-    "eleventy-plugin-typeset": "github:liamfiddler/eleventy-plugin-typeset",
-    "html-minifier": "^4.0.0",
+    "html-entities": "^1.4.0",
+    "html-minifier-terser": "^7.2.0",
+    "hypher": "^0.2.5",
     "markdown-it-footnote": "^4.0.0",
-    "moment": "^2.29.1",
-    "node-html-parser": "^7.0.0",
+    "node-html-parser": "^9.0.0",
     "outdent": "^0.8.0",
-    "terser": "^5.26.0"
+    "terser": "^5.49.0"
   }
 }

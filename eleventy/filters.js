@@ -3,7 +3,6 @@ const fs = require('fs');
 const path = require('path');
 const CleanCSS = require("clean-css");
 const Terser = require("terser");
-const moment = require('moment');
 
 const shouldTransformHTML = process.env.ELEVENTY_ENV === 'production';
 
@@ -54,7 +53,20 @@ module.exports = {
     },
 
     date: function (date, format) {
-        return moment.utc(date).format(format);
+        if (format === "LL") {
+            return new Intl.DateTimeFormat('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                timeZone: 'UTC'
+            }).format(new Date(date));
+        }
+
+        if (!format) {
+            return new Date(date).toISOString().replace(/\.\d{3}Z$/, 'Z');
+        }
+
+        throw new Error(`Unsupported date format: ${format}`);
     },
 
     removeFootnote: function (str) {

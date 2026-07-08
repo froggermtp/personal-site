@@ -1,5 +1,6 @@
-const htmlMinfier = require('html-minifier');
+const htmlMinfier = require('html-minifier-terser');
 const htmlParser = require('node-html-parser');
+const typeset = require('../vendor/typeset');
 
 function shouldTransformHtml(outputPath) {
     return outputPath &&
@@ -8,12 +9,12 @@ function shouldTransformHtml(outputPath) {
 }
 
 module.exports = {
-    htmlmin: function (content, outputPath) {
+    htmlmin: async function (content, outputPath) {
         if (!shouldTransformHtml(outputPath)) {
             return content;
         }
 
-        return htmlMinfier.minify(content, {
+        return await htmlMinfier.minify(content, {
             useShortDoctype: true,
             removeComments: true,
             collapseWhitespace: true,
@@ -33,5 +34,13 @@ module.exports = {
             el.setAttribute('loading', 'lazy');
         });
         return root.toString();
+    },
+
+    typeset: function (content, outputPath) {
+        if (outputPath && outputPath.endsWith('.html')) {
+            return typeset(content, { only: '.articleContent p' });
+        }
+
+        return content;
     }
 };

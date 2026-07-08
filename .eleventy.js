@@ -1,6 +1,5 @@
-const pluginRSS = require("@11ty/eleventy-plugin-rss");
+const { rssPlugin } = require("@11ty/eleventy-plugin-rss");
 const pluginSyntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
-const pluginTypeset = require("eleventy-plugin-typeset");
 const markdownIt = require("markdown-it");
 const markdownItFootnote = require("markdown-it-footnote");
 const markdownItMathjax = require('@area403/markdown-it-mathjax');
@@ -11,8 +10,7 @@ const transforms = require('./eleventy/transforms.js');
 
 module.exports = function (config) {
     // Plugins
-    config.addPlugin(pluginRSS);
-    config.addPlugin(pluginTypeset({ only: '.articleContent p' }));
+    config.addPlugin(rssPlugin);
     config.addPlugin(pluginSyntaxHighlight);
         
     // Filters
