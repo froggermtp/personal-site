@@ -28,6 +28,9 @@ module.exports = function (config) {
         config.addPairedShortcode(pairedShortcodeName, pairedShortcodes[pairedShortcodeName]);
     });
 
+    // Shortcodes
+    config.addShortcode('year', () => String(new Date().getFullYear()));
+
     // Transforms
     Object.keys(transforms).forEach(transformName => {
         config.addTransform(transformName, transforms[transformName]);

@@ -6,7 +6,7 @@ module.exports = {
         const header = options.header ?
             `<header class="console__header box box--split">
                 <span class="console__header-text">${options.header}</span>
-                <button class="console__copy-button js-console-btn">Copy</span>
+                <button class="console__copy-button js-console-btn">Copy</button>
             </header>` :
             '';
 

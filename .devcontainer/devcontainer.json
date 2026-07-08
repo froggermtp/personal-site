@@ -6,7 +6,7 @@
 	"image": "mcr.microsoft.com/devcontainers/base:bullseye",
 	"features": {
 		"ghcr.io/devcontainers-contrib/features/node-asdf:0": {
-			"version": "v18.19.0"
+			"version": "v24.4.0"
 		}
 	}
 
