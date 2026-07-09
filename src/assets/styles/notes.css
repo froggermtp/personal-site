@@ -70,6 +70,7 @@
 
 .note-content p {
     margin-left: 0;
+    margin-right: 0;
     margin-bottom: var(--space-lg);
 }
 

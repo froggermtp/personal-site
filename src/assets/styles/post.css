@@ -140,6 +140,7 @@ article {
 
 .articleContent blockquote p {
     margin-left: 0;
+    margin-right: 0;
 }
 
 .articleContent blockquote:before {

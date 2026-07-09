@@ -39,6 +39,7 @@ article:last-of-type {
 article h1 {
     font-size: 1.4rem;
     margin-left: 0;
+    margin-right: 0;
     margin-bottom: var(--space-med);
 }
 
@@ -64,6 +65,7 @@ article header {
 
 p {
     margin-left: 0;
+    margin-right: 0;
     margin-bottom: var(--space-lg);
 }
 
