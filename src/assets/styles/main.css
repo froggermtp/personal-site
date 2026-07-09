@@ -109,6 +109,9 @@ section {
     /* margin-right: var(--space-xl); */
     overflow-x: auto;
     scrollbar-width: none;
+    /* breathing room so the scroll container doesn't clip descenders */
+    padding-top: 3px;
+    padding-bottom: 3px;
 }
 
 .nav-buttons::-webkit-scrollbar {
@@ -130,10 +133,6 @@ section {
 @media (max-width: 480px) {
     .nav-buttons {
         column-gap: var(--space-lg);
-    }
-
-    .nav-button {
-        font-size: 14px;
     }
 }
 
