@@ -1,0 +1,8 @@
+{
+    "tags": [
+        "note"
+    ],
+    "layout": "note.njk",
+    "permalink": "/notes/{{ page.fileSlug | slug }}/index.html",
+    "changeFreq": "yearly"
+}

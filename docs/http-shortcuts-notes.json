@@ -1,0 +1,82 @@
+{
+  "version": 91,
+  "compatibilityVersion": 90,
+  "title": "Notes Publishing",
+  "globalCode": "function padNum(n) { return (n < 10 ? '0' : '') + n; }\n\n// YYYYMMDD-HHMM in the device's local time, matching the notes slug format.\nfunction buildSlug(now) {\n  return '' + now.getFullYear() + padNum(now.getMonth() + 1) + padNum(now.getDate())\n    + '-' + padNum(now.getHours()) + padNum(now.getMinutes());\n}\n\n// ISO 8601 timestamp with the device's local UTC offset (not \"Z\"), e.g.\n// 2026-07-09T14:30:00-05:00, matching the frontmatter `date` field.\nfunction buildIsoLocal(now) {\n  var offsetMinutes = -now.getTimezoneOffset();\n  var sign = offsetMinutes >= 0 ? '+' : '-';\n  var abs = Math.abs(offsetMinutes);\n  return '' + now.getFullYear() + '-' + padNum(now.getMonth() + 1) + '-' + padNum(now.getDate())\n    + 'T' + padNum(now.getHours()) + ':' + padNum(now.getMinutes()) + ':' + padNum(now.getSeconds())\n    + sign + padNum(Math.floor(abs / 60)) + ':' + padNum(abs % 60);\n}\n\nfunction githubHeaders(token) {\n  return {\n    'Authorization': 'Bearer ' + token,\n    'Accept': 'application/vnd.github+json',\n    'X-GitHub-Api-Version': '2022-11-28',\n    'Content-Type': 'application/json'\n  };\n}\n\nfunction describeFailure(result) {\n  if (result.status === 'networkError') {\n    return 'Network error: ' + result.networkError;\n  }\n  return 'HTTP ' + result.response.statusCode + ': ' + result.response.body;\n}\n",
+  "categories": [
+    {
+      "id": "46cdaf53-5b80-4c77-a9a3-e14f3c3c0eb3",
+      "name": "Notes",
+      "shortcuts": [
+        {
+          "id": "bd48acac-836d-441e-b28e-2c38ce9e31d1",
+          "executionType": "scripting",
+          "name": "Post Note",
+          "description": "Publish a text note. Share text into this shortcut from any app, or tap it and type.",
+          "iconName": "flat_color_pencil",
+          "codeOnPrepare": "// \"Post Note\" -- text-only microblog note.\n// Runs entirely here; this shortcut has no declared HTTP request of its own\n// (it is a Scripting-type shortcut), so there is nothing after this script.\n\nvar noteText = getVariable('note_text');\nif (noteText === null || noteText.trim() === '') {\n  showToast('Post Note cancelled.');\n  abort();\n}\n\nvar now = new Date();\nvar slug = buildSlug(now);\nvar isoLocal = buildIsoLocal(now);\n\nvar markdown = '---\\n'\n  + 'date: ' + isoLocal + '\\n'\n  + '---\\n'\n  + noteText.trim() + '\\n';\n\nvar path = 'src/views/notes/' + slug + '.md';\nvar url = 'https://api.github.com/repos/froggermtp/personal-site/contents/' + path;\n\nvar result = sendHttpRequest(url, {\n  method: 'PUT',\n  headers: githubHeaders(getVariable('github_token')),\n  body: JSON.stringify({\n    message: 'Add note ' + slug,\n    content: base64encode(markdown),\n    branch: 'main'\n  })\n});\n\nif (result.status === 'success') {\n  showToast('Note published: ' + slug);\n} else {\n  showDialog('Post Note failed.\\n\\n' + describeFailure(result), 'Post Note');\n}\n"
+        },
+        {
+          "id": "bee426b2-4993-464c-bc91-9eddf9444037",
+          "executionType": "app",
+          "name": "Post Photo Note",
+          "description": "Publish a photo note. Share an image into this shortcut from your gallery or any share sheet.",
+          "iconName": "flat_color_camera",
+          "method": "POST",
+          "url": "https://api.github.com/repos/froggermtp/personal-site",
+          "requestBodyType": "form_data",
+          "timeout": 60000,
+          "parameters": [
+            {
+              "key": "photo",
+              "type": "file",
+              "fileName": "",
+              "fileUploadOptions": {
+                "fileUploadType": "file_picker"
+              }
+            }
+          ],
+          "responseHandling": {
+            "uiType": "toast",
+            "successOutput": "none",
+            "failureOutput": "none"
+          },
+          "codeOnPrepare": "// \"Post Photo Note\" -- photo microblog note.\n// This shortcut IS a Regular/HTTP shortcut (executionType \"app\") because\n// only Regular shortcuts can declare a file parameter, which is what makes\n// the app offer this shortcut in Android's image share sheet and populate\n// `selectedFiles`. The declared request below (POST to the bare repo URL)\n// is a harmless placeholder that is never actually meant to run -- all of\n// the real work happens right here via sendHttpRequest(), and abort() at\n// the end skips the declared request. It is left configured (rather than\n// blank) as a safety net in case abort() ever fails to suppress it: it\n// would just hit a GitHub endpoint that rejects POST with no side effects.\n\nif (typeof selectedFiles === 'undefined' || selectedFiles.length === 0) {\n  showToast('No image received.');\n  abort();\n}\nvar file = selectedFiles[0];\n\nvar noteText = getVariable('note_text');\nvar altText = getVariable('note_alt_text');\nif (noteText === null || altText === null) {\n  showToast('Post Photo Note cancelled.');\n  abort();\n}\n\n// --- UNVERIFIED STEP: read the shared image as base64 ---\n// 'base64' as a readFile() encoding argument is NOT enumerated in the\n// public docs (which only confirm the default is UTF-8). This is the best\n// documented-shaped guess and must be tested on-device before real use.\n// See docs/phone-publishing.md for how to verify it and the fallback plan.\nvar dir = getDirectory();\nvar imageBase64 = dir.readFile(file.id, 'base64');\n\nvar now = new Date();\nvar slug = buildSlug(now);\nvar isoLocal = buildIsoLocal(now);\nvar headers = githubHeaders(getVariable('github_token'));\nvar apiBase = 'https://api.github.com/repos/froggermtp/personal-site/contents/';\n\n// Images are always committed as .jpg per the site's content model.\n// Share a JPEG for best results.\nvar imagePath = 'src/assets/images/notes/' + slug + '.jpg';\nvar imageResult = sendHttpRequest(apiBase + imagePath, {\n  method: 'PUT',\n  headers: headers,\n  body: JSON.stringify({\n    message: 'Add note image ' + slug,\n    content: imageBase64,\n    branch: 'main'\n  })\n});\n\nif (imageResult.status !== 'success') {\n  showDialog('Photo upload failed.\\n\\n' + describeFailure(imageResult), 'Post Photo Note');\n  abort();\n}\n\n// Image committed successfully -- now commit the markdown that references\n// it. Ordering matters: the site build reads the image file and fails if\n// the markdown references one that doesn't exist yet on `main`.\nvar notePath = 'src/views/notes/' + slug + '.md';\nvar markdown = '---\\n'\n  + 'date: ' + isoLocal + '\\n'\n  + 'image: notes/' + slug + '.jpg\\n'\n  + 'imageAlt: \"' + altText.trim().replace(/\"/g, '\\\\\"') + '\"\\n'\n  + '---\\n'\n  + noteText.trim() + '\\n';\n\nvar noteResult = sendHttpRequest(apiBase + notePath, {\n  method: 'PUT',\n  headers: headers,\n  body: JSON.stringify({\n    message: 'Add note ' + slug,\n    content: base64encode(markdown),\n    branch: 'main'\n  })\n});\n\nif (noteResult.status === 'success') {\n  showToast('Photo note published: ' + slug);\n} else {\n  showDialog(\n    'Image uploaded, but the markdown commit failed.\\n\\n'\n      + describeFailure(noteResult)\n      + '\\n\\nThe image is already committed at ' + imagePath\n      + ' -- you may need to add the note manually or retry.',\n    'Post Photo Note'\n  );\n}\n\nabort(); // real work is done; skip the placeholder declared request below\n"
+        }
+      ]
+    }
+  ],
+  "variables": [
+    {
+      "id": "abd5d967-7330-40cd-a931-ec8339b03237",
+      "key": "github_token",
+      "type": "constant",
+      "value": "",
+      "title": "GitHub Token",
+      "isSecret": true,
+      "isExcludeValueFromExport": true
+    },
+    {
+      "id": "7eb81501-cadd-44a4-aa3a-7c34f9c52201",
+      "key": "note_text",
+      "type": "text",
+      "title": "New Note",
+      "message": "What's on your mind?",
+      "isMultiline": true,
+      "isShareText": true,
+      "isShareTitle": false,
+      "rememberValue": false
+    },
+    {
+      "id": "9b3ebdca-450c-4e85-9443-ba5486e1baa4",
+      "key": "note_alt_text",
+      "type": "text",
+      "title": "Alt Text",
+      "message": "Describe the photo for accessibility",
+      "isMultiline": false,
+      "isShareText": false,
+      "isShareTitle": false,
+      "rememberValue": false
+    }
+  ]
+}

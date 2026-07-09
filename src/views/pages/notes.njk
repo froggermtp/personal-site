@@ -1,0 +1,33 @@
+---
+layout: main.njk
+permalink: /notes/{% if pagination.pageNumber > 0 %}{{ pagination.pageNumber }}/{% endif %}
+title: Notes
+pagination:
+    data: collections.note
+    size: 20
+    reverse: true
+    alias: notes
+assets:
+  styles:
+    - notes.css
+---
+{% from "noteCard.njk" import noteCard %}
+
+<header id="notes-page-header">
+  <h1>Notes</h1>
+</header>
+
+<div id="notes">
+{% for note in notes %}
+  {{ noteCard(note.url, note.date, note.templateContent, note.data.image, note.data.imageAlt) }}
+{% endfor %}
+</div>
+
+<nav id="pagination">
+{% if pagination.previousPageHref %}
+  <a href="{{ pagination.previousPageHref }}" class="new">Newer notes</a>
+{% endif %}
+{% if pagination.nextPageHref %}
+  <a href="{{ pagination.nextPageHref }}" class="old">Older notes</a>
+{% endif %}
+</nav>

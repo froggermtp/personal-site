@@ -1,0 +1,11 @@
+{% macro noteCard(url, date, contentHtml, image, imageAlt) %}
+<article class="note">
+    <header class="note-metadata">
+        <a href="{{ url }}"><time datetime="{{ date | date }}">{{ date | date("LLL") }}</time></a>
+    </header>
+    {% if image %}
+    <img class="note-image" src="{{ image | imagePath }}" alt="{{ imageAlt }}">
+    {% endif %}
+    <div class="note-content">{{ contentHtml | safe }}</div>
+</article>
+{% endmacro %}

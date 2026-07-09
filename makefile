@@ -14,3 +14,6 @@ build: clean
 
 clean:
 	rm -rf ./dist node_modules
+
+note:
+	scripts/new-note.sh $(if $(IMG),-i $(IMG)) $(if $(ALT),-a "$(ALT)")

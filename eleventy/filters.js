@@ -62,6 +62,17 @@ module.exports = {
             }).format(new Date(date));
         }
 
+        if (format === "LLL") {
+            return new Intl.DateTimeFormat('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: '2-digit',
+                timeZone: 'America/Chicago'
+            }).format(new Date(date));
+        }
+
         if (!format) {
             return new Date(date).toISOString().replace(/\.\d{3}Z$/, 'Z');
         }

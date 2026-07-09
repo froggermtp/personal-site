@@ -1,0 +1,11 @@
+---
+layout: main.njk
+assets:
+    styles:
+        - notes.css
+---
+{% from "noteCard.njk" import noteCard %}
+<div id="note-page">
+    {{ noteCard(page.url, page.date, content, image, imageAlt) }}
+    <nav class="note-back"><a href="/notes">← All notes</a></nav>
+</div>

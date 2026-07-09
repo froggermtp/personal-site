@@ -1,0 +1,31 @@
+---
+permalink: notes/feed.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>{{ site.author.name }} | Notes</title>
+  <subtitle>Short notes, links, and photos from {{ site.author.name }}</subtitle>
+  <link href="{{ site.url | url }}/notes/feed.xml" rel="self"/>
+  <link href="{{ site.url | url }}/notes"/>
+  <updated>{{ collections.note | getNewestCollectionItemDate | dateToRfc3339 }}</updated>
+  <id>{{ site.url | url }}/notes/feed.xml</id>
+  <author>
+    <name>{{ site.author.name }}</name>
+    <email>{{ site.author.email }}</email>
+  </author>
+  {%- for note in collections.note | reverse %}
+  {% set absoluteNoteUrl %}{{ note.url | url | absoluteUrl(site.url) }}{% endset %}
+  <entry>
+    <title>Note from {{ note.date | date("LLL") }}</title>
+    <link href="{{ absoluteNoteUrl }}"/>
+    <updated>{{ note.date | dateToRfc3339 }}</updated>
+    <id>{{ absoluteNoteUrl }}</id>
+    {%- if note.data.image %}
+    <content type="html">{{ ('<p><img src="/assets/images/' + note.data.image + '" alt="' + note.data.imageAlt + '"></p>' + note.templateContent) | htmlToAbsoluteUrls(absoluteNoteUrl) }}</content>
+    {%- else %}
+    <content type="html">{{ note.templateContent | htmlToAbsoluteUrls(absoluteNoteUrl) }}</content>
+    {%- endif %}
+  </entry>
+  {%- endfor %}
+</feed>
