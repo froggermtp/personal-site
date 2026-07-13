@@ -29,6 +29,14 @@
     margin-top: var(--space-xl);
 }
 
+/* Flex items (children of #main-container) must be allowed to shrink
+   below their content's min-width, or long URLs widen the whole column
+   past the viewport. */
+#notes,
+#note-page {
+    min-width: 0;
+}
+
 .note {
     margin-left: var(--space-xl);
     margin-right: var(--space-xl);
@@ -66,6 +74,8 @@
 
 .note-content {
     font-size: 1em;
+    /* pasted links can be longer than the screen is wide */
+    overflow-wrap: anywhere;
 }
 
 .note-content p {
