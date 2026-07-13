@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Note Composer</title>
+<style>
+  :root {
+    --space-sm: .25rem; --space-med: .5rem; --space-lg: 1rem; --space-xl: 2rem; --space-xxl: 4rem;
+    --color-dark: hsl(0, 0%, 13%); --color-grey: hsl(0, 0%, 29%); --color-light-grey: hsl(0, 0%, 45%);
+    --color-bg: #fff; --color-field-bg: #fff; --color-border: hsl(0, 0%, 82%);
+    --color-error: hsl(0, 65%, 42%); --color-error-bg: hsl(0, 65%, 96%);
+    --color-success: hsl(140, 45%, 28%); --color-success-bg: hsl(140, 45%, 96%);
+    --color-info-bg: hsl(210, 40%, 96%);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-dark: hsl(0, 0%, 92%); --color-grey: hsl(0, 0%, 78%); --color-light-grey: hsl(0, 0%, 62%);
+      --color-bg: hsl(0, 0%, 9%); --color-field-bg: hsl(0, 0%, 14%); --color-border: hsl(0, 0%, 30%);
+      --color-error: hsl(0, 70%, 68%); --color-error-bg: hsl(0, 45%, 18%);
+      --color-success: hsl(140, 45%, 65%); --color-success-bg: hsl(140, 30%, 15%);
+      --color-info-bg: hsl(210, 25%, 18%);
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--color-bg); color: var(--color-dark); line-height: 1.6;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  header.site-header { background: #000; color: #fff; padding: var(--space-xl); border-bottom: 1px solid transparent; }
+  @media (prefers-color-scheme: dark) { header.site-header { border-bottom-color: hsl(0, 0%, 25%); } }
+  header.site-header h1 { margin: 0 0 var(--space-sm) 0; font-size: 1.5rem; }
+  header.site-header p { margin: 0; color: hsl(0, 0%, 80%); font-size: .95rem; }
+  main { max-width: 640px; margin: 0 auto; padding: var(--space-xl); }
+  .field { margin-bottom: var(--space-xl); }
+  label { display: block; font-weight: 700; margin-bottom: var(--space-med); }
+  .required { color: var(--color-error); font-weight: 400; }
+  textarea, input[type="text"] {
+    width: 100%; padding: var(--space-med); font-size: 1rem; font-family: inherit; color: var(--color-dark);
+    background: var(--color-field-bg); border: 1px solid var(--color-border); border-radius: 6px;
+  }
+  textarea { min-height: 220px; resize: vertical; }
+  input[type="file"] { display: block; margin-top: var(--space-sm); color: var(--color-dark); }
+  #image-preview-wrap { margin-top: var(--space-lg); display: flex; align-items: center; gap: var(--space-lg); }
+  #image-preview { max-width: 160px; max-height: 160px; border-radius: 6px; border: 1px solid var(--color-border); display: block; }
+  button { font-family: inherit; font-size: 1rem; cursor: pointer; border-radius: 6px; }
+  .btn-secondary { padding: var(--space-med) var(--space-lg); background: transparent; color: var(--color-dark); border: 1px solid var(--color-border); }
+  .btn-secondary:hover { background: var(--color-info-bg); }
+  .folder-field p { margin: 0 0 var(--space-med) 0; color: var(--color-grey); }
+  .filename-preview { color: var(--color-grey); font-size: .95rem; }
+  .filename-preview code, .publish-cmd, #brave-hint code, #edit-banner code, .note-title code {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  }
+  .filename-preview code { background: var(--color-info-bg); padding: .15rem .4rem; border-radius: 4px; }
+  #edit-banner p { margin: 0; }
+  .link-btn { background: none; border: none; padding: 0; color: inherit; text-decoration: underline; font-size: inherit; }
+  #notes-section h2 { margin: var(--space-xxl) 0 var(--space-lg) 0; font-size: 1.2rem; }
+  .notes-message { color: var(--color-grey); margin: 0 0 var(--space-med) 0; }
+  .note-row {
+    display: flex; justify-content: space-between; align-items: flex-start; gap: var(--space-lg);
+    padding: var(--space-med) 0; border-bottom: 1px solid var(--color-border);
+  }
+  .note-row p { margin: 0; }
+  .note-meta { min-width: 0; }
+  .note-date { color: var(--color-light-grey); font-size: .85rem; margin-left: var(--space-med); }
+  .note-preview { color: var(--color-grey); font-size: .9rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .note-actions { display: flex; gap: var(--space-med); flex-shrink: 0; }
+  .btn-small { padding: var(--space-sm) var(--space-med); font-size: .9rem; }
+  .btn-danger { color: var(--color-error); border-color: var(--color-error); }
+  #show-all-btn { margin-top: var(--space-lg); }
+  #brave-hint .status p { margin: 0 0 var(--space-med) 0; }
+  #brave-hint code { background: rgba(0, 0, 0, .06); padding: .1rem .3rem; border-radius: 4px; word-break: break-all; }
+  @media (prefers-color-scheme: dark) { #brave-hint code { background: rgba(255, 255, 255, .08); } }
+  #save-btn { padding: var(--space-med) var(--space-xl); background: #000; color: #fff; border: none; font-weight: 700; }
+  @media (prefers-color-scheme: dark) { #save-btn { background: hsl(0, 0%, 92%); color: hsl(0, 0%, 9%); } }
+  #save-btn:hover { opacity: .85; }
+  #status:empty { display: none; }
+  #status { margin-bottom: var(--space-xl); }
+  .status { padding: var(--space-lg); border-radius: 6px; }
+  .status-error { background: var(--color-error-bg); color: var(--color-error); }
+  .status-info { background: var(--color-info-bg); color: var(--color-dark); }
+  .status-success { background: var(--color-success-bg); color: var(--color-success); }
+  .status-success ul { margin: var(--space-med) 0; padding-left: 1.25rem; }
+  .status-heading { font-weight: 700; margin: 0 0 var(--space-med) 0; }
+  .publish-cmd {
+    display: block; background: rgba(0, 0, 0, .06); color: inherit; padding: var(--space-med);
+    border-radius: 4px; white-space: pre-wrap; word-break: break-all; margin: var(--space-med) 0;
+  }
+  @media (prefers-color-scheme: dark) { .publish-cmd { background: rgba(255, 255, 255, .08); } }
+  .copy-btn { padding: var(--space-sm) var(--space-lg); background: transparent; border: 1px solid currentColor; color: inherit; }
+  footer.site-footer {
+    max-width: 640px; margin: 0 auto; padding: 0 var(--space-xl) var(--space-xxl) var(--space-xl);
+    color: var(--color-light-grey); font-size: .9rem;
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <h1>Note Composer</h1>
+  <p>Compose a note for the site's Notes microblog. Runs entirely on this machine.</p>
+</header>
+
+<main>
+  <form id="note-form" novalidate>
+
+    <div class="field">
+      <label for="body-input">Note body (Markdown)</label>
+      <textarea id="body-input" placeholder="Write your note here. Markdown is supported, e.g. [link text](https://example.com)."></textarea>
+    </div>
+
+    <div class="field">
+      <label for="image-input">Photo (optional)</label>
+      <input type="file" id="image-input" accept="image/*">
+      <div id="image-preview-wrap" hidden>
+        <img id="image-preview" alt="Selected photo preview">
+        <button type="button" class="btn-secondary" id="clear-image-btn">Remove photo</button>
+      </div>
+    </div>
+
+    <div class="field" id="alt-field">
+      <label for="alt-input">Alt text <span class="required" id="alt-required" hidden>(required for photo notes)</span></label>
+      <input type="text" id="alt-input" placeholder="Describe the photo for accessibility">
+    </div>
+
+    <div class="field folder-field" id="folder-field" hidden>
+      <p id="folder-status">No folder chosen — files will be downloaded instead.</p>
+      <button type="button" class="btn-secondary" id="choose-folder-btn">Choose repo folder&hellip;</button>
+    </div>
+
+    <div class="field" id="brave-hint" hidden>
+      <div class="status status-info">
+        <p class="status-heading">Using Brave?</p>
+        <p>
+          Brave disables the File System Access API by default, so saving falls
+          back to file downloads. To save notes directly into the repo instead:
+          open <code>brave://flags</code>, search for "File System Access API"
+          (<code>brave://flags/#file-system-access-api</code>), set it to
+          Enabled, and relaunch Brave.
+        </p>
+        <p>
+          Meanwhile, to stop the save dialog appearing for every downloaded
+          file, turn off "Ask where to save each file" in
+          <code>brave://settings/downloads</code> — downloads then go straight
+          to your Downloads folder.
+        </p>
+        <button type="button" class="btn-secondary" id="brave-hint-dismiss">Got it</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <p class="filename-preview">Will save as <code id="filename-preview">src/views/notes/&hellip;.md</code></p>
+    </div>
+
+    <div class="field" id="edit-banner" hidden>
+      <p class="status status-info">Editing <code id="edit-slug"></code> —
+        <button type="button" class="link-btn" id="cancel-edit-btn">Cancel</button></p>
+    </div>
+
+    <div id="status" role="status" aria-live="polite"></div>
+
+    <button type="submit" id="save-btn">Save note</button>
+  </form>
+
+  <section id="notes-section">
+    <h2>Recent notes</h2>
+    <div id="notes-content"><p class="notes-message">Loading&hellip;</p></div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p>
+    Two save modes: in browsers that support the File System Access API
+    (Chromium-based, e.g. Chrome/Edge), you can pick this repo's root folder
+    once and notes/photos are written straight into it. In other browsers,
+    Save downloads the note (and photo, if any) as files for you to move into
+    place by hand. On Brave, direct saving needs the "File System Access API"
+    flag enabled in <code>brave://flags</code> first. Either way, nothing here
+    is uploaded anywhere — there is no server and no network request involved.
+  </p>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  // URL param ?mode=download forces the download fallback path even in
+  // browsers that support the File System Access API. Used for automated
+  // testing of the download path without a directory-picker dialog.
+
+  var DB_NAME = "note-composer";
+  var STORE_NAME = "handles";
+  var HANDLE_KEY = "repoRoot";
+  var DRAFT_IMAGE_KEY = "draftImage";
+  var DRAFT_KEY = "note-composer-draft";
+  var BRAVE_HINT_KEY = "note-composer-brave-hint-dismissed";
+
+  var state = {
+    dirHandle: null, imageFile: null, imageObjectUrl: null,
+    // edit: null = composing a new note; otherwise
+    // { slug, date, originalImageName, imageReplaced } for the note being edited.
+    edit: null,
+    notes: [], showAllNotes: false
+  };
+  var el = {};
+
+  function pad(n) { return (n < 10 ? "0" : "") + n; }
+
+  function buildSlug(now) {
+    return "" + now.getFullYear() + pad(now.getMonth() + 1) + pad(now.getDate())
+      + "-" + pad(now.getHours()) + pad(now.getMinutes());
+  }
+
+  function buildIsoLocal(now) {
+    var offsetMinutes = -now.getTimezoneOffset();
+    var sign = offsetMinutes >= 0 ? "+" : "-";
+    var abs = Math.abs(offsetMinutes);
+    return "" + now.getFullYear() + "-" + pad(now.getMonth() + 1) + "-" + pad(now.getDate())
+      + "T" + pad(now.getHours()) + ":" + pad(now.getMinutes()) + ":00"
+      + sign + pad(Math.floor(abs / 60)) + ":" + pad(abs % 60);
+  }
+
+  function extFromFilename(name) {
+    var idx = name.lastIndexOf(".");
+    if (idx === -1 || idx === name.length - 1) return "jpg";
+    return name.slice(idx + 1).toLowerCase();
+  }
+
+  function assembleMarkdown(opts) {
+    var md = "---\n" + "date: " + opts.isoLocal + "\n";
+    if (opts.imagePath) {
+      md += "image: " + opts.imagePath + "\n";
+      md += "imageAlt: \"" + opts.altText.trim().replace(/"/g, "\\\"") + "\"\n";
+    }
+    return md + "---\n" + opts.body.trim() + "\n";
+  }
+
+  // Inverse of assembleMarkdown: pull date/image/imageAlt and the body back
+  // out of a note file. Tolerates the escaped-quote alt format we write.
+  function parseNote(text) {
+    var m = text.match(/^---\n([\s\S]*?)\n---\n?/);
+    if (!m) return { date: null, image: null, imageAlt: null, body: text };
+    var fm = m[1];
+    var altMatch = fm.match(/^imageAlt:\s*"((?:[^"\\]|\\.)*)"\s*$/m);
+    return {
+      date: ((fm.match(/^date:\s*(.+)$/m) || [])[1] || "").trim() || null,
+      image: ((fm.match(/^image:\s*(.+)$/m) || [])[1] || "").trim() || null,
+      imageAlt: altMatch ? altMatch[1].replace(/\\"/g, "\"") : null,
+      body: text.slice(m[0].length)
+    };
+  }
+
+  // --- IndexedDB: persist the chosen directory handle across page loads ---
+
+  function idbOpen() {
+    return new Promise(function (resolve, reject) {
+      var req = indexedDB.open(DB_NAME, 1);
+      req.onupgradeneeded = function () { req.result.createObjectStore(STORE_NAME); };
+      req.onsuccess = function () { resolve(req.result); };
+      req.onerror = function () { reject(req.error); };
+    });
+  }
+
+  async function idbGet(key) {
+    var db = await idbOpen();
+    return new Promise(function (resolve, reject) {
+      var req = db.transaction(STORE_NAME, "readonly").objectStore(STORE_NAME).get(key);
+      req.onsuccess = function () { resolve(req.result); };
+      req.onerror = function () { reject(req.error); };
+    });
+  }
+
+  async function idbPut(key, value) {
+    var db = await idbOpen();
+    return new Promise(function (resolve, reject) {
+      var tx = db.transaction(STORE_NAME, "readwrite");
+      tx.objectStore(STORE_NAME).put(value, key);
+      tx.oncomplete = function () { resolve(); };
+      tx.onerror = function () { reject(tx.error); };
+    });
+  }
+
+  async function idbDelete(key) {
+    var db = await idbOpen();
+    return new Promise(function (resolve, reject) {
+      var tx = db.transaction(STORE_NAME, "readwrite");
+      tx.objectStore(STORE_NAME).delete(key);
+      tx.oncomplete = function () { resolve(); };
+      tx.onerror = function () { reject(tx.error); };
+    });
+  }
+
+  // --- Draft persistence (survive page refreshes) ---
+
+  function saveTextDraft() {
+    if (state.edit) return; // edit mode suspends new-note draft persistence
+    try {
+      localStorage.setItem(DRAFT_KEY, JSON.stringify({
+        body: el.bodyInput.value,
+        alt: el.altInput.value
+      }));
+    } catch (e) { /* storage unavailable — drafts just won't persist */ }
+  }
+
+  function clearDraft() {
+    try { localStorage.removeItem(DRAFT_KEY); } catch (e) { /* ignore */ }
+    idbDelete(DRAFT_IMAGE_KEY).catch(function () { /* ignore */ });
+  }
+
+  async function restoreDraft() {
+    try {
+      var raw = localStorage.getItem(DRAFT_KEY);
+      if (raw) {
+        var draft = JSON.parse(raw);
+        if (draft && typeof draft.body === "string") el.bodyInput.value = draft.body;
+        if (draft && typeof draft.alt === "string") el.altInput.value = draft.alt;
+      }
+      var file = await idbGet(DRAFT_IMAGE_KEY);
+      if (file) setImageFile(file);
+    } catch (e) { /* a corrupt draft must never break page load */ }
+  }
+
+  // --- Direct-save mode (File System Access API) ---
+
+  function directCapable() {
+    var forceDownload = new URLSearchParams(location.search).get("mode") === "download";
+    return ("showDirectoryPicker" in window) && !forceDownload;
+  }
+
+  async function chooseRepoFolder() {
+    var handle = await window.showDirectoryPicker({ id: "note-composer-repo", mode: "readwrite" });
+    state.dirHandle = handle;
+    await idbPut(HANDLE_KEY, handle);
+    return handle;
+  }
+
+  // Handles without queryPermission/requestPermission (e.g. OPFS directory
+  // handles) are always writable, so treat them as granted.
+  async function queryPermissionSafe(handle) {
+    if (typeof handle.queryPermission !== "function") return "granted";
+    return handle.queryPermission({ mode: "readwrite" });
+  }
+
+  async function verifyPermission(handle) {
+    if (typeof handle.queryPermission !== "function") return true;
+    if ((await queryPermissionSafe(handle)) === "granted") return true;
+    return (await handle.requestPermission({ mode: "readwrite" })) === "granted";
+  }
+
+  async function verifyRepoHandle(handle) {
+    if (!(await verifyPermission(handle))) {
+      throw new Error("Permission to the folder was not granted.");
+    }
+    try {
+      await handle.getDirectoryHandle("src");
+    } catch (e) {
+      throw new Error("That doesn't look like the repo root (no \"src\" folder found there). Choose the repository root folder.");
+    }
+  }
+
+  async function ensureRepoHandle() {
+    var handle = state.dirHandle || await chooseRepoFolder();
+    await verifyRepoHandle(handle);
+    return handle;
+  }
+
+  async function getNotesDir(repoHandle, create) {
+    var opts = create ? { create: true } : undefined;
+    var srcHandle = await repoHandle.getDirectoryHandle("src");
+    var viewsHandle = await srcHandle.getDirectoryHandle("views", opts);
+    return viewsHandle.getDirectoryHandle("notes", opts);
+  }
+
+  async function getImagesDir(repoHandle, create) {
+    var opts = create ? { create: true } : undefined;
+    var srcHandle = await repoHandle.getDirectoryHandle("src");
+    var assetsHandle = await srcHandle.getDirectoryHandle("assets", opts);
+    var imagesHandle = await assetsHandle.getDirectoryHandle("images", opts);
+    return imagesHandle.getDirectoryHandle("notes", opts);
+  }
+
+  async function writeFileTo(dirHandle, name, contents) {
+    var fileHandle = await dirHandle.getFileHandle(name, { create: true });
+    var writable = await fileHandle.createWritable();
+    await writable.write(contents);
+    await writable.close();
+  }
+
+  async function saveDirect(repoHandle, data) {
+    var notesHandle = await getNotesDir(repoHandle, true);
+
+    try {
+      await notesHandle.getFileHandle(data.slug + ".md");
+      throw new Error("A note for this minute already exists — wait a minute.");
+    } catch (err) {
+      if (err && err.name !== "NotFoundError") throw err;
+    }
+
+    var imagePath = null;
+    if (data.file) {
+      var imagesNotesHandle = await getImagesDir(repoHandle, true);
+      await writeFileTo(imagesNotesHandle, data.slug + "." + data.ext, data.file);
+      imagePath = "src/assets/images/notes/" + data.slug + "." + data.ext;
+    }
+
+    await writeFileTo(notesHandle, data.slug + ".md", data.markdown);
+
+    return { notePath: "src/views/notes/" + data.slug + ".md", imagePath: imagePath };
+  }
+
+  // Overwrite an existing note (edit mode). Keeps the original slug and date;
+  // intentionally no duplicate-existence guard.
+  async function updateDirect(repoHandle, ed, body, alt) {
+    var notesHandle = await getNotesDir(repoHandle, true);
+    var file = state.imageFile;
+
+    var imageRef = null;        // frontmatter "notes/<file>" value
+    var writtenImage = null;    // repo-relative path of a newly written image
+    var oldImageToDelete = null;
+
+    if (file && ed.imageReplaced) {
+      var newName = ed.slug + "." + extFromFilename(file.name);
+      await writeFileTo(await getImagesDir(repoHandle, true), newName, file);
+      writtenImage = "src/assets/images/notes/" + newName;
+      if (ed.originalImageName && ed.originalImageName !== newName) oldImageToDelete = ed.originalImageName;
+      imageRef = "notes/" + newName;
+    } else if (file) {
+      imageRef = "notes/" + ed.originalImageName; // unchanged — keep reference, don't rewrite bytes
+    } else if (ed.originalImageName) {
+      oldImageToDelete = ed.originalImageName;    // photo removed
+    }
+
+    var markdown = assembleMarkdown({ isoLocal: ed.date, body: body, imagePath: imageRef, altText: alt });
+    await writeFileTo(notesHandle, ed.slug + ".md", markdown);
+
+    if (oldImageToDelete) {
+      try {
+        await (await getImagesDir(repoHandle, false)).removeEntry(oldImageToDelete);
+      } catch (err) {
+        if (err && err.name !== "NotFoundError") throw err;
+      }
+    }
+
+    return { notePath: "src/views/notes/" + ed.slug + ".md", imagePath: writtenImage };
+  }
+
+  // --- Download fallback mode ---
+
+  function downloadBlob(blob, filename) {
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+  }
+
+  function saveDownload(data) {
+    downloadBlob(new Blob([data.markdown], { type: "text/markdown" }), data.slug + ".md");
+    var imageFilename = null;
+    if (data.file) {
+      downloadBlob(data.file, data.slug + "." + data.ext);
+      imageFilename = data.slug + "." + data.ext;
+    }
+    return { imageFilename: imageFilename };
+  }
+
+  function downloadLines(slug, imageFilename) {
+    var lines = ["src/views/notes/" + slug + ".md (downloaded, move it into place)"];
+    if (imageFilename) lines.push(imageFilename + " downloaded — move it to src/assets/images/notes/");
+    return lines;
+  }
+
+  // --- Status / UI rendering ---
+
+  function clearStatus() {
+    el.status.innerHTML = "";
+    el.status.className = "";
+  }
+
+  function showError(msg) {
+    clearStatus();
+    el.status.className = "status status-error";
+    el.status.textContent = msg;
+  }
+
+  function showInfo(msg) {
+    clearStatus();
+    el.status.className = "status status-info";
+    el.status.textContent = msg;
+  }
+
+  function showSuccess(heading, lines, slug) {
+    clearStatus();
+    el.status.className = "status status-success";
+
+    var h = document.createElement("p");
+    h.className = "status-heading";
+    h.textContent = heading;
+    el.status.appendChild(h);
+
+    var ul = document.createElement("ul");
+    lines.forEach(function (line) {
+      var li = document.createElement("li");
+      li.textContent = line;
+      ul.appendChild(li);
+    });
+    el.status.appendChild(ul);
+
+    var p = document.createElement("p");
+    p.textContent = "To publish:";
+    el.status.appendChild(p);
+
+    var code = document.createElement("code");
+    code.className = "publish-cmd";
+    code.textContent = "git add -A && git commit -m \"Add note " + slug + "\" && git push";
+    el.status.appendChild(code);
+
+    var copyBtn = document.createElement("button");
+    copyBtn.type = "button";
+    copyBtn.className = "copy-btn";
+    copyBtn.textContent = "Copy";
+    copyBtn.addEventListener("click", function () { copyText(code.textContent, copyBtn); });
+    el.status.appendChild(copyBtn);
+  }
+
+  function fallbackCopy(text) {
+    var ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand("copy");
+    ta.remove();
+  }
+
+  async function copyText(text, btn) {
+    var original = btn.textContent;
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+      } else {
+        fallbackCopy(text);
+      }
+      btn.textContent = "Copied!";
+    } catch (e) {
+      try { fallbackCopy(text); btn.textContent = "Copied!"; } catch (e2) { btn.textContent = "Copy failed"; }
+    }
+    setTimeout(function () { btn.textContent = original; }, 1500);
+  }
+
+  async function updateFolderStatus() {
+    if (!state.dirHandle) {
+      el.folderStatus.textContent = "No folder chosen — files will be downloaded instead.";
+      return;
+    }
+    var name = state.dirHandle.name;
+    try {
+      var perm = await queryPermissionSafe(state.dirHandle);
+      el.folderStatus.textContent = perm === "granted"
+        ? "Saving into: " + name
+        : "Saving into: " + name + " (will ask permission on next save)";
+    } catch (e) {
+      el.folderStatus.textContent = "Saving into: " + name;
+    }
+  }
+
+  function updateFilenamePreview() {
+    var slug = state.edit ? state.edit.slug : buildSlug(new Date());
+    el.filenamePreview.textContent = "src/views/notes/" + slug + ".md";
+  }
+
+  function updateAltRequired() {
+    var has = !!state.imageFile;
+    el.altRequired.hidden = !has;
+    el.altField.classList.toggle("required-active", has);
+  }
+
+  function setImageFile(file) {
+    state.imageFile = file;
+    if (state.imageObjectUrl) URL.revokeObjectURL(state.imageObjectUrl);
+    state.imageObjectUrl = URL.createObjectURL(file);
+    el.imagePreview.src = state.imageObjectUrl;
+    el.imagePreviewWrap.hidden = false;
+    updateAltRequired();
+  }
+
+  // Clears the image UI/state only. Draft-image deletion is up to the caller
+  // (edit mode must never touch the stored new-note draft image).
+  function clearImageUI() {
+    if (state.imageObjectUrl) URL.revokeObjectURL(state.imageObjectUrl);
+    state.imageObjectUrl = null;
+    state.imageFile = null;
+    el.imageInput.value = "";
+    el.imagePreview.src = "";
+    el.imagePreviewWrap.hidden = true;
+    updateAltRequired();
+  }
+
+  // "Remove photo": drop only the image draft — the text draft stays.
+  function handleRemovePhoto() {
+    clearImageUI();
+    if (!state.edit) idbDelete(DRAFT_IMAGE_KEY).catch(function () { /* ignore */ });
+  }
+
+  // After a successful NEW-note save: clear form and the whole stored draft.
+  function resetForm() {
+    el.form.reset();
+    clearImageUI();
+    clearDraft();
+    updateFilenamePreview();
+  }
+
+  // --- Event handlers ---
+
+  function handleImageChange(e) {
+    var file = e.target.files && e.target.files[0];
+    if (!file) { handleRemovePhoto(); return; }
+    setImageFile(file);
+    if (state.edit) {
+      state.edit.imageReplaced = true;
+    } else {
+      // File objects are structured-cloneable, so they can be stored as-is.
+      idbPut(DRAFT_IMAGE_KEY, file).catch(function () { /* draft image won't persist */ });
+    }
+  }
+
+  // Brave ships with the File System Access API disabled by default, so the
+  // feature-detect fails and users silently get the download fallback. Point
+  // them at the flag that enables it. (Not shown when ?mode=download forced
+  // the fallback in a capable browser — this checks the API itself, not mode.)
+  function initBraveHint() {
+    var isBraveWithoutApi = navigator.brave !== undefined && !("showDirectoryPicker" in window);
+    if (!isBraveWithoutApi) return;
+    var dismissed = false;
+    try { dismissed = localStorage.getItem(BRAVE_HINT_KEY) === "1"; } catch (e) { /* ignore */ }
+    if (dismissed) return;
+    el.braveHint.hidden = false;
+    el.braveHintDismiss.addEventListener("click", function () {
+      el.braveHint.hidden = true;
+      try { localStorage.setItem(BRAVE_HINT_KEY, "1"); } catch (e) { /* ignore */ }
+    });
+  }
+
+  async function handleChooseFolderClick() {
+    try {
+      var handle = await chooseRepoFolder();
+      await verifyRepoHandle(handle);
+      showInfo("Folder set: " + handle.name + ". Ready to save notes directly into the repo.");
+    } catch (err) {
+      if (!(err && err.name === "AbortError")) showError(err.message || "Could not access that folder.");
+    }
+    updateFolderStatus();
+    refreshNotesSection();
+  }
+
+  // --- Recent notes: list / edit / delete (direct mode only) ---
+
+  function renderNotesMessage(msg) {
+    el.notesContent.innerHTML = "";
+    var p = document.createElement("p");
+    p.className = "notes-message";
+    p.textContent = msg;
+    el.notesContent.appendChild(p);
+  }
+
+  function renderNotesAction(msg, label, onClick) {
+    renderNotesMessage(msg);
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "btn-secondary";
+    btn.textContent = label;
+    btn.addEventListener("click", onClick);
+    el.notesContent.appendChild(btn);
+  }
+
+  function renderNotesList() {
+    el.notesContent.innerHTML = "";
+    if (!state.notes.length) { renderNotesMessage("No notes yet."); return; }
+
+    var shown = state.showAllNotes ? state.notes : state.notes.slice(0, 5);
+    shown.forEach(function (item) {
+      var row = document.createElement("div");
+      row.className = "note-row";
+
+      var meta = document.createElement("div");
+      meta.className = "note-meta";
+      var title = document.createElement("p");
+      title.className = "note-title";
+      var slugCode = document.createElement("code");
+      slugCode.textContent = item.slug;
+      title.appendChild(slugCode);
+      var dateSpan = document.createElement("span");
+      dateSpan.className = "note-date";
+      dateSpan.textContent = item.date || "(no date)";
+      title.appendChild(dateSpan);
+      var preview = document.createElement("p");
+      preview.className = "note-preview";
+      preview.textContent = item.preview || "(no text)";
+      meta.appendChild(title);
+      meta.appendChild(preview);
+
+      var actions = document.createElement("div");
+      actions.className = "note-actions";
+      var editBtn = document.createElement("button");
+      editBtn.type = "button";
+      editBtn.className = "btn-secondary btn-small";
+      editBtn.textContent = "Edit";
+      editBtn.addEventListener("click", function () { startEdit(item); });
+      var delBtn = document.createElement("button");
+      delBtn.type = "button";
+      delBtn.className = "btn-secondary btn-small btn-danger";
+      delBtn.textContent = "Delete";
+      delBtn.addEventListener("click", function () { deleteNote(item); });
+      actions.appendChild(editBtn);
+      actions.appendChild(delBtn);
+
+      row.appendChild(meta);
+      row.appendChild(actions);
+      el.notesContent.appendChild(row);
+    });
+
+    if (state.notes.length > 5) {
+      var toggle = document.createElement("button");
+      toggle.type = "button";
+      toggle.className = "btn-secondary btn-small";
+      toggle.id = "show-all-btn";
+      toggle.textContent = state.showAllNotes ? "Show fewer" : "Show all (" + state.notes.length + ")";
+      toggle.addEventListener("click", function () {
+        state.showAllNotes = !state.showAllNotes;
+        renderNotesList();
+      });
+      el.notesContent.appendChild(toggle);
+    }
+  }
+
+  async function loadNotesList() {
+    var notesHandle = await getNotesDir(state.dirHandle, false);
+    var items = [];
+    for await (var entry of notesHandle.values()) {
+      if (entry.kind !== "file" || !entry.name.endsWith(".md")) continue; // skips notes.json etc.
+      var text = await (await entry.getFile()).text();
+      var parsed = parseNote(text);
+      items.push({
+        slug: entry.name.slice(0, -3),
+        date: parsed.date,
+        image: parsed.image,
+        imageAlt: parsed.imageAlt,
+        body: parsed.body,
+        preview: parsed.body.trim().replace(/\s+/g, " ").slice(0, 70)
+      });
+    }
+    // Slugs are YYYYMMDD-HHMM, so plain string sort is chronological.
+    items.sort(function (a, b) { return a.slug < b.slug ? 1 : a.slug > b.slug ? -1 : 0; });
+    state.notes = items;
+    renderNotesList();
+  }
+
+  async function handleLoadNotesClick() {
+    try {
+      if (await verifyPermission(state.dirHandle)) await loadNotesList();
+      else renderNotesMessage("Folder permission was not granted.");
+    } catch (err) {
+      renderNotesMessage("Could not load notes: " + (err.message || err));
+    }
+    updateFolderStatus();
+  }
+
+  async function refreshNotesSection() {
+    if (!directCapable()) {
+      renderNotesMessage("Managing existing notes requires direct folder access (see above).");
+      return;
+    }
+    if (!state.dirHandle) {
+      renderNotesAction("Choose the repo folder to list existing notes.", "Choose repo folder…", handleChooseFolderClick);
+      return;
+    }
+    try {
+      if ((await queryPermissionSafe(state.dirHandle)) !== "granted") {
+        renderNotesAction("Folder access needs to be re-confirmed to list notes.", "Load notes", handleLoadNotesClick);
+        return;
+      }
+      await loadNotesList();
+    } catch (err) {
+      renderNotesMessage("Could not load notes: " + (err.message || err));
+    }
+  }
+
+  // --- Edit flow ---
+
+  function setEditUI(editing) {
+    el.saveBtn.textContent = editing ? "Update note" : "Save note";
+    el.editBanner.hidden = !editing;
+    if (editing) el.editSlug.textContent = state.edit.slug;
+  }
+
+  async function startEdit(item) {
+    clearStatus();
+    clearImageUI();
+    state.edit = {
+      slug: item.slug,
+      date: item.date || buildIsoLocal(new Date()), // keep original date; fallback only if frontmatter had none
+      originalImageName: item.image ? item.image.split("/").pop() : null,
+      imageReplaced: false
+    };
+    el.bodyInput.value = item.body.trim();
+    el.altInput.value = item.imageAlt || "";
+    setEditUI(true);
+    updateFilenamePreview();
+
+    if (state.edit.originalImageName) {
+      try {
+        var repoHandle = await ensureRepoHandle();
+        var imagesDir = await getImagesDir(repoHandle, false);
+        var imgFile = await (await imagesDir.getFileHandle(state.edit.originalImageName)).getFile();
+        setImageFile(imgFile);
+      } catch (err) {
+        showInfo("Referenced image " + state.edit.originalImageName
+          + " was not found — treating this as a note without a photo. Updating will drop the image reference.");
+      }
+    }
+    updateAltRequired();
+    el.bodyInput.focus();
+  }
+
+  async function exitEditMode() {
+    state.edit = null;
+    el.form.reset();
+    clearImageUI();
+    setEditUI(false);
+    await restoreDraft(); // the new-note draft was left untouched during editing
+    updateFilenamePreview();
+  }
+
+  async function handleCancelEdit() {
+    await exitEditMode();
+    showInfo("Edit cancelled — your unsaved new-note draft is back.");
+  }
+
+  async function submitUpdate(body, alt) {
+    var slug = state.edit.slug;
+    try {
+      var repoHandle = await ensureRepoHandle();
+      var paths = await updateDirect(repoHandle, state.edit, body, alt);
+      var lines = ["Note updated at " + paths.notePath];
+      if (paths.imagePath) lines.push("Photo saved to " + paths.imagePath);
+      showSuccess("Note updated.", lines, slug);
+      await exitEditMode();
+    } catch (err) {
+      if (err && err.name === "AbortError") showError("Folder access is required to update a note.");
+      else showError(err.message || "Could not update the note.");
+    }
+    updateFolderStatus();
+    refreshNotesSection();
+  }
+
+  // --- Delete flow ---
+
+  async function deleteNote(item) {
+    var extra = item.image ? " and its photo" : "";
+    if (!window.confirm("Delete note " + item.slug + extra + "? This cannot be undone.")) return;
+    try {
+      var repoHandle = await ensureRepoHandle();
+      var notesHandle = await getNotesDir(repoHandle, false);
+      await notesHandle.removeEntry(item.slug + ".md");
+      if (item.image) {
+        try {
+          await (await getImagesDir(repoHandle, false)).removeEntry(item.image.split("/").pop());
+        } catch (err) {
+          if (err && err.name !== "NotFoundError") throw err;
+        }
+      }
+      if (state.edit && state.edit.slug === item.slug) await exitEditMode();
+      showInfo("Deleted " + item.slug + ". Commit and push to publish the removal.");
+    } catch (err) {
+      if (!(err && err.name === "AbortError")) showError(err.message || "Could not delete the note.");
+    }
+    refreshNotesSection();
+  }
+
+  async function handleSave(e) {
+    e.preventDefault();
+
+    var body = el.bodyInput.value.trim();
+    var file = state.imageFile;
+    var alt = el.altInput.value.trim();
+
+    if (!body) { showError("Please write something in the note body."); return; }
+    if (file && !alt) { showError("Alt text is required when a photo is attached."); return; }
+
+    if (state.edit) { await submitUpdate(body, alt); return; }
+
+    var now = new Date();
+    var slug = buildSlug(now);
+    var ext = file ? extFromFilename(file.name) : null;
+    var markdown = assembleMarkdown({
+      isoLocal: buildIsoLocal(now),
+      body: body,
+      imagePath: file ? ("notes/" + slug + "." + ext) : null,
+      altText: alt
+    });
+    var data = { slug: slug, ext: ext, file: file, markdown: markdown };
+
+    if (!directCapable()) {
+      var result = saveDownload(data);
+      showSuccess("Files downloaded.", downloadLines(slug, result.imageFilename), slug);
+      resetForm();
+      return;
+    }
+
+    try {
+      var repoHandle = await ensureRepoHandle();
+      var paths = await saveDirect(repoHandle, data);
+      var lines = ["Note saved to " + paths.notePath];
+      if (paths.imagePath) lines.push("Photo saved to " + paths.imagePath);
+      showSuccess("Saved directly into the repo.", lines, slug);
+      resetForm();
+      refreshNotesSection();
+    } catch (err) {
+      if (err && err.name === "AbortError") {
+        showInfo("Folder selection was cancelled — downloading files instead.");
+        var fallback = saveDownload(data);
+        showSuccess("Files downloaded.", downloadLines(slug, fallback.imageFilename), slug);
+        resetForm();
+      } else {
+        showError(err.message || "Could not save the note.");
+      }
+    }
+    updateFolderStatus();
+  }
+
+  async function init() {
+    el.form = document.getElementById("note-form");
+    el.bodyInput = document.getElementById("body-input");
+    el.imageInput = document.getElementById("image-input");
+    el.imagePreviewWrap = document.getElementById("image-preview-wrap");
+    el.imagePreview = document.getElementById("image-preview");
+    el.clearImageBtn = document.getElementById("clear-image-btn");
+    el.altInput = document.getElementById("alt-input");
+    el.altField = document.getElementById("alt-field");
+    el.altRequired = document.getElementById("alt-required");
+    el.folderField = document.getElementById("folder-field");
+    el.folderStatus = document.getElementById("folder-status");
+    el.chooseFolderBtn = document.getElementById("choose-folder-btn");
+    el.filenamePreview = document.getElementById("filename-preview");
+    el.status = document.getElementById("status");
+    el.braveHint = document.getElementById("brave-hint");
+    el.braveHintDismiss = document.getElementById("brave-hint-dismiss");
+    el.saveBtn = document.getElementById("save-btn");
+    el.editBanner = document.getElementById("edit-banner");
+    el.editSlug = document.getElementById("edit-slug");
+    el.cancelEditBtn = document.getElementById("cancel-edit-btn");
+    el.notesContent = document.getElementById("notes-content");
+
+    el.form.addEventListener("submit", handleSave);
+    el.imageInput.addEventListener("change", handleImageChange);
+    el.clearImageBtn.addEventListener("click", handleRemovePhoto);
+    el.chooseFolderBtn.addEventListener("click", handleChooseFolderClick);
+    el.cancelEditBtn.addEventListener("click", handleCancelEdit);
+    el.bodyInput.addEventListener("input", updateFilenamePreview);
+    el.bodyInput.addEventListener("focus", updateFilenamePreview);
+    el.bodyInput.addEventListener("input", saveTextDraft);
+    el.altInput.addEventListener("input", saveTextDraft);
+
+    updateFilenamePreview();
+    updateAltRequired();
+    initBraveHint();
+    await restoreDraft();
+
+    if (directCapable()) {
+      el.folderField.hidden = false;
+      try {
+        var handle = await idbGet(HANDLE_KEY);
+        if (handle) {
+          state.dirHandle = handle;
+          updateFolderStatus();
+        }
+      } catch (e) { /* no persisted handle available */ }
+    }
+
+    refreshNotesSection();
+
+    // Automated-test hook: the native folder picker can't be scripted, so
+    // ?test=1 exposes a way to inject a directory handle (e.g. an OPFS one).
+    // Inert without the param.
+    if (new URLSearchParams(location.search).get("test") === "1") {
+      window.__composerTest = {
+        setRepoHandle: async function (handle) {
+          state.dirHandle = handle;
+          await updateFolderStatus();
+          await refreshNotesSection();
+        }
+      };
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", init);
+})();
+</script>
+
+</body>
+</html>

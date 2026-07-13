@@ -17,3 +17,6 @@ clean:
 
 note:
 	scripts/new-note.sh $(if $(IMG),-i $(IMG)) $(if $(ALT),-a "$(ALT)")
+
+compose:
+	open docs/note-composer.html
