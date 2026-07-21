@@ -86,6 +86,20 @@
 
 .note-content blockquote {
     position: relative;
+    /* On narrow screens the browser-default 40px side margins stack on top of
+       the note's own margins and squish the quote — use a slim left indent and
+       let the right edge align with the rest of the note content. */
+    margin-left: var(--space-lg);
+    margin-right: 0;
+}
+
+@media only screen and (min-width: 730px) {
+    /* Once the container hits its 730px max-width there's room for the original,
+       fuller quote indent. */
+    .note-content blockquote {
+        margin-left: 40px;
+        margin-right: 40px;
+    }
 }
 
 .note-content blockquote p {
