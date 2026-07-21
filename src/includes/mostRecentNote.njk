@@ -1,0 +1,18 @@
+{% from "postPreview.njk" import postPreview %}
+{% set mostRecentNote = collections.note[collections.note.length - 1] %}
+
+<article id="most-recent-note">
+    <header>
+        <h3>
+            <a href="{{ mostRecentNote.url | url }}">
+                <time datetime="{{ mostRecentNote.date | date }}">{{ mostRecentNote.date | date("LLL") }}</time>
+            </a>
+        </h3>
+    </header>
+    <p>
+        {{ postPreview(mostRecentNote.templateContent) }}
+    </p>
+    <footer class="article-footer">
+        <a class="readMore" href="/notes">More Notes</a>
+    </footer>
+</article>

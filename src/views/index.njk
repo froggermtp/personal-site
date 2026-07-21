@@ -7,6 +7,7 @@ assets:
     styles:
         - index.css
         - most-recent-post.css
+        - most-recent-note.css
 ---
 <section id="introduction-section">
     <header class="left">
@@ -37,5 +38,14 @@ assets:
     </div>
     <div class="right">
         {% include "mostRecentPost.njk" %}
+    </div>
+</section>
+
+<section>
+    <div class="left">
+        <h2>Notes</h2>
+    </div>
+    <div class="right">
+        {% include "mostRecentNote.njk" %}
     </div>
 </section>

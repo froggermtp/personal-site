@@ -1,0 +1,19 @@
+#most-recent-note header {
+    height: auto;
+    text-align: left;
+    margin-bottom: var(--space-lg);
+    margin-top: 0;
+}
+
+#most-recent-note header h3 {
+    margin-top: 0;
+    font-size: 1.1rem;
+}
+
+#most-recent-note footer a {
+    margin-left: var(--space-xl)
+}
+
+#most-recent-note footer a:link, #most-recent-note footer a:visited {
+    color: #2A5DB0;
+}
